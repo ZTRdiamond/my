@@ -6,7 +6,11 @@
       "use": "@vercel/node"
     }
   ],
-  "includeFiles": "content/**",
+  "functions": {
+    "src/app.js": {
+      "includeFiles": "content/**"
+    }
+  },
   "routes": [
     {
       "src": "/css/(.*)",
