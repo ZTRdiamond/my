@@ -1,0 +1,108 @@
+<div class="space-y-12">
+  
+  <!-- Page Header -->
+  <div class="space-y-3">
+    <span class="text-xs font-extrabold uppercase tracking-widest text-slate-400 dark:text-slate-500">Archive</span>
+    <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-slate-100">My Articles</h1>
+    <p class="text-slate-600 dark:text-slate-400 max-w-2xl text-base">
+      A construction worker by day, a developer by night—balancing physical work and digital creation.
+    </p>
+  </div>
+
+  <!-- Search & Sorting UI Controls -->
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-4 bg-white dark:bg-slate-900 p-4 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm">
+    <div class="md:col-span-8 relative">
+      <input type="text" id="searchInput" placeholder="Search articles by title, tags or content..." class="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-800 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all duration-300">
+      <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-3.5 text-slate-400 dark:text-slate-500"></i>
+    </div>
+    
+    <div class="md:col-span-4">
+      <select id="sortSelect" class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-800 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all duration-300">
+        <option value="newest">Newest First</option>
+        <option value="oldest">Oldest First</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Filter tag chips -->
+  <div class="flex flex-wrap items-center gap-2">
+    <button onclick="filterTag('')" class="tag-btn text-xs font-bold px-4 py-2 rounded-full border border-sky-200 dark:border-sky-800 bg-sky-50 dark:bg-sky-950/40 text-sky-600 dark:text-sky-300 transition-all duration-300" data-tag="">
+      All Topics
+    </button>
+    <% tags.forEach(tag => { %>
+      <button onclick="filterTag('<%= tag %>')" class="tag-btn text-xs font-bold px-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-300" data-tag="<%= tag %>">
+        #<%= tag %>
+      </button>
+    <% }) %>
+  </div>
+
+  <!-- Article Grid -->
+  <div id="postsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <% posts.forEach(post => { %>
+      <%- include('../partials/post-card', { post }) %>
+    <% }) %>
+  </div>
+</div>
+
+<!-- Fast client-side searching scripts -->
+<script>
+  let activeTag = '';
+  const searchInput = document.getElementById('searchInput');
+  const sortSelect = document.getElementById('sortSelect');
+  const postsGrid = document.getElementById('postsGrid');
+  const postCards = Array.from(postsGrid.children);
+
+  function filterPosts() {
+    const query = searchInput.value.toLowerCase();
+
+    postCards.forEach(card => {
+      const title = card.getAttribute('data-title');
+      const tags = card.getAttribute('data-tags').split(',');
+      const matchesSearch = title.includes(query);
+      const matchesTag = activeTag === '' || tags.includes(activeTag);
+
+      if (matchesSearch && matchesTag) {
+        card.style.display = 'flex';
+        card.style.opacity = '1';
+      } else {
+        card.style.display = 'none';
+        card.style.opacity = '0';
+      }
+    });
+
+    sortPosts();
+  }
+
+  function sortPosts() {
+    const direction = sortSelect.value;
+    const visibleCards = postCards.filter(card => card.style.display !== 'none');
+    const hiddenCards = postCards.filter(card => card.style.display === 'none');
+
+    visibleCards.sort((a, b) => {
+      const dateA = parseInt(a.getAttribute('data-date'));
+      const dateB = parseInt(b.getAttribute('data-date'));
+      return direction === 'newest' ? dateB - dateA : dateA - dateB;
+    });
+
+    postsGrid.innerHTML = '';
+    visibleCards.forEach(card => postsGrid.appendChild(card));
+    hiddenCards.forEach(card => postsGrid.appendChild(card));
+  }
+
+  function filterTag(tag) {
+    activeTag = tag;
+    document.querySelectorAll('.tag-btn').forEach(btn => {
+      if (btn.getAttribute('data-tag') === tag) {
+        btn.classList.add('bg-sky-50', 'dark:bg-sky-950/40', 'text-sky-600', 'dark:text-sky-300', 'border-sky-200', 'dark:border-sky-800');
+        btn.classList.remove('bg-white', 'dark:bg-slate-900', 'text-slate-600', 'dark:text-slate-300', 'border-slate-200', 'dark:border-slate-800');
+      } else {
+        btn.classList.remove('bg-sky-50', 'dark:bg-sky-950/40', 'text-sky-600', 'dark:text-sky-300', 'border-sky-200', 'dark:border-sky-800');
+        btn.classList.add('bg-white', 'dark:bg-slate-900', 'text-slate-600', 'dark:text-slate-300', 'border-slate-200', 'dark:border-slate-800');
+      }
+    });
+    filterPosts();
+  }
+
+  searchInput.addEventListener('input', filterPosts);
+  sortSelect.addEventListener('change', sortPosts);
+</script>

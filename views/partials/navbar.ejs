@@ -1,0 +1,56 @@
+<header class="sticky top-0 z-50 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    
+    <!-- Branding Alignment -->
+    <a href="/" class="flex items-center gap-3 group focus:outline-none">
+      <div class="w-10 h-10 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm transition-transform group-hover:scale-105 duration-300">
+        <img src="<%= config.avatar %>" alt="<%= config.siteName %>" class="w-full h-full object-cover" loading="lazy">
+      </div>
+      <div class="flex flex-col">
+        <span class="text-sm font-bold tracking-tight text-slate-900 dark:text-slate-100"><%= config.siteName %></span>
+        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium tracking-wide">Hobbyist Programmer</span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation Options -->
+    <nav class="hidden md:flex items-center gap-1">
+      <% navigation.forEach(item => { %>
+        <a href="<%= item.href %>" class="px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 <%= currentPath === item.href ? 'bg-sky-50 dark:bg-sky-950/40 text-sky-500' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-50 hover:bg-slate-100/50 dark:hover:bg-slate-900/50' %>">
+          <%= item.label %>
+        </a>
+      <% }) %>
+    </nav>
+
+    <!-- Global Controls -->
+    <div class="flex items-center gap-2">
+
+      <!-- Dark/Light Theme Control Switch -->
+      <button id="themeToggle" class="w-10 h-10 rounded-xl flex items-center justify-center border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-50 hover:bg-slate-50 dark:hover:bg-slate-800/80 transition-all duration-300 focus:outline-none" aria-label="Toggle visual theme">
+        <i id="sunIcon" data-lucide="sun" class="w-4 h-4 hidden"></i>
+        <i id="moonIcon" data-lucide="moon" class="w-4 h-4"></i>
+      </button>
+      
+      <!-- GitHub Accent Button -->
+      <a href="https://github.com/ztrdiamond" target="_blank" rel="noopener noreferrer" class="hidden sm:flex w-10 h-10 rounded-xl items-center justify-center border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-50 hover:bg-slate-50 dark:hover:bg-slate-800/80 transition-all duration-300" aria-label="GitHub Repository">
+        <i data-lucide="github" class="w-4 h-4"></i>
+      </a>
+
+      <!-- Mobile Hamburger Selector -->
+      <button id="mobileMenuBtn" class="md:hidden w-10 h-10 rounded-xl flex items-center justify-center border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-50 transition-all duration-300 focus:outline-none" aria-label="Menu list">
+        <i data-lucide="menu" class="w-5 h-5"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Navigation Menu -->
+  <div id="mobileMenu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 px-4 py-4 space-y-2">
+    <% navigation.forEach(item => { %>
+      <a href="<%= item.href %>" class="block w-full px-4 py-2.5 rounded-xl text-base font-medium transition-all <%= currentPath === item.href ? 'bg-sky-50 dark:bg-sky-950/40 text-sky-500' : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-900' %>">
+        <%= item.label %>
+      </a>
+    <% }) %>
+    <a href="https://github.com/ztrdiamond" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 w-full px-4 py-2.5 rounded-xl text-base font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-900">
+      <i data-lucide="github" class="w-4 h-4"></i> GitHub Profile
+    </a>
+  </div>
+</header>

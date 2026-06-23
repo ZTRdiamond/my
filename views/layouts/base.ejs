@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <%- include('../partials/seo') %>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Mencegah Flash of Light Theme (FOUC) saat memuat halaman -->
+  <script>
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
+
+  <!-- Google Fonts (Poppins) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Konfigurasi Utama Tailwind Play CDN dengan Typography -->
+  <script>
+    window.tailwind = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            sky: {
+              300: '#7dd3fc',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7'
+            }
+          },
+          fontFamily: {
+            // Mengubah font bawaan Tailwind sans menjadi Poppins
+            sans: ['Poppins', 'system-ui', '-apple-system', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.321.0/dist/umd/lucide.min.js"></script>
+
+  <style type="text/css">
+    body {
+      /* Mengubah font default body menggunakan Poppins */
+      font-family: 'Poppins', sans-serif;
+    }
+    .theme-transition, .theme-transition * {
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+    
+    /* Code Highlighting Custom Styling */
+    .hljs {
+      background: #0f172a !important;
+      border: 1px solid #1e293b;
+      border-radius: 1rem;
+      padding: 1.25rem;
+      color: #e2e8f0;
+    }
+    .dark .hljs {
+      background: #020617 !important;
+      border: 1px solid #1e293b;
+    }
+
+    /* Container Admonition Integration */
+    .custom-container {
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-left-width: 4px;
+      border-radius: 1rem;
+    }
+    .custom-container-title {
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    .custom-container.info {
+      background-color: #eff6ff; border-color: #38bdf8; color: #1e3a8a;
+    }
+    .dark .custom-container.info {
+      background-color: #0c1a30; border-color: #0ea5e9; color: #93c5fd;
+    }
+    .custom-container.warning {
+      background-color: #fffbeb; border-color: #f59e0b; color: #78350f;
+    }
+    .dark .custom-container.warning {
+      background-color: #2b1a0a; border-color: #d97706; color: #fde047;
+    }
+    .custom-container.tip {
+      background-color: #f0fdf4; border-color: #10b981; color: #064e3b;
+    }
+    .dark .custom-container.tip {
+      background-color: #0a2417; border-color: #059669; color: #6ee7b7;
+    }
+    .custom-container.danger {
+      background-color: #fef2f2; border-color: #ef4444; color: #7f1d1d;
+    }
+    .dark .custom-container.danger {
+      background-color: #2d1010; border-color: #dc2626; color: #fca5a5;
+    }
+
+    /* Table of Contents */
+    .toc-container {
+      background-color: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 1rem;
+      padding: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .dark .toc-container {
+      background-color: #0f172a;
+      border-color: #1e293b;
+    }
+    .toc-container ul {
+      list-style-type: none;
+      padding-left: 1rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .toc-container > ul {
+      padding-left: 0;
+      margin: 0;
+    }
+    .toc-container a {
+      color: #64748b;
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+    .toc-container a:hover {
+      color: #38bdf8;
+    }
+    .dark .toc-container a {
+      color: #94a3b8;
+    }
+    .dark .toc-container a:hover {
+      color: #38bdf8;
+    }
+        
+    /* Pastikan elemen heading memiliki ruang relatif dan tidak terpotong */
+    article h1, article h2, article h3, article h4 {
+      position: relative;
+    }
+    
+    /* Mencegah underline (garis bawah) ikut muncul pada elemen ikon anchor */
+    .group a, .group a span {
+      text-decoration: none !important;
+      align-items: center;
+    }
+    
+    /* Efek warna garis bawah teks saat judul di-hover */
+    .group:hover {
+      text-decoration-color: rgba(148, 163, 184, 0.5);
+    }
+    
+    /* Prism.js Syntax Highlighting Theme Custom (Dracula Style) */
+    .code-container .token.comment,
+    .code-container .token.prolog,
+    .code-container .token.doctype,
+    .code-container .token.cdata {
+      color: #6272a4; /* Warna komentar abu-abu kebiruan */
+      font-style: italic;
+    }
+    .code-container .token.punctuation {
+      color: #f8f8f2; /* Warna simbol/tanda baca */
+    }
+    .code-container .token.property,
+    .code-container .token.tag,
+    .code-container .token.constant,
+    .code-container .token.symbol,
+    .code-container .token.deleted {
+      color: #ff79c6; /* Pink cerah */
+    }
+    .code-container .token.boolean,
+    .code-container .token.number {
+      color: #bd93f9; /* Ungu lembut */
+    }
+    .code-container .token.selector,
+    .code-container .token.attr-name,
+    .code-container .token.string,
+    .code-container .token.char,
+    .code-container .token.builtin,
+    .code-container .token.inserted {
+      color: #f1fa8c; /* Kuning kehijauan */
+    }
+    .code-container .token.operator,
+    .code-container .token.entity,
+    .code-container .token.url,
+    .code-container .language-css .token.string,
+    .code-container .style .token.string {
+      color: #f8f8f2;
+    }
+    .code-container .token.atrule,
+    .code-container .token.attr-value,
+    .code-container .token.keyword {
+      color: #8be9fd; /* Cyan terang */
+    }
+    .code-container .token.function,
+    .code-container .token.class-name {
+      color: #50fa7b; /* Hijau neon */
+    }
+    .code-container .token.regex,
+    .code-container .token.important,
+    .code-container .token.variable {
+      color: #ffb86c; /* Oranye */
+    }
+    .code-container .token.bold {
+      font-weight: bold;
+    }
+    .code-container .token.italic {
+      font-style: italic;
+    }
+    
+    /* Hilangkan sisa-sisa style hljs lama agar tidak bentrok */
+    .code-container .hljs {
+      background: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    
+    /* Menyelaraskan pemutar audio bawaan browser di mode gelap (Chrome, Safari, Edge) */
+    .dark .audio-wrapper audio::-webkit-media-controls-panel {
+      background-color: #0f172a !important; /* slate-900 */
+      filter: invert(1) hue-rotate(180deg); /* Membalik warna panel agar menjadi gelap */
+    }
+    
+    /* Jaga agar transisi video lancar */
+    .video-wrapper video {
+      outline: none;
+    }
+    
+    /* Menyamarkan background putih native HTML5 Audio di Dark Mode */
+    .dark .audio-wrapper audio::-webkit-media-controls-panel {
+      background-color: #0f172a !important; /* Warna sesuai dengan slate-900 Tailwind */
+      filter: invert(1) hue-rotate(180deg);
+    }
+    
+    /* Mematikan border fokus biru bawaan browser saat video di-klik */
+    .media-container video, 
+    .media-container audio {
+      outline: none !important;
+    }
+    
+/* Menghilangkan scrollbar pada menu Tabs tanpa merusak fungsi scroll */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Animasi Fade In untuk pergantian tab yang estetik */
+@keyframes fadeInTab {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fadeInTab 0.3s ease-out forwards;
+}
+  </style>
+</head>
+<body class="theme-transition bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 flex flex-col min-h-screen selection:bg-sky-400/30 relative overflow-x-hidden">
+
+  <!-- Glowing Aura Background -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] bg-gradient-to-b from-sky-400/10 via-sky-500/5 to-transparent rounded-full filter blur-[120px] pointer-events-none -z-10"></div>
+
+  <%- include('../partials/navbar') %>
+
+  <!-- Area Render Halaman Dinamis -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+    <%- include('../pages/' + page) %>
+  </main>
+
+  <%- include('../partials/footer') %>
+
+  <!-- Script Penanganan Toggle Tema dan Integrasi Ikon -->
+  <script>
+    lucide.createIcons();
+
+    const themeToggleBtn = document.getElementById('themeToggle');
+    const sunIcon = document.getElementById('sunIcon');
+    const moonIcon = document.getElementById('moonIcon');
+
+    function updateToggleIcons() {
+      if (document.documentElement.classList.contains('dark')) {
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+      } else {
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+      }
+    }
+
+    updateToggleIcons();
+
+    themeToggleBtn.addEventListener('click', () => {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+      updateToggleIcons();
+    });
+
+    // Mobile Hamburger Menu
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+/* Custom Content & Component Configurations */
+.anchor-link {
+  text-decoration: none;
+  opacity: 0.35;
+  margin-left: 0.5rem;
+  transition: opacity 0.2s ease;
+}
+
+.anchor-link:hover {
+  opacity: 1;
+}
+
+/* Custom Admonitions styling */
+.custom-container {
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  border-left-width: 4px;
+  border-radius: 0.375rem;
+}
+
+.custom-container-title {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.custom-container.info {
+  background-color: #f0fdf4;
+  border-color: #22c55e;
+  color: #166534;
+}
+
+.custom-container.warning {
+  background-color: #fffbeb;
+  border-color: #f59e0b;
+  color: #92400e;
+}
+
+.custom-container.tip {
+  background-color: #eff6ff;
+  border-color: #3b82f6;
+  color: #1e40af;
+}
+
+.custom-container.danger {
+  background-color: #fef2f2;
+  border-color: #ef4444;
+  color: #991b1b;
+}
+
+/* Table of Contents Formatting */
+.toc-container {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  margin-bottom: 2.25rem;
+}
+
+.toc-container ul {
+  list-style-type: none;
+  padding-left: 1.25rem;
+}
+
+.toc-container > ul {
+  padding-left: 0;
+}
+
+.toc-container a {
+  color: #4f46e5;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.toc-container a:hover {
+  text-decoration: underline;
+}
+
+/* Base Markdown styling overrides */
+article table {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+}
+
+article th, article td {
+  border: 1px solid #e2e8f0;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+article th {
+  background-color: #f1f5f9;
+}
+
+article img {
+  border-radius: 0.5rem;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Code Highlighting styling */
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1.25rem;
+  background: #1e1e2e;
+  color: #cdd6f4;
+  border-radius: 0.5rem;
+}

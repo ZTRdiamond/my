@@ -1,0 +1,42 @@
+/* Styling dasar untuk DOKAPI */
+.dokapi-details {
+  border: 1px solid var(--ifm-alert-border-color);
+  border-radius: var(--ifm-alert-border-radius);
+  padding: 0.8rem 1rem;
+}
+
+.dokapi-summary {
+  cursor: pointer;
+  list-style: none; /* Menyembunyikan tanda panah bawaan browser */
+  outline: none;
+}
+
+.dokapi-summary::-webkit-details-marker {
+  display: none; /* Menyembunyikan tanda panah bawaan di Chrome/Safari */
+}
+
+.dokapi-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: var(--ifm-font-weight-semibold);
+}
+
+/* Memperjelas penulisan Route Path */
+.dokapi-path {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.95rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+}
+
+html[data-theme='dark'] .dokapi-path {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Berikan sedikit margin pada konten di dalam accordion */
+.dokapi-details > *:not(summary) {
+  margin-top: 1rem;
+  padding-left: 0.5rem;
+}

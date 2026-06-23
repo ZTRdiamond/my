@@ -1,0 +1,30 @@
+{
+  "name": "personal-portfolio-blog",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "node --watch src/app.js"
+  },
+  "dependencies": {
+    "@mdit/plugin-container": "latest",
+    "@mdit/plugin-figure": "latest",
+    "@mdit/plugin-img-lazyload": "latest",
+    "@mdit/plugin-tab": "latest",
+    "compression": "^1.7.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "glob": "^10.4.5",
+    "gray-matter": "^4.0.3",
+    "helmet": "^8.0.0",
+    "highlight.js": "^11.11.1",
+    "markdown-it": "^14.1.0",
+    "markdown-it-anchor": "^9.0.0",
+    "markdown-it-html5-media": "^0.7.1",
+    "markdown-it-multimd-table": "^4.2.3",
+    "markdown-it-toc-done-right": "^4.2.0",
+    "prismjs": "^1.30.0",
+    "serve-favicon": "^2.5.0"
+  }
+}

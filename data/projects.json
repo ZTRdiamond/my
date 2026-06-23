@@ -1,0 +1,20 @@
+[
+  {
+    "id": "wavydl",
+    "title": "WavyDL",
+    "description": "High-throughput asynchronous media downloader service and REST API built with absolute minimal runtime footprints.",
+    "image": "https://images.unsplash.com/photo-1618401471353-b98aedd07871?auto=format&fit=crop&w=600&q=80",
+    "tags": ["Node.js", "Express", "REST API", "Automation"],
+    "featured": true,
+    "href": "/blog/hello-world"
+  },
+  {
+    "id": "proxysync",
+    "title": "ProxySync",
+    "description": "Distributed proxy management and health verification automation utility running directly on Linux server environments.",
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80",
+    "tags": ["Go", "Linux", "Self-Hosting", "CLI"],
+    "featured": true,
+    "href": "https://github.com"
+  }
+]
