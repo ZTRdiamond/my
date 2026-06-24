@@ -20,6 +20,12 @@ export function buildSeoOptions(customOptions = {}) {
     ogTitle: finalTitle,
     ogDescription: customOptions.description || defaults.description,
     ogImage: customOptions.ogImage || defaults.ogImage,
-    ogType: customOptions.ogType || defaults.ogType
+    ogType: customOptions.ogType || defaults.ogType,
+    
+    // Injeksi parameter metadata khusus artikel blog (bernilai null jika diakses dari homepage)
+    publishedTime: customOptions.publishedTime || null,
+    modifiedTime: customOptions.modifiedTime || null,
+    author: customOptions.author || cache.config.fullName || null,
+    tags: customOptions.tags || []
   };
 }

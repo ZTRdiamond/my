@@ -27,8 +27,11 @@ export const renderBlogPost = (req, res, next) => {
       title: post.title,
       description: post.description,
       ogImage: post.cover || undefined,
-      ogType: 'article',
-      canonical: `/blog/${slug}`
+      ogType: 'article', // Menandakan bahwa halaman ini bertipe artikel
+      canonical: `/blog/${slug}`,
+      publishedTime: post.createdAt.toISOString(), // Tanggal rilis artikel
+      modifiedTime: post.updatedAt.toISOString(),  // Tanggal update artikel
+      tags: post.tags                              // Daftar tag kategori
     }),
     post
   });
