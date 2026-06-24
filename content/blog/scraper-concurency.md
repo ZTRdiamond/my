@@ -9,7 +9,7 @@ tags:
 createdAt: 2026-06-20
 updatedAt: 2026-06-20
 cover: https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=80
-pinned: true
+pinned: false
 draft: false
 ---
 
