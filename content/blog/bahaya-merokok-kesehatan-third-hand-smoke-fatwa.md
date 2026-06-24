@@ -16,7 +16,7 @@ draft: false
 
 [[toc]]
 
-# Pendahuluan
+# Pendahuluan 
 
 Kebiasaan merokok masih menjadi salah satu tantangan kesehatan masyarakat terbesar di dunia, termasuk di Indonesia. Berdasarkan data dari World Health Organization (WHO), konsumsi tembakau membunuh sekitar 8 juta orang setiap tahunnya. Dari jumlah tersebut, mayoritas merupakan perokok aktif, sedangkan lebih dari 1,3 juta jiwa merupakan perokok pasif yang sebenarnya tidak mengonsumsi rokok secara langsung.
 
