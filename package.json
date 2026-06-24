@@ -1,6 +1,23 @@
 {
   "name": "personal-portfolio-blog",
   "version": "1.0.0",
+  "description": "A simpel personal website with blog using express",
+  "keywords": [
+    "personal",
+    "website",
+    "portfolio",
+    "blog"
+  ],
+  "homepage": "https://github.com/ztrdiamond/my#readme",
+  "bugs": {
+    "url": "https://github.com/ztrdiamond/my/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ztrdiamond/my.git"
+  },
+  "license": "MIT",
+  "author": "ZTRdiamond",
   "type": "module",
   "main": "src/app.js",
   "scripts": {
@@ -26,5 +43,6 @@
     "markdown-it-toc-done-right": "^4.2.0",
     "prismjs": "^1.30.0",
     "serve-favicon": "^2.5.0"
-  }
+  },
+  "devDependencies": {}
 }

@@ -22,11 +22,48 @@ app.use(express.static(path.resolve('public')));
 try {
   app.use(serveFavicon(path.resolve('public', 'favicon', 'favicon.ico')));
 } catch (e) {
-  // Abaikan jika favicon belum diletakkan di folder public
+  // Abaikan jika favicon belum tersedia
 }
 
-// Injeksi variabel navigasi, config, dan sosial media global
 app.use(injectLocals);
+
+// =================================================================
+// INITIALIZATION GUARD MIDDLEWARE (SOLUSI VERCEL COLD START)
+// =================================================================
+let isInitialized = false;
+let initPromise = null;
+
+async function ensureDataInitialized(req, res, next) {
+  // Jika data sudah ada di memori, langsung loloskan request (0ms latency)
+  if (isInitialized) {
+    return next();
+  }
+
+  // Jika proses load belum pernah berjalan, jalankan sekali saja
+  if (!initPromise) {
+    initPromise = initializeApplicationData()
+      .then(() => {
+        isInitialized = true;
+      })
+      .catch((err) => {
+        initPromise = null; // Reset promise agar bisa dicoba kembali jika gagal
+        console.error('Gagal memuat cache data saat cold start:', err);
+        throw err;
+      });
+  }
+
+  // Tahan request HTTP ini sampai proses load asinkronus selesai
+  try {
+    await initPromise;
+    next();
+  } catch (error) {
+    next(error);
+  }
+}
+
+// Pasang guard secara global sebelum router utama diakses
+app.use(ensureDataInitialized);
+// =================================================================
 
 // Route mount
 app.use('/', router);
@@ -35,19 +72,15 @@ app.use('/', router);
 app.use(handleNotFound);
 app.use(handleServerError);
 
-// Jalankan loader data ke memori sebelum melayani request
-async function startServer() {
-  try {
-    await initializeApplicationData();
+// Jalankan listener lokal (hanya aktif jika dijalankan di VPS/Komputer Lokal)
+if (process.env.NODE_ENV !== 'production') {
+  initializeApplicationData().then(() => {
     app.listen(PORT, () => {
-      console.log(`Application successfully listening on port ${PORT}`);
+      console.log(`Server lokal berjalan aktif di port ${PORT}`);
     });
-  } catch (error) {
-    console.error('Core failure. Server startup aborted.', error);
-    process.exit(1);
-  }
+  }).catch(err => {
+    console.error('Gagal mematangkan data lokal:', err);
+  });
 }
-
-startServer();
 
 export default app;
