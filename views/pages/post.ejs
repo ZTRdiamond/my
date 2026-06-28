@@ -10,14 +10,18 @@
 
   <!-- Header Block -->
   <div class="space-y-6">
-    <div class="flex items-center gap-2.5 text-xs font-bold text-slate-400 dark:text-slate-500">
+    <div class="flex flex-wrap items-center gap-2.5 text-xs font-bold text-slate-400 dark:text-slate-500">
       <time datetime="<%= post.createdAt.toISOString() %>">
         <%= post.createdAt.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>
       </time>
       <span>&bull;</span>
       <span><%= post.readingTime %></span>
+      <% if (post.written) { %>
+        <span>&bull;</span>
+        <span class="text-slate-400 dark:text-slate-500">Written by <%= post.written %></span>
+      <% } %>
     </div>
-
+    
     <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight leading-tight">
       <%= post.title %>
     </h1>

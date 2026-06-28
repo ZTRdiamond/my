@@ -20,6 +20,7 @@ export function parseMarkdown(fileContent, filePath) {
     tags: data.tags || [],
     createdAt: data.createdAt ? new Date(data.createdAt) : new Date(),
     updatedAt: data.updatedAt ? new Date(data.updatedAt) : new Date(),
+    written: data.written || "Unknown",
     pinned: data.pinned || false,
     draft: data.draft || false,
     cover: data.cover || '',

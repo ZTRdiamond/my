@@ -3,12 +3,14 @@ title: Bahaya Merokok bagi Kesehatan Diri, Orang Lain, dan Ancaman Senyap "Third
 description: Panduan komprehensif mengenai bahaya merokok untuk perokok aktif, perokok pasif, ancaman residu beracun (third-hand smoke), serta analisis fatwa hukum Islam mengenai budaya merokok.
 slug: bahaya-merokok-kesehatan-third-hand-smoke-fatwa
 tags:
-  - Kesehatan
-  - Edukasi Publik
-  - Parenting
-  - Hukum Islam
+  - Public Health
+  - Medicine
+  - Fiqh
+  - Islam
+  - Life
 createdAt: 2026-06-24
-updatedAt: 2026-06-24
+updatedAt: 2026-06-28
+written: Gemini AI & Me
 cover: https://images.unsplash.com/photo-1528671839653-1f8ab2e4bda1?q=80&w=871&auto=format&fit=crop
 pinned: true
 draft: false
