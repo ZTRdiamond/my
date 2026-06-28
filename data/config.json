@@ -3,7 +3,7 @@
   "siteTitle": "Personal website",
   "siteDescription": "A lightweight space dedicated to  sharing, backend development, and web scraping.",
   "siteUrl": "https://ztrdiamond.is-a.dev",
-  "avatar": "/static/images/profile/ztrdiamond.webp",
+  "avatar": "https://ztrdiamond.vercel.app/static/images/profile/ztrdiamond.webp",
   "fullName": "Fatahillah Al Makarim",
   "occupation": "I currently work as a driver's assistant at a freight forwarding company, and I'm also still active in the fields of technology and programming.",
   "bio": "Backend developer, Automated bot developer, Web scraping, Carpentry, Sharing daily life."
