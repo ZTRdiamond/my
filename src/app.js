@@ -18,7 +18,7 @@ app.set('views', path.resolve('views'));
 app.use(compression());
 
 // Static file pathways
-app.use(express.static(path.resolve('public')));
+app.use("/static", express.static(path.resolve('public')));
 try {
   app.use(serveFavicon(path.resolve('public', 'favicon', 'favicon.ico')));
 } catch (e) {
