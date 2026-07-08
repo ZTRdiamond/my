@@ -4,7 +4,7 @@
   <%- include('../partials/seo') %>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <!-- Mencegah Flash of Light Theme (FOUC) saat memuat halaman -->
   <script>
     if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
@@ -19,9 +19,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Konfigurasi Utama Tailwind Play CDN dengan Typography -->
+  <!-- Konfigurasi Utama Tailwind Play CDN dengan Typography (Diperbaiki agar terbaca CDN) -->
+  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
   <script>
-    window.tailwind = {
+    tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
@@ -34,32 +35,29 @@
             }
           },
           fontFamily: {
-            // Mengubah font bawaan Tailwind sans menjadi Poppins
             sans: ['Poppins', 'system-ui', '-apple-system', 'sans-serif']
           }
         }
       }
     }
   </script>
-  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
-  
+
   <!-- Lucide Icons CDN -->
   <script src="https://cdn.jsdelivr.net/npm/lucide@0.321.0/dist/umd/lucide.min.js"></script>
 
   <style type="text/css">
     body {
-      /* Mengubah font default body menggunakan Poppins */
       font-family: 'Poppins', sans-serif;
     }
     .theme-transition, .theme-transition * {
-      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
     /* Code Highlighting Custom Styling */
     .hljs {
       background: #0f172a !important;
       border: 1px solid #1e293b;
-      border-radius: 1rem;
+      border-radius: 0.75rem;
       padding: 1.25rem;
       color: #e2e8f0;
     }
@@ -73,7 +71,7 @@
       padding: 1.25rem;
       margin: 1.5rem 0;
       border-left-width: 4px;
-      border-radius: 1rem;
+      border-radius: 0.75rem;
     }
     .custom-container-title {
       font-weight: 700;
@@ -111,7 +109,7 @@
     .toc-container {
       background-color: #f8fafc;
       border: 1px solid #e2e8f0;
-      border-radius: 1rem;
+      border-radius: 0.75rem;
       padding: 1.25rem;
       margin-bottom: 2rem;
     }
@@ -166,22 +164,22 @@
     .code-container .token.prolog,
     .code-container .token.doctype,
     .code-container .token.cdata {
-      color: #6272a4; /* Warna komentar abu-abu kebiruan */
+      color: #6272a4;
       font-style: italic;
     }
     .code-container .token.punctuation {
-      color: #f8f8f2; /* Warna simbol/tanda baca */
+      color: #f8f8f2;
     }
     .code-container .token.property,
     .code-container .token.tag,
     .code-container .token.constant,
     .code-container .token.symbol,
     .code-container .token.deleted {
-      color: #ff79c6; /* Pink cerah */
+      color: #ff79c6;
     }
     .code-container .token.boolean,
     .code-container .token.number {
-      color: #bd93f9; /* Ungu lembut */
+      color: #bd93f9;
     }
     .code-container .token.selector,
     .code-container .token.attr-name,
@@ -189,7 +187,7 @@
     .code-container .token.char,
     .code-container .token.builtin,
     .code-container .token.inserted {
-      color: #f1fa8c; /* Kuning kehijauan */
+      color: #f1fa8c;
     }
     .code-container .token.operator,
     .code-container .token.entity,
@@ -201,16 +199,16 @@
     .code-container .token.atrule,
     .code-container .token.attr-value,
     .code-container .token.keyword {
-      color: #8be9fd; /* Cyan terang */
+      color: #8be9fd;
     }
     .code-container .token.function,
     .code-container .token.class-name {
-      color: #50fa7b; /* Hijau neon */
+      color: #50fa7b;
     }
     .code-container .token.regex,
     .code-container .token.important,
     .code-container .token.variable {
-      color: #ffb86c; /* Oranye */
+      color: #ffb86c;
     }
     .code-container .token.bold {
       font-weight: bold;
@@ -229,8 +227,8 @@
     
     /* Menyelaraskan pemutar audio bawaan browser di mode gelap (Chrome, Safari, Edge) */
     .dark .audio-wrapper audio::-webkit-media-controls-panel {
-      background-color: #0f172a !important; /* slate-900 */
-      filter: invert(1) hue-rotate(180deg); /* Membalik warna panel agar menjadi gelap */
+      background-color: #0f172a !important;
+      filter: invert(1) hue-rotate(180deg);
     }
     
     /* Jaga agar transisi video lancar */
@@ -240,7 +238,7 @@
     
     /* Menyamarkan background putih native HTML5 Audio di Dark Mode */
     .dark .audio-wrapper audio::-webkit-media-controls-panel {
-      background-color: #0f172a !important; /* Warna sesuai dengan slate-900 Tailwind */
+      background-color: #0f172a !important;
       filter: invert(1) hue-rotate(180deg);
     }
     
@@ -250,79 +248,46 @@
       outline: none !important;
     }
     
-/* Menghilangkan scrollbar pada menu Tabs tanpa merusak fungsi scroll */
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
+    /* Menghilangkan scrollbar pada menu Tabs tanpa merusak fungsi scroll */
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
 
-/* Animasi Fade In untuk pergantian tab yang estetik */
-@keyframes fadeInTab {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.animate-fade-in {
-  animation: fadeInTab 0.3s ease-out forwards;
-}
+    /* Animasi Fade In untuk pergantian tab yang estetik */
+    @keyframes fadeInTab {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeInTab 0.3s ease-out forwards;
+    }
   </style>
 </head>
-<body class="theme-transition bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 flex flex-col min-h-screen selection:bg-sky-400/30 relative overflow-x-hidden">
+<body class="theme-transition bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 flex flex-col min-h-screen selection:bg-sky-400/30 relative overflow-x-hidden antialiased">
+
+  <!-- Minimalist Tech-Grid Pattern -->
+  <div class="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none -z-20"></div>
 
   <!-- Glowing Aura Background -->
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] bg-gradient-to-b from-sky-400/10 via-sky-500/5 to-transparent rounded-full filter blur-[120px] pointer-events-none -z-10"></div>
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-gradient-to-b from-sky-400/8 via-sky-500/3 to-transparent rounded-full filter blur-[100px] pointer-events-none -z-10"></div>
 
   <%- include('../partials/navbar') %>
 
   <!-- Area Render Halaman Dinamis -->
-  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
     <%- include('../pages/' + page) %>
   </main>
 
   <%- include('../partials/footer') %>
 
-  <!-- Script Penanganan Toggle Tema dan Integrasi Ikon -->
+  <!-- Script Global yang Bersih dari Konflik Duplikasi -->
   <script>
+    // Hanya lakukan inisialisasi ikon secara global
     lucide.createIcons();
-
-    const themeToggleBtn = document.getElementById('themeToggle');
-    const sunIcon = document.getElementById('sunIcon');
-    const moonIcon = document.getElementById('moonIcon');
-
-    function updateToggleIcons() {
-      if (document.documentElement.classList.contains('dark')) {
-        sunIcon.classList.remove('hidden');
-        moonIcon.classList.add('hidden');
-      } else {
-        sunIcon.classList.add('hidden');
-        moonIcon.classList.remove('hidden');
-      }
-    }
-
-    updateToggleIcons();
-
-    themeToggleBtn.addEventListener('click', () => {
-      if (document.documentElement.classList.contains('dark')) {
-        document.documentElement.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-      } else {
-        document.documentElement.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-      }
-      updateToggleIcons();
-    });
-
-    // Mobile Hamburger Menu
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    
-    if (mobileMenuBtn && mobileMenu) {
-      mobileMenuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-      });
-    }
   </script>
 </body>
 </html>

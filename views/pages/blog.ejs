@@ -1,71 +1,101 @@
 <div class="space-y-12">
   
-  <!-- Page Header -->
-  <div class="space-y-3">
-    <span class="text-xs font-extrabold uppercase tracking-widest text-slate-400 dark:text-slate-500">Archive</span>
-    <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 dark:text-slate-100">My Articles</h1>
-    <p class="text-slate-600 dark:text-slate-400 max-w-2xl text-base">
+  <!-- Page Header (Vercel Minimalist Style) -->
+  <div class="space-y-4">
+    <div class="flex items-center gap-3">
+      <div class="h-6 w-1 bg-sky-500 rounded-full"></div>
+      <div class="space-y-0.5">
+        <span class="text-[10px] font-extrabold uppercase tracking-widest text-sky-500 dark:text-sky-400">Archive</span>
+        <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">My Articles</h1>
+      </div>
+    </div>
+    <p class="text-slate-600 dark:text-slate-400 max-w-2xl text-sm sm:text-base leading-relaxed font-light pl-4">
       A construction worker by day, a developer by night—balancing physical work and digital creation.
     </p>
   </div>
 
-  <!-- Search & Sorting UI Controls -->
-  <div class="grid grid-cols-1 md:grid-cols-12 gap-4 bg-white dark:bg-slate-900 p-4 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-sm">
-    <div class="md:col-span-8 relative">
-      <input type="text" id="searchInput" placeholder="Search articles by title, tags or content..." class="w-full pl-10 pr-4 py-3 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-800 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all duration-300">
-      <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-3.5 text-slate-400 dark:text-slate-500"></i>
+  <!-- Search & Sorting Controls (Sleek Combined Row) -->
+  <div class="flex flex-col sm:flex-row items-stretch gap-3 w-full">
+    <!-- Search Input -->
+    <div class="relative flex-grow">
+      <input type="text" id="searchInput" placeholder="Search articles by title, tags or content..." class="w-full pl-11 pr-4 py-3 bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-slate-200/80 dark:border-slate-800/80 rounded-xl text-sm focus:outline-none focus:border-sky-500 focus:ring-4 focus:ring-sky-500/10 transition-all duration-200 placeholder:text-slate-400">
+      <div class="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 dark:text-slate-500 flex items-center">
+        <i data-lucide="search" class="w-4 h-4"></i>
+      </div>
     </div>
     
-    <div class="md:col-span-4">
-      <select id="sortSelect" class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-800 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all duration-300">
+    <!-- Sort Select -->
+    <div class="sm:w-52 shrink-0 relative">
+      <select id="sortSelect" class="w-full pl-4 pr-10 py-3 bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-slate-200/80 dark:border-slate-800/80 rounded-xl text-sm focus:outline-none focus:border-sky-500 focus:ring-4 focus:ring-sky-500/10 transition-all duration-200 appearance-none cursor-pointer">
         <option value="newest">Newest First</option>
         <option value="oldest">Oldest First</option>
       </select>
+      <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 dark:text-slate-500 flex items-center">
+        <i data-lucide="chevron-down" class="w-4 h-4"></i>
+      </div>
     </div>
   </div>
 
-  <!-- Filter tag chips -->
+  <!-- Filter Tag Chips (Tegas & Presisi) -->
   <div class="flex flex-wrap items-center gap-2">
-    <button onclick="filterTag('')" class="tag-btn text-xs font-bold px-4 py-2 rounded-full border border-sky-200 dark:border-sky-800 bg-sky-50 dark:bg-sky-950/40 text-sky-600 dark:text-sky-300 transition-all duration-300" data-tag="">
+    <button onclick="filterTag('')" class="tag-btn text-xs font-bold px-4 py-2 rounded-lg border border-sky-500/30 bg-sky-500/10 text-sky-600 dark:text-sky-400 transition-all duration-200" data-tag="">
       All Topics
     </button>
     <% tags.forEach((tag, index) => { %>
       <button onclick="filterTag('<%= tag %>')" 
-              class="tag-btn text-xs font-bold px-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-300 <%= index >= 5 ? 'hidden extra-tag' : '' %>" 
+              class="tag-btn text-xs font-semibold px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-all duration-200 <%= index >= 5 ? 'hidden extra-tag' : '' %>" 
               data-tag="<%= tag %>">
         #<%= tag %>
       </button>
     <% }) %>
 
-    <% if (tags.length > 10) { %>
-      <button id="toggleTagsBtn" onclick="toggleExtraTags()" class="text-xs font-extrabold px-4 py-2 rounded-full bg-cyan-500 hover:bg-cyan-600 text-white dark:bg-cyan-600 dark:hover:bg-cyan-700 transition-all duration-300 flex items-center gap-1.5 shadow-md shadow-cyan-100 dark:shadow-none">
+    <% if (tags.length > 5) { %>
+      <button id="toggleTagsBtn" onclick="toggleExtraTags()" class="text-xs font-bold px-4 py-2 rounded-lg bg-slate-950 dark:bg-slate-100 hover:bg-slate-800 dark:hover:bg-white text-white dark:text-slate-950 transition-all duration-200 flex items-center gap-1.5">
         <span id="toggleText">More</span>
-        <span id="toggleIcon" class="text-sm font-bold">+</span>
+        <i id="toggleIcon" data-lucide="plus" class="w-3.5 h-3.5"></i>
       </button>
     <% } %>
   </div>
 
-  <!-- Article Grid -->
-  <div id="postsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <!-- Article Grid (Penataan Rapi Maksimal 2 Kolom) -->
+  <div id="postsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
     <% posts.forEach(post => { %>
       <%- include('../partials/post-card', { post }) %>
     <% }) %>
   </div>
+
+  <!-- Dynamic Pagination Controls -->
+  <div id="paginationContainer" class="flex items-center justify-center gap-1.5 pt-10 pb-4">
+    <!-- Kontrol navigasi diisi via JavaScript -->
+  </div>
 </div>
 
-<!-- Fast client-side searching scripts -->
+<!-- Scripts Pelaksana Sistem -->
 <script>
+  const itemsPerPage = 5;
+  let currentPage = 1;
   let activeTag = '';
   let tagsExpanded = false;
+
   const searchInput = document.getElementById('searchInput');
   const sortSelect = document.getElementById('sortSelect');
   const postsGrid = document.getElementById('postsGrid');
   const postCards = Array.from(postsGrid.children);
 
+  // Fungsi Pembantu Pencari Atribut (Mengatasi Bug Pembungkusan Elemen)
+  function getCardAttr(card, attrName) {
+    if (!card) return '';
+    let val = card.getAttribute(attrName);
+    if (val) return val;
+    // Periksa apakah atribut berada di elemen anak terdalam
+    const inner = card.querySelector(`[${attrName}]`);
+    return inner ? inner.getAttribute(attrName) : '';
+  }
+
+  // Fungsi Menampilkan/Menyembunyikan Tag Ekstra (Tanpa Merusak Status Tombol Lain)
   function toggleExtraTags() {
     const extraTags = document.querySelectorAll('.extra-tag');
-    const toggleText = document.getElementById('toggleText');
-    const toggleIcon = document.getElementById('toggleIcon');
+    const toggleTagsBtn = document.getElementById('toggleTagsBtn');
     
     tagsExpanded = !tagsExpanded;
     
@@ -78,65 +108,182 @@
     });
     
     if (tagsExpanded) {
-      toggleText.textContent = 'Less';
-      toggleIcon.textContent = '-';
+      toggleTagsBtn.innerHTML = `<span id="toggleText">Less</span><i data-lucide="minus" class="w-3.5 h-3.5"></i>`;
     } else {
-      toggleText.textContent = 'More';
-      toggleIcon.textContent = '+';
+      toggleTagsBtn.innerHTML = `<span id="toggleText">More</span><i data-lucide="plus" class="w-3.5 h-3.5"></i>`;
     }
+    lucide.createIcons();
   }
 
-  function filterPosts() {
-    const query = searchInput.value.toLowerCase();
+  // Pipeline Filter, Urut, & Paginate Utama
+  function filterAndRender() {
+    const query = searchInput.value.toLowerCase().trim();
 
-    postCards.forEach(card => {
-      const title = card.getAttribute('data-title');
-      const tags = card.getAttribute('data-tags').split(',');
-      const matchesSearch = title.includes(query);
-      const matchesTag = activeTag === '' || tags.includes(activeTag);
+    // 1. Memilah Berdasarkan Input & Tag Aktif
+    const matchedCards = postCards.filter(card => {
+      const title = getCardAttr(card, 'data-title').toLowerCase();
+      const tagsString = getCardAttr(card, 'data-tags');
+      const tags = tagsString.split(',').map(t => t.trim().toLowerCase());
+      
+      const matchesSearch = title.includes(query) || tags.some(tag => tag.includes(query));
+      const matchesTag = activeTag === '' || tags.includes(activeTag.toLowerCase());
 
-      if (matchesSearch && matchesTag) {
-        card.style.display = 'flex';
-        card.style.opacity = '1';
-      } else {
-        card.style.display = 'none';
-        card.style.opacity = '0';
-      }
+      return matchesSearch && matchesTag;
     });
 
-    sortPosts();
-  }
-
-  function sortPosts() {
+    // 2. Melakukan Penyortiran Tanggal
     const direction = sortSelect.value;
-    const visibleCards = postCards.filter(card => card.style.display !== 'none');
-    const hiddenCards = postCards.filter(card => card.style.display === 'none');
-
-    visibleCards.sort((a, b) => {
-      const dateA = parseInt(a.getAttribute('data-date'));
-      const dateB = parseInt(b.getAttribute('data-date'));
+    matchedCards.sort((a, b) => {
+      const dateA = parseInt(getCardAttr(a, 'data-date') || '0');
+      const dateB = parseInt(getCardAttr(b, 'data-date') || '0');
       return direction === 'newest' ? dateB - dateA : dateA - dateB;
     });
 
+    // 3. Menghitung Pembagian Halaman
+    const totalItems = matchedCards.length;
+    const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
+
+    if (currentPage > totalPages) currentPage = totalPages;
+    if (currentPage < 1) currentPage = 1;
+
+    // Bersihkan kontainer utama
     postsGrid.innerHTML = '';
-    visibleCards.forEach(card => postsGrid.appendChild(card));
-    hiddenCards.forEach(card => postsGrid.appendChild(card));
+
+    // Penanganan Tampilan Saat Kosong
+    if (totalItems === 0) {
+      postsGrid.innerHTML = `
+        <div class="col-span-full py-16 text-center space-y-3">
+          <div class="inline-flex p-3 rounded-lg bg-slate-100 dark:bg-slate-900 text-slate-400 dark:text-slate-500">
+            <i data-lucide="book-open" class="w-5 h-5"></i>
+          </div>
+          <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">No articles match your search or filters.</p>
+        </div>
+      `;
+      lucide.createIcons();
+    } else {
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+
+      // Sisipkan kembali elemen yang sesuai halaman aktif ke dalam DOM
+      matchedCards.forEach((card, index) => {
+        if (index >= startIndex && index < endIndex) {
+          card.style.display = 'block';
+          card.style.opacity = '1';
+          postsGrid.appendChild(card);
+        }
+      });
+    }
+
+    // Bangun Ulang Tombol Navigasi Halaman
+    renderPagination(totalPages);
   }
 
-  function filterTag(tag) {
-    activeTag = tag;
-    document.querySelectorAll('.tag-btn').forEach(btn => {
-      if (btn.getAttribute('data-tag') === tag) {
-        btn.classList.add('bg-sky-50', 'dark:bg-sky-950/40', 'text-sky-600', 'dark:text-sky-300', 'border-sky-200', 'dark:border-sky-800');
-        btn.classList.remove('bg-white', 'dark:bg-slate-900', 'text-slate-600', 'dark:text-slate-300', 'border-slate-200', 'dark:border-slate-800');
+  // Membuat Render Angka Dinamis Di Tengah (Rentang Antara Prev & Next)
+  function renderPagination(totalPages) {
+    const container = document.getElementById('paginationContainer');
+    if (!container) return;
+
+    if (totalPages <= 1) {
+      container.innerHTML = '';
+      return;
+    }
+
+    let html = '';
+
+    // Tombol Previous (Kembali)
+    const prevDisabled = currentPage === 1;
+    html += `
+      <button onclick="changePage(${currentPage - 1})" 
+              class="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/80 transition-all duration-200 disabled:opacity-40 disabled:pointer-events-none"
+              ${prevDisabled ? 'disabled' : ''}>
+        <i data-lucide="chevron-left" class="w-4 h-4"></i>
+      </button>
+    `;
+
+    // Penyusunan Jendela Rentang Nomor Tengah
+    const delta = 1;
+    const pages = [];
+
+    for (let i = 1; i <= totalPages; i++) {
+      if (i === 1 || i === totalPages || (i >= currentPage - delta && i <= currentPage + delta)) {
+        pages.push(i);
+      } else if (pages[pages.length - 1] !== '...') {
+        pages.push('...');
+      }
+    }
+
+    pages.forEach(p => {
+      if (p === '...') {
+        html += `
+          <span class="inline-flex items-center justify-center w-9 h-9 text-slate-400 dark:text-slate-600 text-xs font-bold">
+            &bull;&bull;&bull;
+          </span>
+        `;
       } else {
-        btn.classList.remove('bg-sky-50', 'dark:bg-sky-950/40', 'text-sky-600', 'dark:text-sky-300', 'border-sky-200', 'dark:border-sky-800');
-        btn.classList.add('bg-white', 'dark:bg-slate-900', 'text-slate-600', 'dark:text-slate-300', 'border-slate-200', 'dark:border-slate-800');
+        const isActive = p === currentPage;
+        html += `
+          <button onclick="changePage(${p})" 
+                  class="inline-flex items-center justify-center w-9 h-9 rounded-lg text-xs font-bold transition-all duration-200 ${
+                    isActive 
+                      ? 'bg-slate-950 dark:bg-white text-white dark:text-slate-950 shadow-sm' 
+                      : 'border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/80'
+                  }">
+            ${p}
+          </button>
+        `;
       }
     });
-    filterPosts();
+
+    // Tombol Next (Lanjut)
+    const nextDisabled = currentPage === totalPages;
+    html += `
+      <button onclick="changePage(${currentPage + 1})" 
+              class="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/80 transition-all duration-200 disabled:opacity-40 disabled:pointer-events-none"
+              ${nextDisabled ? 'disabled' : ''}>
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      </button>
+    `;
+
+    container.innerHTML = html;
+    lucide.createIcons();
   }
 
-  searchInput.addEventListener('input', filterPosts);
-  sortSelect.addEventListener('change', sortPosts);
+  // Navigasi & Perpindahan Fokus Mulus
+  function changePage(page) {
+    currentPage = page;
+    filterAndRender();
+    searchInput.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // Saringan Filter Tag yang Presisi (Mempertahankan Kelas 'hidden' Milik Tag Lain)
+  function filterTag(tag) {
+    activeTag = tag;
+    currentPage = 1;
+    
+    document.querySelectorAll('.tag-btn').forEach(btn => {
+      const isSelected = btn.getAttribute('data-tag') === tag;
+      if (isSelected) {
+        btn.classList.add('border-sky-500/30', 'bg-sky-500/10', 'text-sky-600', 'dark:text-sky-400');
+        btn.classList.remove('border-slate-200', 'dark:border-slate-800', 'bg-white', 'dark:bg-slate-900', 'text-slate-600', 'dark:text-slate-400');
+      } else {
+        btn.classList.remove('border-sky-500/30', 'bg-sky-500/10', 'text-sky-600', 'dark:text-sky-400');
+        btn.classList.add('border-slate-200', 'dark:border-slate-800', 'bg-white', 'dark:bg-slate-900', 'text-slate-600', 'dark:text-slate-400');
+      }
+    });
+    filterAndRender();
+  }
+
+  // Event Listener Responsif
+  searchInput.addEventListener('input', () => {
+    currentPage = 1;
+    filterAndRender();
+  });
+  
+  sortSelect.addEventListener('change', () => {
+    currentPage = 1;
+    filterAndRender();
+  });
+
+  // Eksekusi Pemuatan Pertama
+  filterAndRender();
 </script>

@@ -1,56 +1,103 @@
-<header class="sticky top-0 z-50 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md transition-all duration-300">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<header class="sticky top-0 z-50 w-full border-b border-slate-200/50 dark:border-slate-800/50 bg-white/70 dark:bg-slate-950/70 backdrop-blur-md transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between relative">
     
     <!-- Branding Alignment -->
     <a href="/" class="flex items-center gap-3 group focus:outline-none">
-      <div class="w-10 h-10 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm transition-transform group-hover:scale-105 duration-300">
+      <div class="w-9 h-9 rounded-xl overflow-hidden border border-slate-200/80 dark:border-slate-800/80 shadow-sm transition-transform group-hover:scale-[1.03] duration-300">
         <img src="<%= config.avatar %>" alt="<%= config.siteName %>" class="w-full h-full object-cover" loading="lazy">
       </div>
       <div class="flex flex-col">
-        <span class="text-sm font-bold tracking-tight text-slate-900 dark:text-slate-100"><%= config.siteName %></span>
-        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium tracking-wide">Hobbyist Programmer</span>
+        <span class="text-xs font-bold tracking-tight text-slate-950 dark:text-white"><%= config.siteName %></span>
+        <span class="text-[9px] text-slate-400 dark:text-slate-500 font-extrabold tracking-widest uppercase">Developer</span>
       </div>
     </a>
 
     <!-- Desktop Navigation Options -->
-    <nav class="hidden md:flex items-center gap-1">
+    <nav class="hidden md:flex items-center gap-1.5">
       <% navigation.forEach(item => { %>
-        <a href="<%= item.href %>" class="px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 <%= currentPath === item.href ? 'bg-sky-50 dark:bg-sky-950/40 text-sky-500' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-50 hover:bg-slate-100/50 dark:hover:bg-slate-900/50' %>">
+        <a href="<%= item.href %>" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 <%= currentPath === item.href ? 'bg-slate-100/80 dark:bg-slate-900/80 text-slate-950 dark:text-white border border-slate-200/40 dark:border-slate-800/40 shadow-sm' : 'text-slate-500 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-900/60' %>">
           <%= item.label %>
         </a>
       <% }) %>
     </nav>
 
     <!-- Global Controls -->
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-1.5">
 
-      <!-- Dark/Light Theme Control Switch -->
-      <button id="themeToggle" class="w-10 h-10 rounded-xl flex items-center justify-center border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-50 hover:bg-slate-50 dark:hover:bg-slate-800/80 transition-all duration-300 focus:outline-none" aria-label="Toggle visual theme">
-        <i id="sunIcon" data-lucide="sun" class="w-4 h-4 hidden"></i>
-        <i id="moonIcon" data-lucide="moon" class="w-4 h-4"></i>
+      <!-- Dark/Light Theme Switch (CSS-Controlled) -->
+      <button id="themeToggle" class="w-9 h-9 rounded-lg flex items-center justify-center border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900/50 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-900/80 transition-all duration-200 focus:outline-none cursor-pointer" aria-label="Toggle visual theme">
+        <!-- Sun icon: Muncul di Mode Gelap -->
+        <span class="hidden dark:block">
+          <i data-lucide="sun" class="w-4 h-4 text-sky-400"></i>
+        </span>
+        <!-- Moon icon: Muncul di Mode Terang -->
+        <span class="block dark:hidden">
+          <i data-lucide="moon" class="w-4 h-4 text-slate-600"></i>
+        </span>
       </button>
       
-      <!-- GitHub Accent Button -->
-      <a href="https://github.com/ztrdiamond" target="_blank" rel="noopener noreferrer" class="hidden sm:flex w-10 h-10 rounded-xl items-center justify-center border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-50 hover:bg-slate-50 dark:hover:bg-slate-800/80 transition-all duration-300" aria-label="GitHub Repository">
+      <!-- GitHub Button -->
+      <a href="https://github.com/ztrdiamond" target="_blank" rel="noopener noreferrer" class="hidden sm:flex w-9 h-9 rounded-lg items-center justify-center border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900/50 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-slate-900/80 transition-all duration-200" aria-label="GitHub Repository">
         <i data-lucide="github" class="w-4 h-4"></i>
       </a>
 
       <!-- Mobile Hamburger Selector -->
-      <button id="mobileMenuBtn" class="md:hidden w-10 h-10 rounded-xl flex items-center justify-center border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-50 transition-all duration-300 focus:outline-none" aria-label="Menu list">
-        <i data-lucide="menu" class="w-5 h-5"></i>
+      <button id="mobileMenuBtn" class="md:hidden w-9 h-9 rounded-lg flex items-center justify-center border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900/50 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all duration-200 focus:outline-none cursor-pointer" aria-label="Menu list">
+        <i id="menuIcon" data-lucide="menu" class="w-4 h-4 block"></i>
+        <i id="closeIcon" data-lucide="x" class="w-4 h-4 hidden"></i>
       </button>
     </div>
   </div>
 
-  <!-- Mobile Dropdown Navigation Menu -->
-  <div id="mobileMenu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 px-4 py-4 space-y-2">
+  <!-- Mobile Dropdown Menu -->
+  <div id="mobileMenu" class="hidden absolute top-16 left-0 right-0 mx-4 mt-2 p-2 bg-white/95 dark:bg-slate-950/95 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl shadow-xl backdrop-blur-lg flex flex-col gap-1 z-50 animate-fade-in">
     <% navigation.forEach(item => { %>
-      <a href="<%= item.href %>" class="block w-full px-4 py-2.5 rounded-xl text-base font-medium transition-all <%= currentPath === item.href ? 'bg-sky-50 dark:bg-sky-950/40 text-sky-500' : 'text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-900' %>">
+      <a href="<%= item.href %>" class="px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 <%= currentPath === item.href ? 'bg-slate-100/80 dark:bg-slate-900/80 text-slate-950 dark:text-white border border-slate-200/40 dark:border-slate-800/40 shadow-sm' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900' %>">
         <%= item.label %>
       </a>
     <% }) %>
-    <a href="https://github.com/ztrdiamond" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 w-full px-4 py-2.5 rounded-xl text-base font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-900">
+    <a href="https://github.com/ztrdiamond" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-900">
       <i data-lucide="github" class="w-4 h-4"></i> GitHub Profile
     </a>
   </div>
 </header>
+
+<!-- Inline Controller Script (Satu-satunya Penanggung Jawab Toggling Tema) -->
+<script>
+  (function() {
+    // 1. Eksekusi Toggling Tema
+    const themeBtn = document.getElementById('themeToggle');
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
+    }
+
+    // 2. Eksekusi Mobile Menu & Pertukaran Ikon (Menu -> X)
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIcon = document.getElementById('menuIcon');
+    const closeIcon = document.getElementById('closeIcon');
+
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.toggle('hidden');
+        
+        if (menuIcon && closeIcon) {
+          if (isHidden) {
+            menuIcon.classList.remove('hidden');
+            menuIcon.classList.add('block');
+            closeIcon.classList.remove('block');
+            closeIcon.classList.add('hidden');
+          } else {
+            menuIcon.classList.remove('block');
+            menuIcon.classList.add('hidden');
+            closeIcon.classList.remove('hidden');
+            closeIcon.classList.add('block');
+          }
+        }
+      });
+    }
+  })();
+</script>

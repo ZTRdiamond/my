@@ -1,119 +1,178 @@
-<div class="space-y-24 md:space-y-32">
-  
+<div class="space-y-28 md:space-y-36">
+
   <!-- Hero Section -->
-  <section class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-    <!-- Left Column text space -->
-    <div class="lg:col-span-7 space-y-6 text-left">
-      <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase bg-sky-100/60 dark:bg-sky-950/60 text-sky-600 dark:text-sky-300">
-        <span class="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse"></span>
-        Hobbyist Programmer
-      </span>
-      
-      <h1 class="text-5xl lg:text-7xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
-        Creating an interesting project
-      </h1>
-      
-      <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 leading-relaxed font-light">
+  <section class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+    <!-- Left Column: Premium Typography & Hierarchy -->
+    <div class="lg:col-span-7 space-y-8 text-left">
+      <div class="space-y-4">
+        <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-[11px] font-bold tracking-widest uppercase bg-sky-50 dark:bg-sky-950/40 text-sky-600 dark:text-sky-400 border border-sky-100/80 dark:border-sky-900/40 shadow-sm">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
+          </span>
+          Hobbyist Programmer
+        </span>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.1]">
+          Creating an <br class="hidden sm:inline" />
+          <span class="bg-gradient-to-r from-sky-500 via-sky-400 to-indigo-500 bg-clip-text text-transparent">
+            interesting project
+          </span>
+        </h1>
+      </div>
+
+      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed font-light max-w-2xl">
         <%= config.bio %>
       </p>
 
-      <div class="flex flex-wrap items-center gap-4 pt-2">
-        <a href="/blog" class="px-6 py-3.5 bg-sky-500 hover:bg-sky-600 text-white rounded-2xl font-bold text-sm shadow-md shadow-sky-500/10 hover:shadow-sky-500/20 hover:-translate-y-0.5 transition-all duration-300">
-          Read Publications
+      <!-- Sleek, Sharp Interactive Action Buttons -->
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-4">
+        <a href="/blog" class="group inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-slate-900 hover:bg-sky-500 dark:bg-white dark:hover:bg-sky-500 text-white dark:text-slate-950 dark:hover:text-white rounded-xl font-semibold text-sm transition-all duration-300 shadow-lg shadow-slate-900/10 dark:shadow-none hover:-translate-y-0.5">
+          <span>Read Publications</span>
+          <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i>
         </a>
-        <a href="#projects" class="px-6 py-3.5 border border-slate-300 dark:border-slate-700 hover:bg-slate-100/50 dark:hover:bg-slate-900/50 text-slate-700 dark:text-slate-300 rounded-2xl font-bold text-sm transition-all duration-300">
-          View Projects
+        <a href="#projects" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 bg-white/50 dark:bg-slate-900/50 hover:bg-slate-50 dark:hover:bg-slate-900 text-slate-700 dark:text-slate-300 rounded-xl font-semibold text-sm transition-all duration-300">
+          <span>View Projects</span>
         </a>
       </div>
     </div>
 
-    <!-- Right Avatar Space with customized Apple style shadow -->
+    <!-- Right Avatar Space with Custom Floating Border Geometry -->
     <div class="lg:col-span-5 flex justify-center lg:justify-end">
-      <div class="relative group max-w-xs md:max-w-sm w-full aspect-square rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none transition-all duration-300">
-        <img src="<%= config.avatar %>" alt="<%= config.fullName %>" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500" loading="lazy">
+      <div class="relative w-full max-w-[280px] sm:max-w-[320px] aspect-square group">
+        <!-- Accent Outer Glow (Tegas & Elegan) -->
+        <div class="absolute inset-0 bg-gradient-to-tr from-sky-500 to-indigo-500 rounded-2xl opacity-10 blur-xl group-hover:opacity-20 transition-all duration-500"></div>
+        
+        <!-- Double Ring Border Wrapper -->
+        <div class="absolute inset-0 p-1 bg-gradient-to-tr from-slate-200 to-slate-100 dark:from-slate-800 dark:to-slate-900 rounded-2xl shadow-sm transition-transform duration-500 group-hover:scale-[1.01]">
+          <div class="relative w-full h-full rounded-[14px] overflow-hidden bg-slate-100 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50">
+            <img src="<%= config.avatar %>" alt="<%= config.fullName %>" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- About Section -->
-  <section class="space-y-8">
-    <div class="space-y-2">
-      <h2 class="text-xs uppercase font-extrabold tracking-widest text-slate-400 dark:text-slate-500">Overview</h2>
-      <h3 class="text-2xl font-bold text-slate-900 dark:text-slate-100">Operational DNA</h3>
+  <!-- About Section (Optimized Asymmetric Grid) -->
+  <section class="space-y-10">
+    <div class="flex items-center gap-3">
+      <div class="h-px w-8 bg-sky-500"></div>
+      <div class="space-y-1">
+        <h2 class="text-xs uppercase font-extrabold tracking-widest text-sky-500 dark:text-sky-400">Overview</h2>
+        <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Operational DNA</h3>
+      </div>
     </div>
-    
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <!-- Card 1 -->
-      <div class="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 space-y-3 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
-        <h4 class="font-bold text-slate-900 dark:text-slate-100">Who Am I</h4>
-        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-          I am a construction worker and a developer, I enjoy new things and technical subjects like programming and the like. 
-        </p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <!-- Main Profile Box (Span 7) -->
+      <div class="lg:col-span-7 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900/60 p-8 space-y-6 flex flex-col justify-between backdrop-blur-sm shadow-sm">
+        <div class="space-y-4">
+          <div class="flex items-center gap-3 text-slate-800 dark:text-slate-200">
+            <span class="p-2 rounded-lg bg-sky-50 dark:bg-sky-950/50 text-sky-500">
+              <i data-lucide="user" class="w-5 h-5"></i>
+            </span>
+            <h4 class="font-bold text-lg">Who Am I</h4>
+          </div>
+          <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed font-light">
+            I am a construction worker and a developer, I enjoy learning new things and diving deep into technical subjects like software development and automated systems.
+          </p>
+        </div>
+        
+        <div class="pt-6 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-4">
+          <div>
+            <p class="text-[10px] uppercase tracking-wider font-extrabold text-slate-400 dark:text-slate-500">Current Occupation</p>
+            <p class="text-sm font-semibold text-slate-800 dark:text-slate-200 mt-1"><%= config.occupation %></p>
+          </div>
+          <span class="p-2 rounded-lg bg-slate-50 dark:bg-slate-800 text-slate-400 dark:text-slate-500">
+            <i data-lucide="briefcase" class="w-5 h-5"></i>
+          </span>
+        </div>
       </div>
 
-      <!-- Card 2 -->
-      <div class="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 space-y-3 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
-        <h4 class="font-bold text-slate-900 dark:text-slate-100">Occupation</h4>
-        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-          <%= config.occupation %>
-        </p>
-      </div>
+      <!-- Grid Column for Tags & Specific Lists (Span 5) -->
+      <div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
+        <!-- Hobbies Card -->
+        <div class="rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900/60 p-6 space-y-4 backdrop-blur-sm shadow-sm hover:border-slate-300 dark:hover:border-slate-700/80 transition-all">
+          <div class="flex items-center gap-2.5 text-slate-800 dark:text-slate-200">
+            <span class="p-1.5 rounded-md bg-sky-50 dark:bg-sky-950/50 text-sky-500">
+              <i data-lucide="heart" class="w-4 h-4"></i>
+            </span>
+            <h4 class="font-bold text-sm">Hobbies & Pursuits</h4>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 bg-slate-50 dark:bg-slate-800/60 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
+              <span class="w-1 h-1 rounded-full bg-sky-500"></span>Programming
+            </span>
+            <span class="px-3 py-1.5 bg-slate-50 dark:bg-slate-800/60 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
+              <span class="w-1 h-1 rounded-full bg-sky-500"></span>Web Scraping
+            </span>
+            <span class="px-3 py-1.5 bg-slate-50 dark:bg-slate-800/60 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
+              <span class="w-1 h-1 rounded-full bg-sky-500"></span>Reading Books
+            </span>
+          </div>
+        </div>
 
-      <!-- Card 3 -->
-      <div class="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 space-y-3 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
-        <h4 class="font-bold text-slate-900 dark:text-slate-100">Hobbies</h4>
-        <ul class="text-sm text-slate-600 dark:text-slate-400 space-y-1.5 font-medium">
-          <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span>Programming</li>
-          <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span>Web Scraping</li>
-          <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span>Reading a book</li>
-        </ul>
-      </div>
-
-      <!-- Card 4 -->
-      <div class="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 space-y-3 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
-        <h4 class="font-bold text-slate-900 dark:text-slate-100">Interests</h4>
-        <ul class="text-sm text-slate-600 dark:text-slate-400 space-y-1.5 font-medium">
-          <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span>Open Source</li>
-          <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span>Backend Development</li>
-          <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span>Task Automation</li>
-          <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span>Technology</li>
-          <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span>Science</li>
-          <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span>Physics</li>
-          <li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span>Psychology</li>
-        </ul>
+        <!-- Technical Interests Card -->
+        <div class="rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900/60 p-6 space-y-4 backdrop-blur-sm shadow-sm hover:border-slate-300 dark:hover:border-slate-700/80 transition-all">
+          <div class="flex items-center gap-2.5 text-slate-800 dark:text-slate-200">
+            <span class="p-1.5 rounded-md bg-sky-50 dark:bg-sky-950/50 text-sky-500">
+              <i data-lucide="cpu" class="w-4 h-4"></i>
+            </span>
+            <h4 class="font-bold text-sm">Areas of Interest</h4>
+          </div>
+          <div class="flex flex-wrap gap-1.5">
+            <% ['Open Source', 'Backend Dev', 'Automation', 'Science', 'Physics', 'Psychology'].forEach(interest => { %>
+              <span class="px-2.5 py-1 bg-sky-500/5 hover:bg-sky-500/10 border border-sky-500/10 rounded-md text-[11px] font-medium text-sky-600 dark:text-sky-400 transition-colors">
+                <%= interest %>
+              </span>
+            <% }) %>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Project Implementations -->
-  <section id="projects" class="space-y-8 scroll-mt-24">
-    <div class="space-y-2">
-      <h2 class="text-xs uppercase font-extrabold tracking-widest text-slate-400 dark:text-slate-500">Portfolio</h2>
-      <h3 class="text-2xl font-bold text-slate-900 dark:text-slate-100">The projects I've created</h3>
+  <section id="projects" class="space-y-10 scroll-mt-24">
+    <div class="flex items-center gap-3">
+      <div class="h-px w-8 bg-sky-500"></div>
+      <div class="space-y-1">
+        <h2 class="text-xs uppercase font-extrabold tracking-widest text-sky-500 dark:text-sky-400">Portfolio</h2>
+        <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Featured Projects</h3>
+      </div>
     </div>
 
+    <!-- Wrapper modern dengan border tipis dan penataan grid yang bersih -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <% projects.forEach(project => { %>
-        <%- include('../partials/project-card', { project }) %>
+        <div class="transition-all duration-300 hover:-translate-y-1">
+          <%- include('../partials/project-card', { project }) %>
+        </div>
       <% }) %>
     </div>
   </section>
 
   <!-- Latest Blog Posts Preview -->
-  <section class="space-y-8">
-    <div class="flex items-end justify-between border-b border-slate-200/60 dark:border-slate-800/60 pb-4">
-      <div class="space-y-2">
-        <h2 class="text-xs uppercase font-extrabold tracking-widest text-slate-400 dark:text-slate-500">Writings</h2>
-        <h3 class="text-2xl font-bold text-slate-900 dark:text-slate-100">Recent Publications</h3>
+  <section class="space-y-10">
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200/60 dark:border-slate-800/60 pb-5">
+      <div class="flex items-center gap-3">
+        <div class="h-px w-8 bg-sky-500"></div>
+        <div class="space-y-1">
+          <h2 class="text-xs uppercase font-extrabold tracking-widest text-sky-500 dark:text-sky-400">Writings</h2>
+          <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Recent Publications</h3>
+        </div>
       </div>
-      <a href="/blog" class="text-sm font-bold text-sky-500 hover:text-sky-600 transition-colors">
-        All Publications &rarr;
+      <a href="/blog" class="group inline-flex items-center gap-1 text-sm font-bold text-sky-500 hover:text-sky-600 transition-colors">
+        <span>All Publications</span>
+        <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i>
       </a>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <% posts.forEach(post => { %>
-        <%- include('../partials/post-card', { post }) %>
+        <div class="transition-all duration-300 hover:-translate-y-1">
+          <%- include('../partials/post-card', { post }) %>
+        </div>
       <% }) %>
     </div>
   </section>
