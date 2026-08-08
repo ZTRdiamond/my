@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import compression from 'compression';
+import helmet from 'helmet';
 import serveFavicon from 'serve-favicon';
 import router from './routes/index.js';
 import { initializeApplicationData } from './services/contentLoader.js';
@@ -16,11 +17,26 @@ app.set('views', path.resolve('views'));
 
 // Core middleware
 app.use(compression());
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://cdn.tailwindcss.com", "https://cdn.jsdelivr.net"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      imgSrc: ["'self'", "https:", "data:", "blob:"],
+      connectSrc: ["'self'"],
+      mediaSrc: ["'self'", "https:", "blob:"]
+    }
+  },
+  crossOriginEmbedderPolicy: false
+}));
 
 // Static file pathways
+app.use(express.static(path.resolve('public')));
 app.use("/static", express.static(path.resolve('public')));
 try {
-  app.use(serveFavicon(path.resolve('public', 'favicon', 'favicon.ico')));
+  app.use(serveFavicon(path.resolve('public', 'favicon.ico')));
 } catch (e) {
   // Abaikan jika favicon belum tersedia
 }
