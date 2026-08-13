@@ -1,289 +1,219 @@
-<div class="space-y-12">
-  
-  <!-- Page Header (Vercel Minimalist Style) -->
-  <div class="space-y-4">
-    <div class="flex items-center gap-3">
-      <div class="h-6 w-1 bg-sky-500 rounded-full"></div>
-      <div class="space-y-0.5">
-        <span class="text-[10px] font-extrabold uppercase tracking-widest text-sky-500 dark:text-sky-400">Archive</span>
-        <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">My Articles</h1>
+<div class="px-5 sm:px-8 pt-32 md:pt-40 pb-28 md:pb-40">
+  <div class="max-w-6xl mx-auto">
+
+    <!-- Page Header -->
+    <div class="relative">
+      <span class="absolute -top-24 -right-4 font-display font-light text-[clamp(6rem,18vw,15rem)] leading-none text-blue/10 select-none pointer-events-none" aria-hidden="true">04</span>
+      <div class="flex items-baseline justify-between mb-6 relative">
+        <h2 class="font-mono text-xs tracking-[.3em] uppercase text-soft">04 — Publikasi &amp; Tulisan</h2>
+        <span class="font-hand text-2xl text-orange rotate-2 hidden sm:inline">arsip lengkap</span>
+      </div>
+      <h1 class="font-display font-light leading-[.96] tracking-tight text-[clamp(2.4rem,7vw,5.5rem)]">Arsip <em class="italic text-blue">Tulisan.</em></h1>
+      <p class="mt-6 max-w-2xl text-[15px] leading-[1.85] text-ink/80">
+        Catatan pemikiran, dokumentasi pembacaan, dan rekam jejak proses belajar. Telusuri berdasarkan kata kunci atau topik.
+      </p>
+    </div>
+
+    <!-- Search & Sort -->
+    <div class="mt-14 flex flex-col sm:flex-row items-stretch gap-3">
+      <div class="relative flex-grow">
+        <input type="text" id="searchInput" placeholder="cari judul, tag, atau topik…" class="w-full pl-5 pr-4 py-3 bg-paper border-2 border-ink text-ink placeholder:text-soft/70 font-mono text-sm focus:outline-none focus:border-blue transition-colors duration-200">
+      </div>
+      <div class="sm:w-56 shrink-0 relative">
+        <select id="sortSelect" class="w-full pl-4 pr-10 py-3 bg-paper border-2 border-ink text-ink font-mono text-sm focus:outline-none focus:border-blue transition-colors duration-200 appearance-none cursor-pointer">
+          <option value="newest">Terbaru dulu</option>
+          <option value="oldest">Terlama dulu</option>
+        </select>
+        <span class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-soft">▾</span>
       </div>
     </div>
-    <p class="text-slate-600 dark:text-slate-400 max-w-2xl text-sm sm:text-base leading-relaxed font-light pl-4">
-      A construction worker by day, a developer by night—balancing physical work and digital creation.
-    </p>
-  </div>
 
-  <!-- Search & Sorting Controls (Sleek Combined Row) -->
-  <div class="flex flex-col sm:flex-row items-stretch gap-3 w-full">
-    <!-- Search Input -->
-    <div class="relative flex-grow">
-      <input type="text" id="searchInput" placeholder="Search articles by title, tags or content..." class="w-full pl-11 pr-4 py-3 bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-slate-200/80 dark:border-slate-800/80 rounded-xl text-sm focus:outline-none focus:border-sky-500 focus:ring-4 focus:ring-sky-500/10 transition-all duration-200 placeholder:text-slate-400">
-      <div class="absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 dark:text-slate-500 flex items-center">
-        <i data-lucide="search" class="w-4 h-4"></i>
-      </div>
+    <!-- Filter Tag Chips -->
+    <div id="tagFilterBar" class="mt-6 flex flex-wrap items-center gap-2">
+      <button type="button" class="tag-btn text-xs font-mono px-4 py-2 border border-blue bg-tint text-blued cursor-pointer transition-all duration-200" data-tag="" aria-pressed="true">Semua Topik</button>
+      <% tags.forEach((tag, index) => { %>
+        <button type="button"
+                class="tag-btn text-xs font-mono px-4 py-2 border border-ink/25 bg-paper text-soft hover:border-blue hover:text-blued cursor-pointer transition-all duration-200 <%= index >= 5 ? 'hidden extra-tag' : '' %>"
+                data-tag="<%= tag %>"
+                aria-pressed="false">
+          #<%= tag %>
+        </button>
+      <% }) %>
+      <% if (tags.length > 5) { %>
+        <button type="button" id="toggleTagsBtn" class="text-xs font-mono px-4 py-2 bg-ink text-paper hover:bg-blue cursor-pointer transition-colors duration-200 flex items-center gap-1.5">
+          <span id="toggleText">Lainnya</span><span id="toggleIcon">+</span>
+        </button>
+      <% } %>
     </div>
-    
-    <!-- Sort Select -->
-    <div class="sm:w-52 shrink-0 relative">
-      <select id="sortSelect" class="w-full pl-4 pr-10 py-3 bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-slate-200/80 dark:border-slate-800/80 rounded-xl text-sm focus:outline-none focus:border-sky-500 focus:ring-4 focus:ring-sky-500/10 transition-all duration-200 appearance-none cursor-pointer">
-        <option value="newest">Newest First</option>
-        <option value="oldest">Oldest First</option>
-      </select>
-      <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 dark:text-slate-500 flex items-center">
-        <i data-lucide="chevron-down" class="w-4 h-4"></i>
-      </div>
+
+    <!-- Article Rows -->
+    <ol id="postsGrid" class="mt-10 border-b-4 border-ink">
+      <% posts.forEach(post => { %>
+        <%- include('../partials/writing-row', { post }) %>
+      <% }) %>
+    </ol>
+
+    <!-- Pagination -->
+    <div id="paginationContainer" class="flex items-center justify-center gap-1.5 pt-12 pb-4"></div>
+
+    <!-- Empty State -->
+    <div id="emptyState" class="hidden text-center py-20">
+      <p class="font-hand text-3xl text-soft rotate-[-1deg]">tidak ada tulisan yang cocok — coba kata kunci lain.</p>
     </div>
-  </div>
-
-  <!-- Filter Tag Chips (Tegas & Presisi) -->
-  <div class="flex flex-wrap items-center gap-2">
-    <button onclick="filterTag('')" class="tag-btn text-xs font-bold px-4 py-2 rounded-lg border border-sky-500/30 bg-sky-500/10 text-sky-600 dark:text-sky-400 transition-all duration-200" data-tag="">
-      All Topics
-    </button>
-    <% tags.forEach((tag, index) => { %>
-      <button onclick="filterTag('<%= tag %>')" 
-              class="tag-btn text-xs font-semibold px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 transition-all duration-200 <%= index >= 5 ? 'hidden extra-tag' : '' %>" 
-              data-tag="<%= tag %>">
-        #<%= tag %>
-      </button>
-    <% }) %>
-
-    <% if (tags.length > 5) { %>
-      <button id="toggleTagsBtn" onclick="toggleExtraTags()" class="text-xs font-bold px-4 py-2 rounded-lg bg-slate-950 dark:bg-slate-100 hover:bg-slate-800 dark:hover:bg-white text-white dark:text-slate-950 transition-all duration-200 flex items-center gap-1.5">
-        <span id="toggleText">More</span>
-        <i id="toggleIcon" data-lucide="plus" class="w-3.5 h-3.5"></i>
-      </button>
-    <% } %>
-  </div>
-
-  <!-- Article Grid (Penataan Rapi Maksimal 2 Kolom) -->
-  <div id="postsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-    <% posts.forEach(post => { %>
-      <%- include('../partials/post-card', { post }) %>
-    <% }) %>
-  </div>
-
-  <!-- Dynamic Pagination Controls -->
-  <div id="paginationContainer" class="flex items-center justify-center gap-1.5 pt-10 pb-4">
-    <!-- Kontrol navigasi diisi via JavaScript -->
   </div>
 </div>
 
-<!-- Scripts Pelaksana Sistem -->
+<!-- Scripts -->
 <script>
-  const itemsPerPage = 5;
-  let currentPage = 1;
-  let activeTag = '';
-  let tagsExpanded = false;
+  (function () {
+    const itemsPerPage = 2;
+    let currentPage = 1;
+    let activeTag = '';
+    let tagsExpanded = false;
 
-  const searchInput = document.getElementById('searchInput');
-  const sortSelect = document.getElementById('sortSelect');
-  const postsGrid = document.getElementById('postsGrid');
-  const postCards = Array.from(postsGrid.children);
-
-  // Fungsi Pembantu Pencari Atribut (Mengatasi Bug Pembungkusan Elemen)
-  function getCardAttr(card, attrName) {
-    if (!card) return '';
-    let val = card.getAttribute(attrName);
-    if (val) return val;
-    // Periksa apakah atribut berada di elemen anak terdalam
-    const inner = card.querySelector(`[${attrName}]`);
-    return inner ? inner.getAttribute(attrName) : '';
-  }
-
-  // Fungsi Menampilkan/Menyembunyikan Tag Ekstra (Tanpa Merusak Status Tombol Lain)
-  function toggleExtraTags() {
-    const extraTags = document.querySelectorAll('.extra-tag');
+    const searchInput = document.getElementById('searchInput');
+    const sortSelect = document.getElementById('sortSelect');
+    const postsGrid = document.getElementById('postsGrid');
+    const emptyState = document.getElementById('emptyState');
+    const tagFilterBar = document.getElementById('tagFilterBar');
     const toggleTagsBtn = document.getElementById('toggleTagsBtn');
-    
-    tagsExpanded = !tagsExpanded;
-    
-    extraTags.forEach(tag => {
-      if (tagsExpanded) {
-        tag.classList.remove('hidden');
-      } else {
-        tag.classList.add('hidden');
-      }
-    });
-    
-    if (tagsExpanded) {
-      toggleTagsBtn.innerHTML = `<span id="toggleText">Less</span><i data-lucide="minus" class="w-3.5 h-3.5"></i>`;
-    } else {
-      toggleTagsBtn.innerHTML = `<span id="toggleText">More</span><i data-lucide="plus" class="w-3.5 h-3.5"></i>`;
+    const paginationContainer = document.getElementById('paginationContainer');
+    const postCards = Array.from(postsGrid.children).filter(el => el.tagName === 'LI');
+
+    function getCardAttr(card, attrName) {
+      return card ? (card.getAttribute(attrName) || '') : '';
     }
-    lucide.createIcons();
-  }
 
-  // Pipeline Filter, Urut, & Paginate Utama
-  function filterAndRender() {
-    const query = searchInput.value.toLowerCase().trim();
+    function toggleExtraTags() {
+      tagsExpanded = !tagsExpanded;
+      document.querySelectorAll('.extra-tag').forEach(tag => tag.classList.toggle('hidden', !tagsExpanded));
+      const t = document.getElementById('toggleText');
+      const i = document.getElementById('toggleIcon');
+      if (t) t.textContent = tagsExpanded ? 'Lebih sedikit' : 'Lainnya';
+      if (i) i.textContent = tagsExpanded ? '−' : '+';
+    }
 
-    // 1. Memilah Berdasarkan Input & Tag Aktif
-    const matchedCards = postCards.filter(card => {
-      const title = getCardAttr(card, 'data-title').toLowerCase();
-      const tagsString = getCardAttr(card, 'data-tags');
-      const tags = tagsString.split(',').map(t => t.trim().toLowerCase());
-      
-      const matchesSearch = title.includes(query) || tags.some(tag => tag.includes(query));
-      const matchesTag = activeTag === '' || tags.includes(activeTag.toLowerCase());
-
-      return matchesSearch && matchesTag;
-    });
-
-    // 2. Melakukan Penyortiran Tanggal
-    const direction = sortSelect.value;
-    matchedCards.sort((a, b) => {
-      const dateA = parseInt(getCardAttr(a, 'data-date') || '0');
-      const dateB = parseInt(getCardAttr(b, 'data-date') || '0');
-      return direction === 'newest' ? dateB - dateA : dateA - dateB;
-    });
-
-    // 3. Menghitung Pembagian Halaman
-    const totalItems = matchedCards.length;
-    const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
-
-    if (currentPage > totalPages) currentPage = totalPages;
-    if (currentPage < 1) currentPage = 1;
-
-    // Bersihkan kontainer utama
-    postsGrid.innerHTML = '';
-
-    // Penanganan Tampilan Saat Kosong
-    if (totalItems === 0) {
-      postsGrid.innerHTML = `
-        <div class="col-span-full py-16 text-center space-y-3">
-          <div class="inline-flex p-3 rounded-lg bg-slate-100 dark:bg-slate-900 text-slate-400 dark:text-slate-500">
-            <i data-lucide="book-open" class="w-5 h-5"></i>
-          </div>
-          <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">No articles match your search or filters.</p>
-        </div>
-      `;
-      lucide.createIcons();
-    } else {
-      const startIndex = (currentPage - 1) * itemsPerPage;
-      const endIndex = startIndex + itemsPerPage;
-
-      // Sisipkan kembali elemen yang sesuai halaman aktif ke dalam DOM
-      matchedCards.forEach((card, index) => {
-        if (index >= startIndex && index < endIndex) {
-          card.style.display = 'block';
-          card.style.opacity = '1';
-          postsGrid.appendChild(card);
-        }
+    function setTagButtonStates() {
+      tagFilterBar.querySelectorAll('.tag-btn').forEach(btn => {
+        const isSelected = (btn.getAttribute('data-tag') || '').toLowerCase() === (activeTag || '').toLowerCase();
+        btn.classList.toggle('border-blue', isSelected);
+        btn.classList.toggle('bg-tint', isSelected);
+        btn.classList.toggle('text-blued', isSelected);
+        btn.classList.toggle('border-ink/25', !isSelected);
+        btn.classList.toggle('bg-paper', !isSelected);
+        btn.classList.toggle('text-soft', !isSelected);
+        btn.setAttribute('aria-pressed', String(isSelected));
       });
     }
 
-    // Bangun Ulang Tombol Navigasi Halaman
-    renderPagination(totalPages);
-  }
+    function filterAndRender() {
+      const query = searchInput.value.toLowerCase().trim();
 
-  // Membuat Render Angka Dinamis Di Tengah (Rentang Antara Prev & Next)
-  function renderPagination(totalPages) {
-    const container = document.getElementById('paginationContainer');
-    if (!container) return;
+      const matchedCards = postCards.filter(card => {
+        const title = getCardAttr(card, 'data-title');
+        const tagsString = getCardAttr(card, 'data-tags');
+        const tags = tagsString.split(',').map(t => t.trim());
 
-    if (totalPages <= 1) {
-      container.innerHTML = '';
-      return;
+        const matchesSearch = title.includes(query) || tags.some(tag => tag.includes(query));
+        const matchesTag = activeTag === '' || tags.includes(activeTag.toLowerCase());
+
+        return matchesSearch && matchesTag;
+      });
+
+      const direction = sortSelect.value;
+      matchedCards.sort((a, b) => {
+        const dateA = parseInt(getCardAttr(a, 'data-date') || '0');
+        const dateB = parseInt(getCardAttr(b, 'data-date') || '0');
+        return direction === 'newest' ? dateB - dateA : dateA - dateB;
+      });
+
+      const totalItems = matchedCards.length;
+      const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
+
+      if (currentPage > totalPages) currentPage = totalPages;
+      if (currentPage < 1) currentPage = 1;
+
+      postCards.forEach(card => card.style.display = 'none');
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      matchedCards.slice(startIndex, endIndex).forEach(card => card.style.display = '');
+
+      emptyState.classList.toggle('hidden', totalItems !== 0);
+      renderPagination(totalPages);
     }
 
-    let html = '';
+    function renderPagination(totalPages) {
+      if (totalPages <= 1) { paginationContainer.innerHTML = ''; return; }
 
-    // Tombol Previous (Kembali)
-    const prevDisabled = currentPage === 1;
-    html += `
-      <button onclick="changePage(${currentPage - 1})" 
-              class="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/80 transition-all duration-200 disabled:opacity-40 disabled:pointer-events-none"
-              ${prevDisabled ? 'disabled' : ''}>
-        <i data-lucide="chevron-left" class="w-4 h-4"></i>
-      </button>
-    `;
+      let html = '';
+      const prevDisabled = currentPage === 1;
+      html += `<button type="button" data-page="${currentPage - 1}" ${prevDisabled ? 'disabled' : ''} class="w-9 h-9 border-2 border-ink bg-paper text-ink hover:bg-ink hover:text-paper cursor-pointer transition-colors duration-200 disabled:opacity-30 disabled:pointer-events-none" aria-label="Halaman sebelumnya">‹</button>`;
 
-    // Penyusunan Jendela Rentang Nomor Tengah
-    const delta = 1;
-    const pages = [];
-
-    for (let i = 1; i <= totalPages; i++) {
-      if (i === 1 || i === totalPages || (i >= currentPage - delta && i <= currentPage + delta)) {
-        pages.push(i);
-      } else if (pages[pages.length - 1] !== '...') {
-        pages.push('...');
+      const delta = 1;
+      const pages = [];
+      for (let i = 1; i <= totalPages; i++) {
+        if (i === 1 || i === totalPages || (i >= currentPage - delta && i <= currentPage + delta)) {
+          pages.push(i);
+        } else if (pages[pages.length - 1] !== '…') {
+          pages.push('…');
+        }
       }
+
+      pages.forEach(p => {
+        if (p === '…') {
+          html += `<span class="inline-flex items-center justify-center w-9 h-9 text-soft font-mono text-xs">•••</span>`;
+        } else {
+          const isActive = p === currentPage;
+          html += `<button type="button" data-page="${p}" class="w-9 h-9 font-mono text-sm cursor-pointer transition-colors duration-200 ${isActive ? 'bg-blue text-paper' : 'border-2 border-ink bg-paper text-ink hover:bg-ink hover:text-paper'}">${p}</button>`;
+        }
+      });
+
+      const nextDisabled = currentPage === totalPages;
+      html += `<button type="button" data-page="${currentPage + 1}" ${nextDisabled ? 'disabled' : ''} class="w-9 h-9 border-2 border-ink bg-paper text-ink hover:bg-ink hover:text-paper cursor-pointer transition-colors duration-200 disabled:opacity-30 disabled:pointer-events-none" aria-label="Halaman berikutnya">›</button>`;
+
+      paginationContainer.innerHTML = html;
     }
 
-    pages.forEach(p => {
-      if (p === '...') {
-        html += `
-          <span class="inline-flex items-center justify-center w-9 h-9 text-slate-400 dark:text-slate-600 text-xs font-bold">
-            &bull;&bull;&bull;
-          </span>
-        `;
-      } else {
-        const isActive = p === currentPage;
-        html += `
-          <button onclick="changePage(${p})" 
-                  class="inline-flex items-center justify-center w-9 h-9 rounded-lg text-xs font-bold transition-all duration-200 ${
-                    isActive 
-                      ? 'bg-slate-950 dark:bg-white text-white dark:text-slate-950 shadow-sm' 
-                      : 'border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/80'
-                  }">
-            ${p}
-          </button>
-        `;
-      }
+    function changePage(page) {
+      const totalPages = Math.ceil(postCards.filter(card => {
+        const query = searchInput.value.toLowerCase().trim();
+        const title = getCardAttr(card, 'data-title');
+        const tags = getCardAttr(card, 'data-tags').split(',').map(t => t.trim());
+        const matchesSearch = title.includes(query) || tags.some(tag => tag.includes(query));
+        const matchesTag = activeTag === '' || tags.includes(activeTag.toLowerCase());
+        return matchesSearch && matchesTag;
+      }).length / itemsPerPage) || 1;
+      if (page < 1 || page > totalPages) return;
+      currentPage = page;
+      filterAndRender();
+      searchInput.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function filterTag(tag) {
+      activeTag = tag || '';
+      currentPage = 1;
+      setTagButtonStates();
+      filterAndRender();
+    }
+
+    // Wire-up: event listener (bukan inline onclick — lebih andal)
+    tagFilterBar.addEventListener('click', (e) => {
+      const btn = e.target.closest('.tag-btn');
+      if (btn) filterTag(btn.getAttribute('data-tag'));
     });
 
-    // Tombol Next (Lanjut)
-    const nextDisabled = currentPage === totalPages;
-    html += `
-      <button onclick="changePage(${currentPage + 1})" 
-              class="inline-flex items-center justify-center w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/80 transition-all duration-200 disabled:opacity-40 disabled:pointer-events-none"
-              ${nextDisabled ? 'disabled' : ''}>
-        <i data-lucide="chevron-right" class="w-4 h-4"></i>
-      </button>
-    `;
+    if (toggleTagsBtn) toggleTagsBtn.addEventListener('click', toggleExtraTags);
 
-    container.innerHTML = html;
-    lucide.createIcons();
-  }
-
-  // Navigasi & Perpindahan Fokus Mulus
-  function changePage(page) {
-    currentPage = page;
-    filterAndRender();
-    searchInput.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-
-  // Saringan Filter Tag yang Presisi (Mempertahankan Kelas 'hidden' Milik Tag Lain)
-  function filterTag(tag) {
-    activeTag = tag;
-    currentPage = 1;
-    
-    document.querySelectorAll('.tag-btn').forEach(btn => {
-      const isSelected = btn.getAttribute('data-tag') === tag;
-      if (isSelected) {
-        btn.classList.add('border-sky-500/30', 'bg-sky-500/10', 'text-sky-600', 'dark:text-sky-400');
-        btn.classList.remove('border-slate-200', 'dark:border-slate-800', 'bg-white', 'dark:bg-slate-900', 'text-slate-600', 'dark:text-slate-400');
-      } else {
-        btn.classList.remove('border-sky-500/30', 'bg-sky-500/10', 'text-sky-600', 'dark:text-sky-400');
-        btn.classList.add('border-slate-200', 'dark:border-slate-800', 'bg-white', 'dark:bg-slate-900', 'text-slate-600', 'dark:text-slate-400');
-      }
+    paginationContainer.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-page]');
+      if (btn && !btn.disabled) changePage(parseInt(btn.getAttribute('data-page'), 10));
     });
-    filterAndRender();
-  }
 
-  // Event Listener Responsif
-  searchInput.addEventListener('input', () => {
-    currentPage = 1;
-    filterAndRender();
-  });
-  
-  sortSelect.addEventListener('change', () => {
-    currentPage = 1;
-    filterAndRender();
-  });
+    searchInput.addEventListener('input', () => { currentPage = 1; filterAndRender(); });
+    sortSelect.addEventListener('change', () => { currentPage = 1; filterAndRender(); });
 
-  // Eksekusi Pemuatan Pertama
-  filterAndRender();
+    // Init
+    setTagButtonStates();
+    filterAndRender();
+  })();
 </script>

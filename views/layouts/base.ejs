@@ -1,293 +1,301 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="id" class="scroll-smooth">
 <head>
   <%- include('../partials/seo') %>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Mencegah Flash of Light Theme (FOUC) saat memuat halaman -->
-  <script>
-    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  </script>
-
-  <!-- Google Fonts (Poppins) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 
-  <!-- Konfigurasi Utama Tailwind Play CDN dengan Typography (Diperbaiki agar terbaca CDN) -->
   <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
   <script>
     tailwind.config = {
-      darkMode: 'class',
       theme: {
         extend: {
           colors: {
-            sky: {
-              300: '#7dd3fc',
-              400: '#38bdf8',
-              500: '#0ea5e9',
-              600: '#0284c7'
-            }
+            paper:  '#F7F2E8',
+            paper2: '#EFE7D6',
+            tint:   '#E9EDFB',
+            ink:    '#191714',
+            soft:   '#5C5547',
+            blue:   '#2A4BEA',
+            blued:  '#1D36B5',
+            orange: '#E2542C',
           },
           fontFamily: {
-            sans: ['Poppins', 'system-ui', '-apple-system', 'sans-serif']
-          }
-        }
-      }
+            display: ['Fraunces', 'Georgia', 'serif'],
+            sans:    ['"Space Grotesk"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            mono:    ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+            hand:    ['Caveat', 'cursive'],
+          },
+        },
+      },
     }
   </script>
+  <style>
+    :root{
+      --paper:#F7F2E8; --paper2:#EFE7D6; --tint:#E9EDFB; --ink:#191714; --soft:#5C5547;
+      --blue:#2A4BEA; --blued:#1D36B5; --orange:#E2542C;
+    }
+    html, body{ overflow-x:clip; scroll-behavior:smooth; }
+    body{ background:var(--paper); color:var(--ink); -webkit-font-smoothing:antialiased; max-width:100%; }
 
-  <!-- Lucide Icons CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.321.0/dist/umd/lucide.min.js"></script>
-
-  <style type="text/css">
-    body {
-      font-family: 'Poppins', sans-serif;
-    }
-    .theme-transition, .theme-transition * {
-      transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    /* Code Highlighting Custom Styling */
-    .hljs {
-      background: #0f172a !important;
-      border: 1px solid #1e293b;
-      border-radius: 0.75rem;
-      padding: 1.25rem;
-      color: #e2e8f0;
-    }
-    .dark .hljs {
-      background: #020617 !important;
-      border: 1px solid #1e293b;
+    /* Tekstur kertas grain */
+    body::before{
+      content:""; position:fixed; inset:0; z-index:80; pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+      opacity:.05; mix-blend-mode:multiply;
     }
 
-    /* Container Admonition Integration */
-    .custom-container {
-      padding: 1.25rem;
-      margin: 1.5rem 0;
-      border-left-width: 4px;
-      border-radius: 0.75rem;
+    /* Pola halftone dots */
+    .dots{
+      background-image:radial-gradient(circle, rgba(42,75,234,.16) 1.2px, transparent 1.3px);
+      background-size:14px 14px;
     }
-    .custom-container-title {
-      font-weight: 700;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.5rem;
-    }
-    .custom-container.info {
-      background-color: #eff6ff; border-color: #38bdf8; color: #1e3a8a;
-    }
-    .dark .custom-container.info {
-      background-color: #0c1a30; border-color: #0ea5e9; color: #93c5fd;
-    }
-    .custom-container.warning {
-      background-color: #fffbeb; border-color: #f59e0b; color: #78350f;
-    }
-    .dark .custom-container.warning {
-      background-color: #2b1a0a; border-color: #d97706; color: #fde047;
-    }
-    .custom-container.tip {
-      background-color: #f0fdf4; border-color: #10b981; color: #064e3b;
-    }
-    .dark .custom-container.tip {
-      background-color: #0a2417; border-color: #059669; color: #6ee7b7;
-    }
-    .custom-container.danger {
-      background-color: #fef2f2; border-color: #ef4444; color: #7f1d1d;
-    }
-    .dark .custom-container.danger {
-      background-color: #2d1010; border-color: #dc2626; color: #fca5a5;
+    .dots-orange{
+      background-image:radial-gradient(circle, rgba(226,84,44,.14) 1.2px, transparent 1.3px);
+      background-size:14px 14px;
     }
 
-    /* Table of Contents */
-    .toc-container {
-      background-color: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 0.75rem;
-      padding: 1.25rem;
-      margin-bottom: 2rem;
-    }
-    .dark .toc-container {
-      background-color: #0f172a;
-      border-color: #1e293b;
-    }
-    .toc-container ul {
-      list-style-type: none;
-      padding-left: 1rem;
-      margin-top: 0.5rem;
-      margin-bottom: 0.5rem;
-    }
-    .toc-container > ul {
-      padding-left: 0;
-      margin: 0;
-    }
-    .toc-container a {
-      color: #64748b;
-      text-decoration: none;
-      font-size: 0.875rem;
-      transition: color 0.2s ease;
-    }
-    .toc-container a:hover {
-      color: #38bdf8;
-    }
-    .dark .toc-container a {
-      color: #94a3b8;
-    }
-    .dark .toc-container a:hover {
-      color: #38bdf8;
-    }
-        
-    /* Pastikan elemen heading memiliki ruang relatif dan tidak terpotong */
-    article h1, article h2, article h3, article h4 {
-      position: relative;
-    }
-    
-    /* Mencegah underline (garis bawah) ikut muncul pada elemen ikon anchor */
-    .group a, .group a span {
-      text-decoration: none !important;
-      align-items: center;
-    }
-    
-    /* Efek warna garis bawah teks saat judul di-hover */
-    .group:hover {
-      text-decoration-color: rgba(148, 163, 184, 0.5);
-    }
-    
-    /* Prism.js Syntax Highlighting Theme Custom (Dracula Style) */
-    .code-container .token.comment,
-    .code-container .token.prolog,
-    .code-container .token.doctype,
-    .code-container .token.cdata {
-      color: #6272a4;
-      font-style: italic;
-    }
-    .code-container .token.punctuation {
-      color: #f8f8f2;
-    }
-    .code-container .token.property,
-    .code-container .token.tag,
-    .code-container .token.constant,
-    .code-container .token.symbol,
-    .code-container .token.deleted {
-      color: #ff79c6;
-    }
-    .code-container .token.boolean,
-    .code-container .token.number {
-      color: #bd93f9;
-    }
-    .code-container .token.selector,
-    .code-container .token.attr-name,
-    .code-container .token.string,
-    .code-container .token.char,
-    .code-container .token.builtin,
-    .code-container .token.inserted {
-      color: #f1fa8c;
-    }
-    .code-container .token.operator,
-    .code-container .token.entity,
-    .code-container .token.url,
-    .code-container .language-css .token.string,
-    .code-container .style .token.string {
-      color: #f8f8f2;
-    }
-    .code-container .token.atrule,
-    .code-container .token.attr-value,
-    .code-container .token.keyword {
-      color: #8be9fd;
-    }
-    .code-container .token.function,
-    .code-container .token.class-name {
-      color: #50fa7b;
-    }
-    .code-container .token.regex,
-    .code-container .token.important,
-    .code-container .token.variable {
-      color: #ffb86c;
-    }
-    .code-container .token.bold {
-      font-weight: bold;
-    }
-    .code-container .token.italic {
-      font-style: italic;
-    }
-    
-    /* Hilangkan sisa-sisa style hljs lama agar tidak bentrok */
-    .code-container .hljs {
-      background: transparent !important;
-      border: none !important;
-      padding: 0 !important;
-      margin: 0 !important;
-    }
-    
-    /* Menyelaraskan pemutar audio bawaan browser di mode gelap (Chrome, Safari, Edge) */
-    .dark .audio-wrapper audio::-webkit-media-controls-panel {
-      background-color: #0f172a !important;
-      filter: invert(1) hue-rotate(180deg);
-    }
-    
-    /* Jaga agar transisi video lancar */
-    .video-wrapper video {
-      outline: none;
-    }
-    
-    /* Menyamarkan background putih native HTML5 Audio di Dark Mode */
-    .dark .audio-wrapper audio::-webkit-media-controls-panel {
-      background-color: #0f172a !important;
-      filter: invert(1) hue-rotate(180deg);
-    }
-    
-    /* Mematikan border fokus biru bawaan browser saat video di-klik */
-    .media-container video, 
-    .media-container audio {
-      outline: none !important;
-    }
-    
-    /* Menghilangkan scrollbar pada menu Tabs tanpa merusak fungsi scroll */
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-    .scrollbar-hide {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
+    ::selection{ background:var(--blue); color:var(--paper); }
+    :focus-visible{ outline:2px solid var(--blued); outline-offset:3px; border-radius:2px; }
+    section{ scroll-margin-top:88px; }
 
-    /* Animasi Fade In untuk pergantian tab yang estetik */
-    @keyframes fadeInTab {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* Animasi Reveal */
+    .reveal{ opacity:0; transform:translateY(26px); transition:opacity .9s cubic-bezier(.2,.6,.2,1), transform .9s cubic-bezier(.2,.6,.2,1); transition-delay:var(--d,0ms); }
+    .reveal.in{ opacity:1; transform:none; }
+
+    /* Masking Teks Hero */
+    .line-mask{ display:block; overflow:hidden; }
+    .line-inner{ display:block; transform:translateY(112%); transition:transform 1.1s cubic-bezier(.19,1,.22,1); }
+    .in .line-inner, body.no-anim .line-inner{ transform:none; }
+
+    /* Teks Berjalan (Marquee) */
+    .marquee-track{ display:flex; width:max-content; animation:marq 40s linear infinite; }
+    @keyframes marq{ to{ transform:translateX(-50%); } }
+
+    /* Efek Hover Proyek */
+    .art{ transition:transform .7s cubic-bezier(.2,.6,.2,1); }
+    .proj:hover .art{ transform:scale(1.03); }
+    .proj .go{ transition:transform .4s cubic-bezier(.2,.6,.2,1); }
+    .proj:hover .go{ transform:translate(4px,-4px); }
+    .proj .ptitle{ transition:transform .5s cubic-bezier(.2,.6,.2,1), color .4s; }
+    .proj:hover .ptitle{ transform:translateX(14px); color:var(--blue); }
+
+    /* Baris Tulisan / Writing */
+    .wrow{ position:relative; transition:background-color .45s ease, padding-left .35s ease; }
+    .wrow::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--blue); transform:scaleY(0); transform-origin:bottom; transition:transform .45s cubic-bezier(.2,.6,.2,1); }
+    .wrow:hover{ background:var(--tint); padding-left:18px; }
+    .wrow:hover::before{ transform:scaleY(1); }
+    .wrow .wtitle{ transition:transform .45s cubic-bezier(.2,.6,.2,1), color .35s; }
+    .wrow:hover .wtitle{ transform:translateX(12px); color:var(--blue); }
+    .wrow .wnum{ transition:transform .45s cubic-bezier(.2,.6,.2,1), color .35s; }
+    .wrow:hover .wnum{ transform:translateY(-6px); color:var(--blue); }
+    .wrow .warr{ opacity:0; transform:translateX(-8px); transition:opacity .35s ease, transform .45s cubic-bezier(.2,.6,.2,1); }
+    .wrow:hover .warr{ opacity:1; transform:none; }
+
+    /* Header Navigasi Transparan */
+    header{ transition:background-color .45s ease, border-color .45s ease; }
+    header.menu-open{ background:transparent; border-color:transparent; }
+    .nav-ink{ transition:color .4s ease; }
+    header.menu-open .nav-ink{ color:var(--paper); }
+    .menu-line{ transition:transform .5s cubic-bezier(.2,.6,.2,1), background-color .4s ease; }
+    header.menu-open .menu-line{ background:var(--paper); }
+    header.menu-open .menu-line:first-child{ transform:translateY(4px) rotate(45deg); }
+    header.menu-open .menu-line:last-child{ transform:translateY(-4px) rotate(-45deg); }
+
+    /* Menu Overlay Transisi */
+    #menu-overlay{ visibility:hidden; opacity:0; pointer-events:none; transition:opacity .55s ease, visibility .55s, pointer-events 0s linear .55s; }
+    #menu-overlay.open{ visibility:visible; opacity:1; pointer-events:auto; transition:opacity .55s ease, visibility 0s, pointer-events 0s; }
+    .menu-row{ display:block; overflow:hidden; }
+    .menu-row-inner{ display:inline-block; transform:translateY(115%); transition:transform 1s cubic-bezier(.19,1,.22,1); transition-delay:var(--d,0ms); }
+    #menu-overlay.open .menu-row-inner{ transform:none; }
+    .mlink .mtitle{ display:inline-block; transition:transform .5s cubic-bezier(.2,.6,.2,1), color .35s; }
+    .mlink:hover .mtitle{ transform:translateX(20px); color:var(--orange); font-style:italic; }
+    .mlink .mnum{ transition:color .35s, transform .4s; }
+    .mlink:hover .mnum{ color:var(--orange); }
+    .mlink .marr{ opacity:0; transform:translateX(-12px); transition:opacity .3s ease, transform .45s cubic-bezier(.2,.6,.2,1); }
+    .mlink:hover .marr{ opacity:1; transform:none; }
+    .mlink .mhand{ opacity:0; transform:rotate(-3deg) translateY(8px); transition:opacity .4s ease, transform .4s ease; }
+    .mlink:hover .mhand{ opacity:1; transform:rotate(-3deg) translateY(0); }
+    .mlink.active .mnum{ color:var(--orange); }
+    @media (hover:none){
+      .mlink .mhand{ opacity:1; transform:rotate(-3deg) translateY(0); }
+      .mlink .marr{ opacity:1; transform:none; }
     }
-    .animate-fade-in {
-      animation: fadeInTab 0.3s ease-out forwards;
+    .dots-dark{ background-image:radial-gradient(circle, rgba(233,237,251,.08) 1.2px, transparent 1.3px); background-size:16px 16px; }
+
+    /* Underline Hover Link */
+    .u-hover{ background-image:linear-gradient(var(--blue),var(--blue)); background-size:0% 2px; background-position:0 100%; background-repeat:no-repeat; transition:background-size .4s cubic-bezier(.2,.6,.2,1); }
+    .u-hover:hover{ background-size:100% 2px; }
+
+    /* Floating Animation */
+    .float-y{ animation:floaty 7s ease-in-out infinite; }
+    @keyframes floaty{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-10px); } }
+    .spin-slow{ animation:spin 46s linear infinite; }
+    @keyframes spin{ to{ transform:rotate(360deg); } }
+
+    /* ================================================================
+       MARKDOWN PLUGIN — tema paper (kelas di-render langsung oleh plugin)
+       ================================================================ */
+    .prose{ color:rgba(25,23,20,.85); max-width:100%; overflow-wrap:break-word; }
+    .prose :where(h1,h2,h3,h4,h5,h6):not(:where([class~="not-prose"] *)){ font-family:'Fraunces',Georgia,serif; color:var(--ink); font-weight:500; letter-spacing:-.01em; }
+    .prose :where(a):not(:where([class~="not-prose"] *)){ color:var(--blued); overflow-wrap:anywhere; }
+    .prose :where(blockquote):not(:where([class~="not-prose"] *)){ border-left-color:var(--blue); }
+    .prose :where(strong):not(:where([class~="not-prose"] *)){ color:var(--ink); }
+
+    /* Cegah konten melebar: tabel di-scroll horizontal, media tidak melebihi kolom */
+    .prose :where(table):not(:where([class~="not-prose"] *)){ display:block; max-width:100%; overflow-x:auto; }
+    .prose :where(img, video, iframe):not(:where([class~="not-prose"] *)){ max-width:100%; height:auto; }
+
+    /* Inline code (HighlightBacktick) — tint biru paper */
+    .prose code:not(pre code){ background:var(--tint); border:1px solid rgba(42,75,234,.25); color:var(--blued); }
+
+    /* Admonition (::: note/info/tip/warning/danger) — teks konten mengikuti warna wrapper */
+    .custom-container .prose{ color:inherit; }
+
+    /* Tabel (markdown-it-multimd-table) */
+    .prose :where(table):not(:where([class~="not-prose"] *)) th{ color:var(--ink); border-color:rgba(25,23,20,.25); }
+    .prose :where(table):not(:where([class~="not-prose"] *)) td{ border-color:rgba(25,23,20,.15); }
+
+    /* Prism token theme — latar gelap MacCodeBlock (Catppuccin Mocha) */
+    .code-container pre code .token.comment, .code-container pre code .token.prolog, .code-container pre code .token.doctype, .code-container pre code .token.cdata{ color:#6c7086; }
+    .code-container pre code .token.punctuation{ color:#cdd6f4; }
+    .code-container pre code .token.property, .code-container pre code .token.tag, .code-container pre code .token.constant, .code-container pre code .token.symbol, .code-container pre code .token.deleted{ color:#f38ba8; }
+    .code-container pre code .token.boolean, .code-container pre code .token.number{ color:#fab387; }
+    .code-container pre code .token.selector, .code-container pre code .token.attr-name, .code-container pre code .token.string, .code-container pre code .token.char, .code-container pre code .token.builtin, .code-container pre code .token.inserted{ color:#a6e3a1; }
+    .code-container pre code .token.operator, .code-container pre code .token.entity, .code-container pre code .token.url{ color:#94e2d5; }
+    .code-container pre code .token.atrule, .code-container pre code .token.attr-value, .code-container pre code .token.keyword{ color:#cba6f7; }
+    .code-container pre code .token.function, .code-container pre code .token.class-name{ color:#89b4fa; }
+    .code-container pre code .token.regex, .code-container pre code .token.important, .code-container pre code .token.variable{ color:#f9e2af; }
+    .code-container pre code .token.important, .code-container pre code .token.bold{ font-weight:bold; }
+    .code-container pre code .token.italic{ font-style:italic; }
+
+    /* Animasi pane tab aktif (Tabs.js) */
+    @keyframes fadein{ from{ opacity:0; transform:translateY(4px); } to{ opacity:1; transform:none; } }
+    .animate-fade-in{ animation:fadein .3s ease; }
+
+    /* Scrollbar hide untuk tabs */
+    .scrollbar-hide::-webkit-scrollbar{ display:none; }
+    .scrollbar-hide{ -ms-overflow-style:none; scrollbar-width:none; }
+
+    @media (prefers-reduced-motion: reduce){
+      *, *::before, *::after{ animation:none !important; transition:none !important; }
+      .reveal, .line-inner{ opacity:1 !important; transform:none !important; }
+      html{ scroll-behavior:auto; }
     }
   </style>
 </head>
-<body class="theme-transition bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 flex flex-col min-h-screen selection:bg-sky-400/30 relative overflow-x-hidden antialiased">
 
-  <!-- Minimalist Tech-Grid Pattern -->
-  <div class="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none -z-20"></div>
-
-  <!-- Glowing Aura Background -->
-  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-gradient-to-b from-sky-400/8 via-sky-500/3 to-transparent rounded-full filter blur-[100px] pointer-events-none -z-10"></div>
+<body class="font-sans text-ink antialiased">
 
   <%- include('../partials/navbar') %>
 
-  <!-- Area Render Halaman Dinamis -->
-  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+  <main id="top">
     <%- include('../pages/' + page) %>
   </main>
 
   <%- include('../partials/footer') %>
 
-  <!-- Script Global yang Bersih dari Konflik Duplikasi -->
+  <!-- Skrip Interaktivitas Utama -->
   <script>
-    // Hanya lakukan inisialisasi ikon secara global
-    lucide.createIcons();
+  (function(){
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) document.body.classList.add('no-anim');
+
+    // Pembaruan tahun otomatis pada footer
+    document.querySelectorAll('.js-year').forEach(el => el.textContent = new Date().getFullYear());
+
+    // Animasi garis hero (halaman yang punya h1 line-mask)
+    const hero = document.querySelector('h1');
+    if (hero) {
+      hero.querySelectorAll('.line-mask').forEach((m, i) => {
+        setTimeout(() => m.classList.add('in'), 150 + i * 130);
+      });
+    }
+
+    // Intersect Observer untuk efek Scroll Reveal
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Pengendali Menu Overlay Modal Navigasi
+    const toggle = document.getElementById('menu-toggle');
+    const overlay = document.getElementById('menu-overlay');
+    const headerEl = document.querySelector('header');
+    const mainEl = document.querySelector('main');
+    const pageFooter = document.querySelector('footer.border-t-4');
+    const labelEl = toggle && toggle.querySelector('.menu-label');
+    if (toggle && overlay) {
+      const openMenu = () => {
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        overlay.removeAttribute('inert');
+        headerEl.classList.add('menu-open');
+        if (mainEl) mainEl.setAttribute('inert', '');
+        if (pageFooter) pageFooter.setAttribute('inert', '');
+        document.body.classList.add('overflow-hidden');
+        toggle.setAttribute('aria-expanded', 'true');
+        if (labelEl) labelEl.textContent = 'Tutup';
+      };
+      const closeMenu = () => {
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        overlay.setAttribute('inert', '');
+        headerEl.classList.remove('menu-open');
+        if (mainEl) mainEl.removeAttribute('inert');
+        if (pageFooter) pageFooter.removeAttribute('inert');
+        document.body.classList.remove('overflow-hidden');
+        toggle.setAttribute('aria-expanded', 'false');
+        if (labelEl) labelEl.textContent = 'Menu';
+      };
+      toggle.addEventListener('click', () => overlay.classList.contains('open') ? closeMenu() : openMenu());
+      overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeMenu(); });
+    }
+
+    // Navigasi Spy - Penanda tautan menu aktif berdasarkan posisi scroll
+    const mLinks = document.querySelectorAll('.mlink');
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          mLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    ['notes', 'writing', 'now', 'contact'].forEach(id => { const s = document.getElementById(id); if (s) spy.observe(s); });
+
+    // Jam real-time zona waktu Jakarta
+    const jkt = document.getElementById('jkt');
+    if (jkt) {
+      const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+      const tick = () => { jkt.textContent = 'JKT ' + fmt.format(new Date()); };
+      tick(); setInterval(tick, 1000);
+    }
+
+    // Efek paralaks / mouse drift halus pada perangkat kursor
+    if (!reduceMotion && window.matchMedia('(pointer: fine)').matches) {
+      const driftEls = document.querySelectorAll('[data-drift]');
+      if (driftEls.length) {
+        let raf = null;
+        window.addEventListener('mousemove', (ev) => {
+          if (raf) return;
+          raf = requestAnimationFrame(() => {
+            const cx = (ev.clientX / window.innerWidth - 0.5) * 2;
+            const cy = (ev.clientY / window.innerHeight - 0.5) * 2;
+            driftEls.forEach(t => {
+              const d = parseFloat(t.getAttribute('data-drift') || 14);
+              t.style.translate = (cx * d) + 'px ' + (cy * d) + 'px';
+            });
+            raf = null;
+          });
+        });
+      }
+    }
+  })();
   </script>
 </body>
 </html>
