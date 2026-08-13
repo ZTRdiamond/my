@@ -112,59 +112,55 @@ function buildTocDropdownHtml(headings, containerClass) {
 
   let html = `
   <div class="${containerClass} not-prose">
-    <!-- Mengembalikan bingkai dan latar belakang Biru (Sky Blue) yang sudah benar sebelumnya -->
-    <details class="group border border-sky-100 dark:border-sky-900/50 bg-sky-50/50 dark:bg-sky-950/20 rounded-2xl overflow-hidden transition-all duration-300" open>
+    <!-- Dropdown TOC dengan tema paper -->
+    <details class="group border border-ink/15 bg-paper2/50 rounded-2xl overflow-hidden transition-all duration-300" open>
       
-      <!-- Summary Toggle Header (Menggunakan warna biru beraksen lembut di mode gelap) -->
-      <summary class="flex items-center justify-between px-5 py-4 cursor-pointer font-bold text-sm text-sky-800 dark:text-sky-400/90 select-none hover:bg-sky-50 dark:hover:bg-sky-950/40 transition-all duration-300 focus:outline-none">
+      <!-- Summary Toggle Header -->
+      <summary class="flex items-center justify-between px-5 py-4 cursor-pointer font-bold text-sm text-ink select-none hover:bg-tint transition-all duration-300 focus:outline-none">
         <div class="flex items-center gap-2">
-          <!-- Mengembalikan warna ikon biru sebelumnya -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-sky-500 dark:text-sky-400/80"><line x1="4" y1="9" x2="20" y2="9"></line><line x1="4" y1="15" x2="20" y2="15"></line><line x1="10" y1="3" x2="8" y2="21"></line><line x1="16" y1="3" x2="14" y2="21"></line></svg>
+          <!-- Ikon biru paper -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-blue"><line x1="4" y1="9" x2="20" y2="9"></line><line x1="4" y1="15" x2="20" y2="15"></line><line x1="10" y1="3" x2="8" y2="21"></line><line x1="16" y1="3" x2="14" y2="21"></line></svg>
           <span>Table of Content</span>
         </div>
-        <span class="transition-transform duration-300 group-open:rotate-180 text-sky-400">
+        <span class="transition-transform duration-300 group-open:rotate-180 text-blue/60">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </span>
       </summary>
 
       <!-- Panel Submenu Lists -->
-      <div class="px-5 pb-5 pt-2 border-t border-sky-100/50 dark:border-sky-900/30 bg-white dark:bg-slate-900/40">
+      <div class="px-5 pb-5 pt-2 border-t border-ink/10 bg-paper/70">
         <nav class="space-y-1 pl-2">
   `;
 
   headings.forEach((heading) => {
     let indentClass = 'pl-0';
-    // Base style dengan hover biru (sky) yang interaktif
-    let textStyle = 'block transition-colors duration-200 hover:text-sky-500 dark:hover:text-sky-400';
+    // Base style dengan hover biru (paper) yang interaktif
+    let textStyle = 'block transition-colors duration-200 hover:text-blue';
     
     switch (heading.level) {
       case 1:
         indentClass = 'pl-0';
-        // Mengubah warna putih mencolok (slate-100) menjadi putih abu-abu yang lebih adem (slate-300)
-        textStyle += ' text-sm font-bold text-slate-800 dark:text-slate-300';
+        textStyle += ' text-sm font-bold text-ink';
         break;
       case 2:
-        indentClass = 'pl-2 border-l-2 border-slate-200/85 dark:border-slate-800/80';
-        // Mengubah dark:text-slate-300 menjadi slate-300 dengan sedikit transparansi agar lebih redup
-        textStyle += ' text-sm font-semibold text-slate-700 dark:text-slate-300/90';
+        indentClass = 'pl-2 border-l-2 border-ink/15';
+        textStyle += ' text-sm font-semibold text-soft';
         break;
       case 3:
-        indentClass = 'pl-6 border-l border-slate-200/60 dark:border-slate-800/40 mt-1';
-        // Teks level 3 menggunakan slate-400 yang lebih lembut dibanding level di atasnya
-        textStyle += ' text-xs font-medium text-slate-500 dark:text-slate-400';
+        indentClass = 'pl-6 border-l border-ink/10 mt-1';
+        textStyle += ' text-xs font-medium text-soft/80';
         break;
       case 4:
-        indentClass = 'pl-10 border-l border-slate-100/50 dark:border-slate-900/30 mt-1';
-        // Menggunakan slate-400 dengan opasitas 80% agar kontrasnya pas dan tidak terlalu terang
-        textStyle += ' text-xs font-light text-slate-400 dark:text-slate-400/80';
+        indentClass = 'pl-10 border-l border-ink/10 mt-1';
+        textStyle += ' text-xs font-light text-soft/70';
         break;
       case 5:
-        indentClass = 'pl-12 border-l border-dashed border-slate-100/50 dark:border-slate-900/20 mt-1';
-        textStyle += ' text-[11px] font-light text-slate-400/80 dark:text-slate-500';
+        indentClass = 'pl-12 border-l border-dashed border-ink/10 mt-1';
+        textStyle += ' text-[11px] font-light text-soft/60';
         break;
       case 6:
-        indentClass = 'pl-16 border-l border-dashed border-slate-100/50 dark:border-slate-900/20 mt-1';
-        textStyle += ' text-[10px] font-light text-slate-400/60 dark:text-slate-550';
+        indentClass = 'pl-16 border-l border-dashed border-ink/10 mt-1';
+        textStyle += ' text-[10px] font-light text-soft/50';
         break;
     }
 

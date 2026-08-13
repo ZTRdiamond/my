@@ -1,33 +1,34 @@
 // Konfigurasi visual untuk setiap jenis kontainer (Ikon SVG, Kelas Tailwind, dsb)
+// Tema paper: warna aksen disesuaikan dengan design UI (tint/blue untuk info, hijau/amber/merah lembut untuk semantik)
 const containerConfigs = {
   note: {
-    wrapperClass: 'bg-sky-50/60 dark:bg-sky-950/20 border-sky-500 dark:border-sky-400 text-sky-800 dark:text-sky-300',
-    titleClass: 'text-sky-800 dark:text-sky-300',
+    wrapperClass: 'bg-tint/60 border-blue text-blued',
+    titleClass: 'text-blued',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>`
   },
   info: {
-    wrapperClass: 'bg-sky-50/60 dark:bg-sky-950/20 border-sky-500 dark:border-sky-400 text-sky-800 dark:text-sky-300',
-    titleClass: 'text-sky-800 dark:text-sky-300',
+    wrapperClass: 'bg-tint/60 border-blue text-blued',
+    titleClass: 'text-blued',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>`
   },
   tip: {
-    wrapperClass: 'bg-emerald-50/60 dark:bg-emerald-950/20 border-emerald-500 dark:border-emerald-400 text-emerald-800 dark:text-emerald-300',
-    titleClass: 'text-emerald-800 dark:text-emerald-300',
+    wrapperClass: 'bg-[#eaf8ec] border-[#2b9e4b] text-[#1d5e31]',
+    titleClass: 'text-[#1d5e31]',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A7 7 0 0 0 4 8c0 1.3.5 2.6 1.5 3.5.7.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>`
   },
   warning: {
-    wrapperClass: 'bg-amber-50/60 dark:bg-amber-950/20 border-amber-500 dark:border-amber-400 text-amber-800 dark:text-amber-300',
-    titleClass: 'text-amber-800 dark:text-amber-300',
+    wrapperClass: 'bg-[#fdf3e1] border-[#e8860c] text-[#8a4a00]',
+    titleClass: 'text-[#8a4a00]',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`
   },
   caution: {
-    wrapperClass: 'bg-amber-50/60 dark:bg-amber-950/20 border-amber-500 dark:border-amber-400 text-amber-800 dark:text-amber-300',
-    titleClass: 'text-amber-800 dark:text-amber-300',
+    wrapperClass: 'bg-[#fdf3e1] border-[#e8860c] text-[#8a4a00]',
+    titleClass: 'text-[#8a4a00]',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`
   },
   danger: {
-    wrapperClass: 'bg-red-50/60 dark:bg-red-950/20 border-red-500 dark:border-red-400 text-red-800 dark:text-red-300',
-    titleClass: 'text-red-800 dark:text-red-300',
+    wrapperClass: 'bg-[#fdeaea] border-[#e03131] text-[#8a1f1f]',
+    titleClass: 'text-[#8a1f1f]',
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`
   }
 };
@@ -147,7 +148,7 @@ export default function markdownItDocusaurusContainer(md) {
             ${config.icon}
             <span>${displayTitle}</span>
           </div>
-          <div class="prose prose-sm dark:prose-invert max-w-none text-current leading-relaxed">
+          <div class="prose prose-sm max-w-none text-current leading-relaxed">
       `.trim();
     };
 

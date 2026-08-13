@@ -28,12 +28,12 @@ export default function markdownItGithubAnchor(md, options = {}) {
     }
 
     // Menambahkan 'pl-6 md:pl-8' untuk mendorong teks heading ke dalam secara aman
-    let headingClasses = 'group flex items-center relative font-bold text-slate-900 dark:text-slate-100 scroll-mt-24 transition-all duration-200 hover:underline hover:underline-offset-4 hover:decoration-slate-300 dark:hover:decoration-slate-700 pl-6 md:pl-8';
+    let headingClasses = 'group flex items-center relative font-medium text-ink scroll-mt-24 transition-all duration-200 hover:underline hover:underline-offset-4 hover:decoration-ink/30 pl-6 md:pl-8';
     
     if (token.tag === 'h1') {
       headingClasses += ' text-3xl md:text-4xl mt-10 mb-6';
     } else if (token.tag === 'h2') {
-      headingClasses += ' text-2xl md:text-3xl mt-8 mb-4 border-b border-slate-200/60 dark:border-slate-800/60 pb-2 w-full';
+      headingClasses += ' text-2xl md:text-3xl mt-8 mb-4 border-b border-ink/15 pb-2 w-full';
     } else if (token.tag === 'h3') {
       headingClasses += ' text-xl md:text-2xl mt-6 mb-3';
     } else if (token.tag === 'h4') {
@@ -50,9 +50,9 @@ export default function markdownItGithubAnchor(md, options = {}) {
     if (slug) {
       // Mengubah posisi koordinat dari '-left-6' menjadi 'left-0' agar berada di dalam padding heading
       const anchorHtml = `
-        <a class="absolute left-0 md:left-1 text-slate-350 dark:text-slate-600 hover:text-sky-500 dark:hover:text-sky-400 select-none focus:outline-none flex items-center justify-center no-underline w-5 h-5" href="#${slug}" aria-hidden="true" title="Direct link to heading" style="text-decoration: none !important;">
+        <a class="absolute left-0 md:left-1 text-soft/60 hover:text-blue select-none focus:outline-none flex items-center justify-center no-underline w-5 h-5" href="#${slug}" aria-hidden="true" title="Direct link to heading" style="text-decoration: none !important;">
           <!-- Default: Menampilkan karakter '#' -->
-          <span class="group-hover:hidden text-slate-300 dark:text-slate-600 font-medium">#</span>
+          <span class="group-hover:hidden text-soft/50 font-medium">#</span>
           
           <!-- Hover: Berubah menjadi Icon Link SVG -->
           <span class="hidden group-hover:inline-block">

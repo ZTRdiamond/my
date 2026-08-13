@@ -99,9 +99,9 @@ export default function markdownItMacCodeBlock(md) {
     `.replace(/\s+/g, ' ').trim();
 
     return `
-      <div class="code-container relative border border-slate-200/80 dark:border-slate-800/80 rounded-2xl my-6 bg-[#1e1e2e] dark:bg-[#11111b] shadow-md overflow-hidden not-prose transition-all duration-300">
+      <div class="code-container relative border border-ink/25 rounded-2xl my-6 bg-[#1e1e2e] shadow-md overflow-hidden not-prose transition-all duration-300">
         <!-- Header Mac Terminal Style -->
-        <div class="flex items-center justify-between px-4 py-3 bg-[#181825]/90 dark:bg-[#11111b]/90 border-b border-slate-800/30 select-none">
+        <div class="flex items-center justify-between px-4 py-3 bg-[#181825]/90 border-b border-white/10 select-none">
           <!-- Dot Mac Tiga Warna -->
           <div class="flex items-center gap-1.5 w-1/4">
             <span class="w-3 h-3 rounded-full bg-rose-500/90 block"></span>

@@ -216,38 +216,38 @@ function dokapiCoreApplyReference(state) {
 function getRouteContext(verb) {
   switch (verb.toUpperCase()) {
     case "GET":
-      return { alertClass: "alert--info", badgeClass: "badge--info" };
+      return { accent: 'bg-tint text-blued border-blue/30' };
     case "POST":
-      return { alertClass: "alert--success", badgeClass: "badge--success" };
+      return { accent: 'bg-[#eaf8ec] text-[#1d5e31] border-[#2b9e4b]/30' };
     case "PUT":
     case "PATCH":
-      return { alertClass: "alert--warning", badgeClass: "badge--warning" };
+      return { accent: 'bg-[#fdf3e1] text-[#8a4a00] border-[#e8860c]/30' };
     case "DELETE":
-      return { alertClass: "alert--danger", badgeClass: "badge--danger" };
+      return { accent: 'bg-[#fdeaea] text-[#8a1f1f] border-[#e03131]/30' };
     default:
-      return { alertClass: "alert--secondary", badgeClass: "badge--secondary" };
+      return { accent: 'bg-paper2 text-soft border-ink/15' };
   }
 }
 
 function renderRoute(tokens, idx, _options, env, self) {
   const token = tokens[idx];
   const verb = token.info || "";
-  const { alertClass, badgeClass } = getRouteContext(verb);
+  const { accent } = getRouteContext(verb);
 
   if (token.type === "dokapi_route_open") {
-    token.attrJoin("class", "dokapi-route-container margin-bottom--md");
+    token.attrJoin("class", "dokapi-route-container my-6");
   } else if (token.type === "dokapi_route_details_open") {
-    token.attrJoin("class", `alert ${alertClass} dokapi-details`);
+    token.attrJoin("class", "dokapi-details rounded-xl border-2 border-ink/10 bg-paper2/40 overflow-hidden not-prose");
   } else if (token.type === "dokapi_route_summary_open") {
-    token.attrJoin("class", "dokapi-summary");
+    token.attrJoin("class", "dokapi-summary flex items-center gap-3 px-4 py-3 cursor-pointer list-none select-none");
   } else if (token.type === "dokapi_route_title_open") {
-    token.attrJoin("class", "dokapi-title-row");
+    token.attrJoin("class", "dokapi-title-row flex items-center gap-2.5");
   } else if (token.type === "dokapi_route_verb_open") {
-    token.attrJoin("class", `badge ${badgeClass} dokapi-verb`);
+    token.attrJoin("class", `dokapi-verb inline-block px-2.5 py-0.5 rounded-md font-mono text-xs font-bold border ${accent}`);
   } else if (token.type === "dokapi_route_path_open") {
-    token.attrJoin("class", "dokapi-path");
+    token.attrJoin("class", "dokapi-path font-mono text-sm bg-paper px-2 py-0.5 rounded-md border border-ink/10 text-ink");
   } else if (token.type === "dokapi_route_description_open") {
-    token.attrJoin("class", "dokapi-description margin-left--sm text--muted");
+    token.attrJoin("class", "dokapi-description ml-2 text-soft text-sm");
   }
   return self.renderToken(tokens, idx, _options);
 }
@@ -394,21 +394,22 @@ function dokapiRoute(state, startLine, endLine, silent) {
 function renderResponse(tokens, idx, _options, env, self) {
   const token = tokens[idx];
   const responseclass = token.info || "";
-  const alertClass = responseclass === "success" ? "alert--success" : "alert--danger";
-  const badgeClass = responseclass === "success" ? "badge--success" : "badge--danger";
+  const accent = responseclass === "success"
+    ? 'bg-[#eaf8ec] text-[#1d5e31] border-[#2b9e4b]/30'
+    : 'bg-[#fdeaea] text-[#8a1f1f] border-[#e03131]/30';
 
   if (token.type === "dokapi_response_open") {
-    token.attrJoin("class", "dokapi-response-container margin-bottom--md");
+    token.attrJoin("class", "dokapi-response-container my-6");
   } else if (token.type === "dokapi_response_details_open") {
-    token.attrJoin("class", `alert ${alertClass} dokapi-details`);
+    token.attrJoin("class", "dokapi-details rounded-xl border-2 border-ink/10 bg-paper2/40 overflow-hidden not-prose");
   } else if (token.type === "dokapi_response_summary_open") {
-    token.attrJoin("class", "dokapi-summary");
+    token.attrJoin("class", "dokapi-summary flex items-center gap-3 px-4 py-3 cursor-pointer list-none select-none");
   } else if (token.type === "dokapi_response_title_open") {
-    token.attrJoin("class", "dokapi-title-row");
+    token.attrJoin("class", "dokapi-title-row flex items-center gap-2.5");
   } else if (token.type === "dokapi_response_status_open") {
-    token.attrJoin("class", `badge ${badgeClass} dokapi-status`);
+    token.attrJoin("class", `dokapi-status inline-block px-2.5 py-0.5 rounded-md font-mono text-xs font-bold border ${accent}`);
   } else if (token.type === "dokapi_response_message_open") {
-    token.attrJoin("class", "dokapi-message margin-left--sm text--muted");
+    token.attrJoin("class", "dokapi-message ml-2 text-soft text-sm");
   }
   return self.renderToken(tokens, idx, _options);
 }

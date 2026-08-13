@@ -102,16 +102,16 @@ export default function markdownItOceanTabs(md) {
     // ==========================================
     // UI BUILDER HTML
     // ==========================================
-    let html = `<div class="ocean-tabs my-6 rounded-2xl border border-sky-100 dark:border-sky-900/60 bg-white dark:bg-slate-900 shadow-sm overflow-hidden not-prose transition-all duration-300 w-full">`;
+    let html = `<div class="ocean-tabs my-6 rounded-2xl border border-ink/15 bg-paper shadow-sm overflow-hidden not-prose transition-all duration-300 w-full">`;
     
     // Header Navigasi Tombol
-    html += `<div class="flex overflow-x-auto border-b border-sky-100 dark:border-sky-900/60 bg-sky-50/50 dark:bg-slate-900/50 scrollbar-hide" role="tablist">`;
+    html += `<div class="flex overflow-x-auto border-b border-ink/15 bg-paper2/50 scrollbar-hide" role="tablist">`;
     
     tabs.forEach((tab, index) => {
       const isActive = index === 0;
       const activeClass = isActive 
-        ? 'border-sky-500 text-sky-600 dark:text-sky-400 bg-white dark:bg-slate-900' 
-        : 'border-transparent text-slate-500 hover:text-sky-500 hover:bg-sky-50 dark:text-slate-400 dark:hover:text-sky-300 dark:hover:bg-slate-800/40';
+        ? 'border-blue text-blue bg-paper' 
+        : 'border-transparent text-soft hover:text-blued hover:bg-tint';
       
       html += `
         <button class="tab-btn relative whitespace-nowrap px-6 py-3.5 text-sm font-semibold border-b-2 transition-all duration-200 focus:outline-none ${activeClass}" 
@@ -123,7 +123,7 @@ export default function markdownItOceanTabs(md) {
     html += `</div>`;
 
     // Area Konten Panes
-    html += `<div class="p-5 sm:p-6 bg-white dark:bg-slate-900">`;
+    html += `<div class="p-5 sm:p-6 bg-paper">`;
     tabs.forEach((tab, index) => {
       const isActive = index === 0;
       const displayClass = isActive ? 'block animate-fade-in' : 'hidden';
@@ -132,7 +132,7 @@ export default function markdownItOceanTabs(md) {
       const renderedMarkdown = md.render(tabMarkdownText, env);
       
       html += `
-        <div id="${tab.id}" class="tab-pane ${displayClass} prose prose-slate dark:prose-invert prose-sky max-w-none" role="tabpanel" data-group="${groupId}">
+        <div id="${tab.id}" class="tab-pane ${displayClass} prose prose-slate max-w-none" role="tabpanel" data-group="${groupId}">
           ${renderedMarkdown}
         </div>
       `;
@@ -149,10 +149,10 @@ export default function markdownItOceanTabs(md) {
             // Matikan semua tombol di grup yang sama
             const allBtns = document.querySelectorAll('.tab-btn[data-group="' + groupId + '"]');
             allBtns.forEach(b => {
-              b.className = 'tab-btn relative whitespace-nowrap px-6 py-3.5 text-sm font-semibold border-b-2 transition-all duration-200 focus:outline-none border-transparent text-slate-500 hover:text-sky-500 hover:bg-sky-50 dark:text-slate-400 dark:hover:text-sky-300 dark:hover:bg-slate-800/40';
+              b.className = 'tab-btn relative whitespace-nowrap px-6 py-3.5 text-sm font-semibold border-b-2 transition-all duration-200 focus:outline-none border-transparent text-soft hover:text-blued hover:bg-tint';
             });
             // Aktifkan tombol yang diklik
-            btn.className = 'tab-btn relative whitespace-nowrap px-6 py-3.5 text-sm font-semibold border-b-2 transition-all duration-200 focus:outline-none border-sky-500 text-sky-600 dark:text-sky-400 bg-white dark:bg-slate-900';
+            btn.className = 'tab-btn relative whitespace-nowrap px-6 py-3.5 text-sm font-semibold border-b-2 transition-all duration-200 focus:outline-none border-blue text-blue bg-paper';
             
             // Sembunyikan semua pane konten di grup yang sama
             const allPanes = document.querySelectorAll('.tab-pane[data-group="' + groupId + '"]');
