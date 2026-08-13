@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fatahillah Al Makarim — Kode, Rasa Ingin Tahu, dan Ruang di Antaranya</title>
+  <meta name="description" content="Portofolio personal Fatahillah Al Makarim — Programmer dan Technology Enthusiast. Menjelajahi kode, eksplorasi teknologi, dan catatan pemikiran.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500;1,9..144,600&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper:  '#F7F2E8',
+            paper2: '#EFE7D6',
+            tint:   '#E9EDFB',
+            ink:    '#191714',
+            soft:   '#5C5547',
+            blue:   '#2A4BEA',
+            blued:  '#1D36B5',
+            orange: '#E2542C',
+          },
+          fontFamily: {
+            display: ['Fraunces', 'Georgia', 'serif'],
+            sans:    ['"Space Grotesk"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            mono:    ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+            hand:    ['Caveat', 'cursive'],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    :root{
+      --paper:#F7F2E8; --paper2:#EFE7D6; --tint:#E9EDFB; --ink:#191714; --soft:#5C5547;
+      --blue:#2A4BEA; --blued:#1D36B5; --orange:#E2542C;
+    }
+    html{ overflow-x:clip; }
+    body{ background:var(--paper); color:var(--ink); -webkit-font-smoothing:antialiased; }
+
+    /* Tekstur kertas grain */
+    body::before{
+      content:""; position:fixed; inset:0; z-index:80; pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+      opacity:.05; mix-blend-mode:multiply;
+    }
+
+    /* Pola halftone dots */
+    .dots{
+      background-image:radial-gradient(circle, rgba(42,75,234,.16) 1.2px, transparent 1.3px);
+      background-size:14px 14px;
+    }
+    .dots-orange{
+      background-image:radial-gradient(circle, rgba(226,84,44,.14) 1.2px, transparent 1.3px);
+      background-size:14px 14px;
+    }
+
+    ::selection{ background:var(--blue); color:var(--paper); }
+    :focus-visible{ outline:2px solid var(--blued); outline-offset:3px; border-radius:2px; }
+    section{ scroll-margin-top:88px; }
+
+    /* Animasi Reveal */
+    .reveal{ opacity:0; transform:translateY(26px); transition:opacity .9s cubic-bezier(.2,.6,.2,1), transform .9s cubic-bezier(.2,.6,.2,1); transition-delay:var(--d,0ms); }
+    .reveal.in{ opacity:1; transform:none; }
+
+    /* Masking Teks Hero */
+    .line-mask{ display:block; overflow:hidden; }
+    .line-inner{ display:block; transform:translateY(112%); transition:transform 1.1s cubic-bezier(.19,1,.22,1); }
+    .in .line-inner, body.no-anim .line-inner{ transform:none; }
+
+    /* Teks Berjalan (Marquee) */
+    .marquee-track{ display:flex; width:max-content; animation:marq 40s linear infinite; }
+    @keyframes marq{ to{ transform:translateX(-50%); } }
+
+    /* Efek Hover Proyek */
+    .art{ transition:transform .7s cubic-bezier(.2,.6,.2,1); }
+    .proj:hover .art{ transform:scale(1.03); }
+    .proj .go{ transition:transform .4s cubic-bezier(.2,.6,.2,1); }
+    .proj:hover .go{ transform:translate(4px,-4px); }
+    .proj .ptitle{ transition:transform .5s cubic-bezier(.2,.6,.2,1), color .4s; }
+    .proj:hover .ptitle{ transform:translateX(14px); color:var(--blue); }
+
+    /* Baris Tulisan / Writing */
+    .wrow{ position:relative; transition:background-color .45s ease, padding-left .35s ease; }
+    .wrow::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--blue); transform:scaleY(0); transform-origin:bottom; transition:transform .45s cubic-bezier(.2,.6,.2,1); }
+    .wrow:hover{ background:var(--tint); padding-left:18px; }
+    .wrow:hover::before{ transform:scaleY(1); }
+    .wrow .wtitle{ transition:transform .45s cubic-bezier(.2,.6,.2,1), color .35s; }
+    .wrow:hover .wtitle{ transform:translateX(12px); color:var(--blue); }
+    .wrow .wnum{ transition:transform .45s cubic-bezier(.2,.6,.2,1), color .35s; }
+    .wrow:hover .wnum{ transform:translateY(-6px); color:var(--blue); }
+    .wrow .warr{ opacity:0; transform:translateX(-8px); transition:opacity .35s ease, transform .45s cubic-bezier(.2,.6,.2,1); }
+    .wrow:hover .warr{ opacity:1; transform:none; }
+
+    /* Header Navigasi Transparan */
+    header{ transition:background-color .45s ease, border-color .45s ease; }
+    header.menu-open{ background:transparent; border-color:transparent; }
+    .nav-ink{ transition:color .4s ease; }
+    header.menu-open .nav-ink{ color:var(--paper); }
+    .menu-line{ transition:transform .5s cubic-bezier(.2,.6,.2,1), background-color .4s ease; }
+    header.menu-open .menu-line{ background:var(--paper); }
+    header.menu-open .menu-line:first-child{ transform:translateY(4px) rotate(45deg); }
+    header.menu-open .menu-line:last-child{ transform:translateY(-4px) rotate(-45deg); }
+
+    /* Menu Overlay Transisi */
+    #menu-overlay{ visibility:hidden; opacity:0; transition:opacity .55s ease, visibility .55s; }
+    #menu-overlay.open{ visibility:visible; opacity:1; }
+    .menu-row{ display:block; overflow:hidden; }
+    .menu-row-inner{ display:inline-block; transform:translateY(115%); transition:transform 1s cubic-bezier(.19,1,.22,1); transition-delay:var(--d,0ms); }
+    #menu-overlay.open .menu-row-inner{ transform:none; }
+    .mlink .mtitle{ display:inline-block; transition:transform .5s cubic-bezier(.2,.6,.2,1), color .35s; }
+    .mlink:hover .mtitle{ transform:translateX(20px); color:var(--orange); font-style:italic; }
+    .mlink .mnum{ transition:color .35s, transform .4s; }
+    .mlink:hover .mnum{ color:var(--orange); }
+    .mlink .marr{ opacity:0; transform:translateX(-12px); transition:opacity .3s ease, transform .45s cubic-bezier(.2,.6,.2,1); }
+    .mlink:hover .marr{ opacity:1; transform:none; }
+    .mlink .mhand{ opacity:0; transform:rotate(-3deg) translateY(8px); transition:opacity .4s ease, transform .4s ease; }
+    .mlink:hover .mhand{ opacity:1; transform:rotate(-3deg) translateY(0); }
+    .mlink.active .mnum{ color:var(--orange); }
+    @media (hover:none){
+      .mlink .mhand{ opacity:1; transform:rotate(-3deg) translateY(0); }
+      .mlink .marr{ opacity:1; transform:none; }
+    }
+    .dots-dark{ background-image:radial-gradient(circle, rgba(233,237,251,.08) 1.2px, transparent 1.3px); background-size:16px 16px; }
+
+    /* Underline Hover Link */
+    .u-hover{ background-image:linear-gradient(var(--blue),var(--blue)); background-size:0% 2px; background-position:0 100%; background-repeat:no-repeat; transition:background-size .4s cubic-bezier(.2,.6,.2,1); }
+    .u-hover:hover{ background-size:100% 2px; }
+
+    /* Floating Animation */
+    .float-y{ animation:floaty 7s ease-in-out infinite; }
+    @keyframes floaty{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-10px); } }
+    .spin-slow{ animation:spin 46s linear infinite; }
+    @keyframes spin{ to{ transform:rotate(360deg); } }
+
+    @media (prefers-reduced-motion: reduce){
+      *, *::before, *::after{ animation:none !important; transition:none !important; }
+      .reveal, .line-inner{ opacity:1 !important; transform:none !important; }
+      html{ scroll-behavior:auto; }
+    }
+  </style>
+</head>
+
+<body class="font-sans text-ink antialiased">
+
+<!-- ============ NAVIGASI UTAMA ============ -->
+<header class="fixed top-0 inset-x-0 z-50 bg-paper/85 backdrop-blur-sm border-b border-ink/10">
+  <nav class="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between" aria-label="Navigasi utama">
+    <a href="#top" class="nav-ink font-display text-2xl tracking-tight flex items-baseline gap-1 group">
+      F<span class="text-blue italic inline-block transition-transform duration-300 group-hover:rotate-12">·</span>AM
+    </a>
+    <button id="menu-toggle" class="nav-ink flex items-center gap-3 font-mono text-[11px] sm:text-xs tracking-[.3em] uppercase py-3 pr-1 pl-3 -mr-2 sm:mr-0" aria-expanded="false" aria-controls="menu-overlay">
+      <span class="relative flex flex-col justify-center gap-[6px] w-5 h-5" aria-hidden="true">
+        <span class="menu-line block h-[2px] bg-ink w-full"></span>
+        <span class="menu-line block h-[2px] bg-ink w-full"></span>
+      </span>
+      <span class="menu-label">Menu</span>
+    </button>
+  </nav>
+</header>
+
+<!-- ============ MENU OVERLAY ============ -->
+<div id="menu-overlay" class="fixed inset-0 z-40 bg-ink text-paper overflow-y-auto" aria-hidden="true" inert>
+  <div class="dots-dark absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+  <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-display font-light text-[clamp(6rem,18vw,14rem)] leading-none select-none pointer-events-none" style="color:transparent;-webkit-text-stroke:1px rgba(247,242,232,.10)" aria-hidden="true">menu</span>
+
+  <nav class="relative min-h-full flex flex-col justify-center px-5 sm:px-8 py-24" aria-label="Menu">
+    <div class="max-w-6xl mx-auto w-full">
+      <!-- Kalimat disempurnakan agar navigasi menu terstruktur dengan anggun -->
+      <p class="font-mono text-[11px] tracking-[.3em] uppercase text-paper/50 mb-12">Navigasi Utama — 04 Bagian · Silakan Ditelusuri</p>
+
+      <ol class="border-t-2 border-paper/25">
+        <li class="menu-row border-b border-paper/15">
+          <a href="#notes" class="mlink flex items-baseline gap-4 sm:gap-8 py-5 sm:py-7">
+            <span class="menu-row-inner mnum font-mono text-sm text-paper/50" style="--d:80ms">01</span>
+            <span class="menu-row-inner mtitle font-display font-light text-[clamp(2.2rem,7.5vw,5.6rem)] leading-none">Work</span>
+            <span class="menu-row-inner mhand font-hand text-xl sm:text-2xl text-orange hidden md:inline -rotate-2">proyek &amp; karya terorganisir</span>
+            <span class="menu-row-inner marr text-orange ml-auto" aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li class="menu-row border-b border-paper/15">
+          <a href="#writing" class="mlink flex items-baseline gap-4 sm:gap-8 py-5 sm:py-7">
+            <span class="menu-row-inner mnum font-mono text-sm text-paper/50" style="--d:160ms">02</span>
+            <span class="menu-row-inner mtitle font-display font-light text-[clamp(2.2rem,7.5vw,5.6rem)] leading-none">Writing</span>
+            <span class="menu-row-inner mhand font-hand text-xl sm:text-2xl text-orange hidden md:inline rotate-1">catatan, artikel &amp; refleksi</span>
+            <span class="menu-row-inner marr text-orange ml-auto" aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li class="menu-row border-b border-paper/15">
+          <a href="#now" class="mlink flex items-baseline gap-4 sm:gap-8 py-5 sm:py-7">
+            <span class="menu-row-inner mnum font-mono text-sm text-paper/50" style="--d:240ms">03</span>
+            <span class="menu-row-inner mtitle font-display font-light text-[clamp(2.2rem,7.5vw,5.6rem)] leading-none">Now</span>
+            <span class="menu-row-inner mhand font-hand text-xl sm:text-2xl text-orange hidden md:inline rotate-2">fokus &amp; aktivitas saat ini</span>
+            <span class="menu-row-inner marr text-orange ml-auto" aria-hidden="true">↗</span>
+          </a>
+        </li>
+        <li class="menu-row">
+          <a href="#contact" class="mlink flex items-baseline gap-4 sm:gap-8 py-5 sm:py-7">
+            <span class="menu-row-inner mnum font-mono text-sm text-paper/50" style="--d:320ms">04</span>
+            <span class="menu-row-inner mtitle font-display font-light text-[clamp(2.2rem,7.5vw,5.6rem)] leading-none">Contact</span>
+            <span class="menu-row-inner mhand font-hand text-xl sm:text-2xl text-orange hidden md:inline -rotate-1">mari berdiskusi</span>
+            <span class="menu-row-inner marr text-orange ml-auto" aria-hidden="true">↗</span>
+          </a>
+        </li>
+      </ol>
+
+      <div class="mt-12 flex flex-wrap items-center justify-between gap-6">
+        <div class="flex flex-wrap gap-x-8 gap-y-2 font-mono text-xs text-paper/60">
+          <a href="mailto:hello@example.com" class="transition-colors duration-300 hover:text-paper">email ↗</a>
+          <a href="https://github.com/zanixongroup" target="_blank" rel="noopener" class="transition-colors duration-300 hover:text-paper">github ↗</a>
+          <a href="https://instagram.com" target="_blank" rel="noopener" class="transition-colors duration-300 hover:text-paper">instagram ↗</a>
+        </div>
+        <p id="jkt" class="font-mono text-xs text-paper/40"></p>
+      </div>
+    </div>
+  </nav>
+
+  <span class="absolute bottom-6 right-6 text-orange text-2xl spin-slow hidden sm:block" aria-hidden="true">✦</span>
+</div>
+
+<main id="top">
+
+<!-- ============ HERO SECTION ============ -->
+<section class="relative min-h-screen flex flex-col justify-center px-5 sm:px-8 pt-24 pb-14" aria-label="Pembuka">
+  <div class="max-w-6xl mx-auto w-full">
+
+    <p class="reveal font-mono text-xs sm:text-sm text-soft">
+      <span class="text-blue">indeks</span> — situs pribadi Fatahillah Al Makarim — pengembang &amp; penggiat teknologi
+    </p>
+
+    <h1 class="font-display font-light leading-[.96] tracking-tight text-[clamp(2.7rem,9.5vw,8.5rem)] mt-6">
+      <span class="line-mask"><span class="line-inner">Code, curiosity,</span></span>
+      <span class="line-mask"><span class="line-inner">and the things</span></span>
+      <span class="line-mask"><span class="line-inner"><em class="italic font-normal text-blue">in between.</em></span></span>
+    </h1>
+
+    <!-- Teks pengenalan yang sudah direvisi agar mengalir lebih natural & eksplisit -->
+    <div class="relative mt-14 max-w-2xl">
+      <div class="dots absolute -inset-8 -z-10 hidden md:block" data-drift="-10"></div>
+      <p class="text-[15px] sm:text-base leading-[1.85] text-ink/80">
+        Saya merancang kode, mengeksplorasi batas teknologi, dan mendokumentasikan proses belajar tersebut secara berkala. Berawal dari rasa penasaran untuk memahami bagaimana sesuatu bekerja, saya mencoba menuangkannya menjadi karya yang fungsional dan berdampak.
+      </p>
+    </div>
+
+    <!-- Ringkasan status informasi utama -->
+    <div class="mt-14 grid sm:grid-cols-2 md:grid-cols-4 border-t-2 border-ink">
+      <div class="py-5 pr-6 border-b sm:border-b-0 sm:border-r border-ink/15">
+        <p class="font-mono text-[11px] uppercase tracking-[.25em] text-soft mb-1.5">Saat Ini</p>
+        <p class="text-sm">Fokus membaca, membangun proyek, dan merangkum catatannya.</p>
+      </div>
+      <div class="py-5 pr-6 border-b sm:border-b-0 sm:border-r border-ink/15">
+        <p class="font-mono text-[11px] uppercase tracking-[.25em] text-soft mb-1.5">Lokasi</p>
+        <p class="text-sm">Jakarta, Indonesia — GMT+7</p>
+      </div>
+      <div class="py-5 pr-6 border-b sm:border-b-0 sm:border-r border-ink/15">
+        <p class="font-mono text-[11px] uppercase tracking-[.25em] text-soft mb-1.5">Bahasa</p>
+        <p class="text-sm">Indonesia (Fasih) · Jawa (Menengah) · Inggris (B1 — Pemahaman konteks &amp; literatur kuat)</p>
+      </div>
+      <div class="py-5">
+        <p class="font-mono text-[11px] uppercase tracking-[.25em] text-soft mb-1.5">Status</p>
+        <p class="text-sm"><span class="inline-block w-2 h-2 rounded-full bg-blue mr-2"></span>Terbuka untuk kolaborasi &amp; eksperimen baru</p>
+      </div>
+    </div>
+
+    <p class="mt-16 font-mono text-[11px] sm:text-xs tracking-[.25em] uppercase text-soft flex items-center gap-3">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="float-y" data-drift="8">
+        <path d="M8 1v12M3 8l5 5 5-5" stroke="currentColor" stroke-width="1.2"/>
+      </svg>
+      gulir ke bawah untuk mengeksplorasi
+    </p>
+  </div>
+</section>
+
+<!-- ============ 01 BUILD (APA YANG SAYA BANGUN) ============ -->
+<section id="build" class="px-5 sm:px-8 py-28 md:py-40 bg-tint/50" aria-label="I build things">
+  <div class="max-w-6xl mx-auto">
+    <div class="relative">
+      <span class="absolute -top-20 -right-4 font-display font-light text-[clamp(6rem,18vw,15rem)] leading-none text-blue/10 select-none" aria-hidden="true">01</span>
+      <div class="flex items-baseline justify-between mb-14 relative">
+        <h2 class="font-mono text-xs tracking-[.3em] uppercase text-soft">01 — Eksplorasi &amp; Karya</h2>
+        <span class="font-hand text-2xl text-orange rotate-2">fokus pengembangan</span>
+      </div>
+    </div>
+
+    <!-- Perbaikan kutipan pembuka agar lebih relevan dan tidak kaku -->
+    <blockquote class="reveal font-display font-light text-[clamp(1.8rem,4.6vw,3.9rem)] leading-[1.1] max-w-4xl">
+      «"<em class="italic text-blue">Bagaimana kalau...</em>"
+      <span class="text-ink/70">lalu</span>
+      "<em class="italic text-blue">Ayo buat!</em>"
+      <span class="text-ink/70">— Cara saya mengawali hampir setiap proyek.</span>»
+    </blockquote>
+
+    <div class="mt-16 grid md:grid-cols-12 gap-10">
+      <div class="md:col-span-5">
+        <p class="reveal text-[15px] leading-[1.85] text-ink/80">
+          Saya tidak membatasi diri pada satu domain spesifik. Hal yang paling menarik bagi saya berada di titik temu antar-teknologi—ruang di mana ide abstrak dapat diwujudkan menjadi solusi yang konkret.
+        </p>
+        <p class="reveal mt-6 text-[15px] leading-[1.85] text-ink/80" style="--d:120ms">
+          Terkadang hasilnya berupa aplikasi praktis yang langsung bernilai pakai, terkadang sekadar proyek eksperimental.
+          <span class="text-blued italic">Bagi saya, keduanya merupakan proses belajar yang berharga.</span>
+        </p>
+        <p class="mt-8 font-hand text-3xl text-orange -rotate-2 inline-block">kebiasaan bereksperimen yang terus dirawat.</p>
+      </div>
+
+      <!-- Penyempurnaan daftar bidang keahlian/teknologi -->
+      <div class="md:col-span-6 md:col-start-7">
+        <ul class="border-t-4 border-ink">
+          <li class="reveal flex items-baseline gap-4 py-3 border-b border-ink/15 text-[15px]"><span class="font-mono text-xs text-blue w-6">01</span>Artificial Intelligence &amp; LLMs</li>
+          <li class="reveal flex items-baseline gap-4 py-3 border-b border-ink/15 text-[15px]" style="--d:50ms"><span class="font-mono text-xs text-blue w-6">02</span>Pengembangan Aplikasi Web</li>
+          <li class="reveal flex items-baseline gap-4 py-3 border-b border-ink/15 text-[15px]" style="--d:100ms"><span class="font-mono text-xs text-blue w-6">03</span>APIs &amp; Developer Tools</li>
+          <li class="reveal flex items-baseline gap-4 py-3 border-b border-ink/15 text-[15px]" style="--d:150ms"><span class="font-mono text-xs text-blue w-6">04</span>Sistem Otomatisasi (Automation)</li>
+          <li class="reveal flex items-baseline gap-4 py-3 border-b border-ink/15 text-[15px]" style="--d:200ms"><span class="font-mono text-xs text-blue w-6">05</span>Bot &amp; Integrasi Platform</li>
+          <li class="reveal flex items-baseline gap-4 py-3 border-b border-ink/15 text-[15px]" style="--d:250ms"><span class="font-mono text-xs text-blue w-6">06</span>Pengolahan Data &amp; Web Scraping</li>
+          <li class="reveal flex items-baseline gap-4 py-3 border-b border-ink/15 text-[15px]" style="--d:300ms"><span class="font-mono text-xs text-blue w-6">07</span>Proyek Open Source</li>
+          <li class="reveal flex items-baseline gap-4 py-3 border-b border-ink/15 text-[15px]" style="--d:350ms"><span class="font-mono text-xs text-blue w-6">08</span>Infrastruktur Internet</li>
+          <li class="reveal flex items-baseline gap-4 py-3 border-b border-ink/15 text-[15px]" style="--d:400ms"><span class="font-mono text-xs text-blue w-6">09</span>Perangkat Lunak Eksperimental</li>
+          <li class="reveal flex items-baseline gap-4 py-3 text-[15px]" style="--d:450ms"><span class="font-mono text-xs text-orange w-6">10</span>Ruang interdisipliner tempat <em class="italic text-blued">teknologi saling bertaut</em></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 WAY (PRINSIP & CARA BERPIKIR) ============ -->
+<section id="way" class="px-5 sm:px-8 py-28 md:py-40" aria-label="The way I work">
+  <div class="max-w-6xl mx-auto">
+    <div class="relative">
+      <span class="absolute -top-20 -right-4 font-display font-light text-[clamp(6rem,18vw,15rem)] leading-none text-blue/10 select-none" aria-hidden="true">02</span>
+      <div class="flex items-baseline justify-between mb-14 relative">
+        <h2 class="font-mono text-xs tracking-[.3em] uppercase text-soft">02 — Pendekatan Kerja</h2>
+        <span class="font-hand text-2xl text-orange -rotate-3">prinsip &amp; pola pikir</span>
+      </div>
+    </div>
+
+    <!-- Perbaikan struktur narasi poin-poin cara berpikir -->
+    <ol>
+      <li class="reveal grid md:grid-cols-12 gap-4 md:gap-8 items-baseline py-8 md:py-10 border-t-4 border-ink">
+        <span class="md:col-span-2 font-display italic text-4xl md:text-5xl text-blue">01</span>
+        <div class="md:col-span-6">
+          <h3 class="font-display font-light text-3xl md:text-4xl leading-tight">Memahami Sistem Secara Mendalam</h3>
+          <p class="mt-3 text-[15px] leading-[1.8] text-ink/75">Saya tidak berhenti saat kode sekadar berfungsi (*it works*). Terdapat tiga hal yang selalu saya evaluasi: Mengapa sistem ini berhasil bekerja? Bagaimana cara mengoptimalkannya? Dan bagaimana perilakunya saat menghadapi kekeliruan?</p>
+        </div>
+        <p class="md:col-span-3 md:col-start-10 font-hand text-2xl text-soft rotate-2">pemahaman menyeluruh</p>
+      </li>
+      <li class="reveal grid md:grid-cols-12 gap-4 md:gap-8 items-baseline py-8 md:py-10 border-t border-ink/15" style="--d:100ms">
+        <span class="md:col-span-2 font-display italic text-4xl md:text-5xl text-blue">02</span>
+        <div class="md:col-span-6">
+          <h3 class="font-display font-light text-3xl md:text-4xl leading-tight">Keingintahuan Sebagai Penggerak Utama</h3>
+          <p class="mt-3 text-[15px] leading-[1.8] text-ink/75">Rasa penasaran acap kali membawa saya mengeksplorasi aspek di luar batas masalah utama. Banyak ide bernilai justru lahir dari temuan yang tidak diduga sebelumnya.</p>
+        </div>
+        <p class="md:col-span-3 md:col-start-10 font-hand text-2xl text-soft -rotate-2">eksplorasi tanpa batas</p>
+      </li>
+      <li class="reveal grid md:grid-cols-12 gap-4 md:gap-8 items-baseline py-8 md:py-10 border-t border-b-4 border-ink" style="--d:200ms">
+        <span class="md:col-span-2 font-display italic text-4xl md:text-5xl text-blue">03</span>
+        <div class="md:col-span-6">
+          <h3 class="font-display font-light text-3xl md:text-4xl leading-tight">Eksperimentasi yang Terarah</h3>
+          <p class="mt-3 text-[15px] leading-[1.8] text-ink/75">Uji coba secara langsung sering kali memberikan wawasan berharga. Saya merancang sesuatu yang menarik, lalu membiarkan temuan dari proyek tersebut menentukan langkah iterasi selanjutnya.</p>
+        </div>
+        <p class="md:col-span-3 md:col-start-10 font-hand text-2xl text-soft rotate-1">iterasi &amp; evaluasi</p>
+      </li>
+    </ol>
+
+    <!-- Minat / Interest di luar kode -->
+    <div class="mt-20">
+      <p class="reveal font-mono text-[11px] uppercase tracking-[.3em] text-soft mb-6">Di Luar Kode — Bidang Minat &amp; Perspektif</p>
+      <ol class="border-t-4 border-ink">
+        <li class="reveal grid grid-cols-12 gap-3 md:gap-6 items-baseline py-6 border-b border-ink/15 group">
+          <span class="col-span-3 md:col-span-2 font-mono text-xs text-blue">INT-01</span>
+          <span class="col-span-9 md:col-span-4 font-display text-2xl md:text-3xl leading-tight transition-colors duration-300 group-hover:text-blue">Teknologi</span>
+          <span class="col-span-12 md:col-span-6 text-sm text-ink/70 leading-relaxed">Membangun, mengeksplorasi, dan memahami arsitektur digital secara mendasar.</span>
+        </li>
+        <li class="reveal grid grid-cols-12 gap-3 md:gap-6 items-baseline py-6 border-b border-ink/15 group" style="--d:60ms">
+          <span class="col-span-3 md:col-span-2 font-mono text-xs text-blue">INT-02</span>
+          <span class="col-span-9 md:col-span-4 font-display text-2xl md:text-3xl leading-tight italic transition-colors duration-300 group-hover:text-blue">Sains</span>
+          <span class="col-span-12 md:col-span-6 text-sm text-ink/70 leading-relaxed">Pertanyaan yang lahir saat mengamati fenomena alamiah secara lebih seksama.</span>
+        </li>
+        <li class="reveal grid grid-cols-12 gap-3 md:gap-6 items-baseline py-6 border-b border-ink/15 group" style="--d:120ms">
+          <span class="col-span-3 md:col-span-2 font-mono text-xs text-blue">INT-03</span>
+          <span class="col-span-9 md:col-span-4 font-display text-2xl md:text-3xl leading-tight transition-colors duration-300 group-hover:text-blue">Filsafat</span>
+          <span class="col-span-12 md:col-span-6 text-sm text-ink/70 leading-relaxed">Menghubungkan berbagai gagasan dan sudut pandang pemikiran yang berbeda.</span>
+        </li>
+        <li class="reveal grid grid-cols-12 gap-3 md:gap-6 items-baseline py-6 border-b border-ink/15 group" style="--d:180ms">
+          <span class="col-span-3 md:col-span-2 font-mono text-xs text-orange">INT-04</span>
+          <span class="col-span-9 md:col-span-4 font-display text-2xl md:text-3xl leading-tight transition-colors duration-300 group-hover:text-orange">Budaya Digital</span>
+          <span class="col-span-12 md:col-span-6 text-sm text-ink/70 leading-relaxed">Dinamika internet, fenomena meme, dan pola komunikasi masyarakat modern.</span>
+        </li>
+        <li class="reveal grid grid-cols-12 gap-3 md:gap-6 items-baseline py-6 border-b border-ink/15 group" style="--d:240ms">
+          <span class="col-span-3 md:col-span-2 font-mono text-xs text-blue">INT-05</span>
+          <span class="col-span-9 md:col-span-4 font-display text-2xl md:text-3xl leading-tight transition-colors duration-300 group-hover:text-blue">Literasi</span>
+          <span class="col-span-12 md:col-span-6 text-sm text-ink/70 leading-relaxed">Membaca buku, publikasi, dan esai. Fokus utama berada pada kedalaman substansi bacaan.</span>
+        </li>
+      </ol>
+      <p class="mt-6 font-hand text-2xl text-soft -rotate-1">rasa ingin tahu yang melampaui baris kode.</p>
+    </div>
+
+    <!-- Hobi & Aktivitas Luang -->
+    <div class="mt-20">
+      <p class="reveal font-mono text-[11px] uppercase tracking-[.3em] text-soft mb-5">Kegiatan Waktu Luang</p>
+      <p class="reveal font-display text-2xl md:text-3xl leading-snug">
+        Membaca · Eksplorasi Hal Baru · Menonton · Diskusi · Programming
+      </p>
+      <p class="mt-3 font-hand text-2xl text-soft rotate-1">tidak semua hal harus berorientasi pada hasil akhir.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARQUEE BANNER ============ -->
+<div class="bg-blue text-paper overflow-hidden py-3" aria-hidden="true">
+  <div class="marquee-track font-mono text-sm tracking-[.3em] uppercase">
+    <span class="flex items-center gap-10 pr-10">code ✦ curiosity ✦ what if ✦ let's build it ✦ exploring ✦ learning ✦ building ✦</span>
+    <span class="flex items-center gap-10 pr-10">code ✦ curiosity ✦ what if ✦ let's build it ✦ exploring ✦ learning ✦ building ✦</span>
+  </div>
+</div>
+
+<!-- ============ 03 FIELD NOTES (PORTOPOLIO PROYEK) ============ -->
+<section id="notes" class="px-5 sm:px-8 py-28 md:py-40" aria-label="Field notes">
+  <div class="max-w-6xl mx-auto">
+    <div class="relative">
+      <span class="absolute -top-20 -right-4 font-display font-light text-[clamp(6rem,18vw,15rem)] leading-none text-blue/10 select-none" aria-hidden="true">03</span>
+      <div class="flex flex-wrap items-baseline justify-between gap-4 mb-16 relative">
+        <h2 class="font-mono text-xs tracking-[.3em] uppercase text-soft">03 — Catatan Proyek</h2>
+        <p class="text-sm text-soft italic font-display">Empat proyek aktif yang terus dikembangkan secara bertahap</p>
+      </div>
+    </div>
+
+    <!-- FN-01 WavyDL -->
+    <article class="proj grid md:grid-cols-12 gap-8 md:gap-12 items-center mb-24 md:mb-32">
+      <div class="md:col-span-7 relative">
+        <figure class="overflow-hidden border-2 border-ink bg-paper">
+          <div class="art aspect-[4/3] flex items-center justify-center">
+            <svg viewBox="0 0 400 300" class="w-full h-full" role="img" aria-label="WavyDL — antar muka downloader multi-media">
+              <rect width="400" height="300" fill="#F7F2E8"/>
+              <g stroke="rgba(25,23,20,.07)"><path d="M0 60h400M0 120h400M0 180h400M0 240h400"/><path d="M100 0v300M200 0v300M300 0v300"/></g>
+              <text x="24" y="34" font-family="JetBrains Mono" font-size="11" letter-spacing="2" fill="#5C5547">WAVYDL — MULTI-MEDIA &amp; AUTO DETECTION</text>
+              <rect x="24" y="60" width="352" height="52" rx="4" fill="#191714"/>
+              <text x="40" y="90" font-family="JetBrains Mono" font-size="13" fill="#F7F2E8">tempel tautan postingan… <tspan fill="#E9EDFB" opacity=".6">▊</tspan></text>
+              <rect x="300" y="70" width="60" height="32" rx="4" fill="#2A4BEA"/>
+              <text x="311" y="91" font-family="JetBrains Mono" font-size="12" fill="#F7F2E8">Ambil ⚡</text>
+              <g font-family="JetBrains Mono" font-size="10" fill="#5C5547">
+                <text x="24" y="136">IG</text><text x="52" y="136">TikTok</text><text x="96" y="136">YT</text><text x="128" y="136">FB</text><text x="160" y="136">Spotify</text><text x="216" y="136">Reddit</text><text x="268" y="136">Bluesky</text>
+              </g>
+              <g stroke="rgba(25,23,20,.2)"><path d="M24 148h352M24 196h352M24 244h352"/></g>
+              <rect x="24" y="156" width="104" height="32" rx="4" fill="#2A4BEA" opacity=".14" stroke="rgba(42,75,234,.5)"/>
+              <text x="36" y="177" font-family="JetBrains Mono" font-size="11" fill="#1D36B5">▶ Video</text>
+              <rect x="136" y="156" width="100" height="32" rx="4" fill="#E2542C" opacity=".12" stroke="rgba(226,84,44,.5)"/>
+              <text x="148" y="177" font-family="JetBrains Mono" font-size="11" fill="#C2442A">▣ Foto</text>
+              <rect x="244" y="156" width="100" height="32" rx="4" fill="#8A8A5E" opacity=".15" stroke="rgba(138,138,94,.5)"/>
+              <text x="256" y="177" font-family="JetBrains Mono" font-size="11" fill="#6E7057">♪ Audio</text>
+              <text x="24" y="220" font-family="JetBrains Mono" font-size="12" fill="#191714">POST · auto detected ✓</text>
+              <text x="24" y="272" font-family="Caveat" font-size="18" fill="#E2542C">12+ platform — satu tautan, semua media</text>
+            </svg>
+          </div>
+        </figure>
+        <p class="absolute -top-6 -right-2 sm:-right-6 bg-orange text-paper font-mono text-xs px-4 py-2 rotate-[4deg] shadow-[3px_3px_0_#191714]">FN-01</p>
+      </div>
+      <div class="md:col-span-5">
+        <p class="font-mono text-[11px] tracking-[.25em] text-soft uppercase mb-3">2026 · aplikasi web · downloader</p>
+        <h3 class="ptitle font-display font-light text-4xl sm:text-5xl leading-none">WavyDL</h3>
+        <!-- Penyempurnaan penjelasan fungsionalitas WavyDL -->
+        <p class="mt-5 text-[15px] leading-[1.8] text-ink/75">
+          Layanan pengunduh media yang mampu mendeteksi jenis tautan secara otomatis. Mendukung Instagram, TikTok, Facebook, Spotify, Reddit, dan platform lainnya. Sistem akan memilih format video, foto, atau audio yang tepat secara presisi, menyusun album carousel, serta mengekstrak audio tanpa kompresi ulang.
+        </p>
+        <ul class="mt-5 flex flex-wrap gap-2 text-xs font-mono text-soft">
+          <li class="border border-ink/25 px-2.5 py-1">Node.js</li>
+          <li class="border border-ink/25 px-2.5 py-1">API Integration</li>
+          <li class="border border-ink/25 px-2.5 py-1">12+ Platform</li>
+        </ul>
+        <p class="mt-7 text-sm font-mono"><a href="https://wavydl.vercel.app" target="_blank" rel="noopener" class="u-hover text-blued">buka aplikasi <span class="go inline-block">→</span></a></p>
+      </div>
+    </article>
+
+    <!-- FN-02 Amira Bot Base -->
+    <article class="proj grid md:grid-cols-12 gap-8 md:gap-12 items-center mb-24 md:mb-32">
+      <div class="md:col-span-7 md:order-2 relative">
+        <figure class="overflow-hidden border-2 border-ink bg-paper">
+          <div class="art aspect-[4/3] flex items-center justify-center">
+            <svg viewBox="0 0 400 300" class="w-full h-full" role="img" aria-label="Amira Bot Base — fondasi pengembangan bot WhatsApp">
+              <rect width="400" height="300" fill="#F7F2E8"/>
+              <g stroke="rgba(25,23,20,.07)"><path d="M0 60h400M0 120h400M0 180h400M0 240h400"/><path d="M100 0v300M200 0v300M300 0v300"/></g>
+              <text x="24" y="34" font-family="JetBrains Mono" font-size="11" letter-spacing="2" fill="#5C5547">AMIRA BOT BASE — FONDASI BOT WHATSAPP</text>
+
+              <rect x="50" y="210" width="300" height="40" rx="4" fill="#191714"/>
+              <text x="200" y="237" font-family="JetBrains Mono" font-size="14" fill="#F7F2E8" text-anchor="middle" letter-spacing="4">BASE</text>
+
+              <rect x="60" y="150" width="80" height="50" rx="4" fill="#2A4BEA"/>
+              <text x="100" y="181" font-family="JetBrains Mono" font-size="12" fill="#F7F2E8" text-anchor="middle">CMD</text>
+
+              <rect x="160" y="150" width="80" height="50" rx="4" fill="#E2542C"/>
+              <text x="200" y="181" font-family="JetBrains Mono" font-size="12" fill="#F7F2E8" text-anchor="middle">EVT</text>
+
+              <rect x="260" y="150" width="80" height="50" rx="4" fill="#8A8A5E"/>
+              <text x="300" y="181" font-family="JetBrains Mono" font-size="12" fill="#F7F2E8" text-anchor="middle">PLUGIN</text>
+
+              <rect x="135" y="70" width="130" height="60" rx="8" fill="#EFE7D6" stroke="#191714" stroke-width="2"/>
+              <circle cx="170" cy="100" r="6" fill="#191714"/>
+              <circle cx="230" cy="100" r="6" fill="#191714"/>
+              <path d="M190 110q10 8 20 0" stroke="#191714" stroke-width="2" fill="none"/>
+              <text x="200" y="58" font-family="JetBrains Mono" font-size="11" fill="#5C5547" text-anchor="middle">BOT WHATSAPP</text>
+
+              <text x="50" y="282" font-family="Caveat" font-size="18" fill="#E2542C">base · modular &amp; ringan</text>
+            </svg>
+          </div>
+        </figure>
+        <p class="absolute -top-6 -left-2 sm:-left-6 bg-orange text-paper font-mono text-xs px-4 py-2 rotate-[-4deg] shadow-[3px_3px_0_#191714]">FN-02</p>
+      </div>
+      <div class="md:col-span-5 md:order-1">
+        <p class="font-mono text-[11px] tracking-[.25em] text-soft uppercase mb-3">open source · fondasi bot whatsapp</p>
+        <h3 class="ptitle font-display font-light text-4xl sm:text-5xl leading-none">Amira Bot Base</h3>
+        <!-- Penyempurnaan deskripsi Amira Bot Base -->
+        <p class="mt-5 text-[15px] leading-[1.8] text-ink/75">
+          Kerangka dasar (*starter kit*) bot WhatsApp yang dirancang untuk mempermudah alur kerja pengembang. Memiliki struktur kode yang bersih, rapi, dan modular, lengkap dengan sistem penanganan perintah (*command handler*), penanganan peristiwa (*event handler*), serta sistem plugin. Dikembangkan di bawah ZanixonGroup.
+        </p>
+        <ul class="mt-5 flex flex-wrap gap-2 text-xs font-mono text-soft">
+          <li class="border border-ink/25 px-2.5 py-1">Node.js</li>
+          <li class="border border-ink/25 px-2.5 py-1">Baileys</li>
+          <li class="border border-ink/25 px-2.5 py-1">Open Source</li>
+        </ul>
+        <p class="mt-7 text-sm font-mono"><a href="https://github.com/zanixongroup/amira-bot-base" target="_blank" rel="noopener" class="u-hover text-blued">lihat repositori <span class="go inline-block">→</span></a></p>
+      </div>
+    </article>
+
+    <!-- FN-03 Mirasvara -->
+    <article class="proj grid md:grid-cols-12 gap-8 md:gap-12 items-center mb-24 md:mb-32">
+      <div class="md:col-span-7 relative">
+        <figure class="overflow-hidden border-2 border-ink bg-paper">
+          <div class="art aspect-[4/3] flex items-center justify-center">
+            <svg viewBox="0 0 400 300" class="w-full h-full" role="img" aria-label="Mirasvara — Spotify ke MP3">
+              <rect width="400" height="300" fill="#F7F2E8"/>
+              <g stroke="rgba(25,23,20,.07)"><path d="M0 60h400M0 120h400M0 180h400M0 240h400"/><path d="M100 0v300M200 0v300M300 0v300"/></g>
+              <text x="24" y="34" font-family="JetBrains Mono" font-size="11" letter-spacing="2" fill="#5C5547">MIRASVARA — SPOTIFY TO MP3</text>
+              <g font-family="JetBrains Mono" font-size="13">
+                <text x="24" y="84" fill="#191714">Spotify</text>
+                <text x="24" y="140" fill="#8A8A5E">▸ paste tautan lagu…</text>
+              </g>
+              <rect x="24" y="156" width="352" height="44" rx="4" fill="#191714"/>
+              <text x="40" y="184" font-family="JetBrains Mono" font-size="12" fill="#F7F2E8">Unduh MP3 <tspan fill="#F0B24E">128/320kbps</tspan></text>
+              <g fill="#2A4BEA" opacity=".9">
+                <rect x="318" y="106" width="6" height="16" rx="2"/>
+                <rect x="330" y="96" width="6" height="26" rx="2"/>
+                <rect x="342" y="86" width="6" height="36" rx="2"/>
+                <rect x="354" y="102" width="6" height="20" rx="2"/>
+              </g>
+              <text x="24" y="238" font-family="JetBrains Mono" font-size="11" fill="#5C5547">penyanyi · album · metadata lengkap</text>
+              <text x="24" y="272" font-family="Caveat" font-size="18" fill="#E2542C">otomatisasi kualitas terbaik — 128/320kbps</text>
+            </svg>
+          </div>
+        </figure>
+        <p class="absolute -top-6 -right-2 sm:-right-6 bg-orange text-paper font-mono text-xs px-4 py-2 rotate-[4deg] shadow-[3px_3px_0_#191714]">FN-03</p>
+      </div>
+      <div class="md:col-span-5">
+        <p class="font-mono text-[11px] tracking-[.25em] text-soft uppercase mb-3">2026 · aplikasi web · musik</p>
+        <h3 class="ptitle font-display font-light text-4xl sm:text-5xl leading-none">Mirasvara</h3>
+        <!-- Penyempurnaan deskripsi Mirasvara -->
+        <p class="mt-5 text-[15px] leading-[1.8] text-ink/75">
+          Layanan pengunduh trek Spotify ke format MP3 secara praktis. Cukup tempelkan tautan lagu untuk mendapatkan berkas audio berkualitasi tinggi (128/320kbps) yang telah dilengkapi metadata lengkap seperti nama musisi, judul, dan sampul album. Dilengkapi pula dengan dokumentasi API untuk pengembang.
+        </p>
+        <ul class="mt-5 flex flex-wrap gap-2 text-xs font-mono text-soft">
+          <li class="border border-ink/25 px-2.5 py-1">Spotify API</li>
+          <li class="border border-ink/25 px-2.5 py-1">MP3 Audio Processing</li>
+          <li class="border border-ink/25 px-2.5 py-1">API Docs</li>
+        </ul>
+        <p class="mt-7 text-sm font-mono"><a href="https://mirasvara.vercel.app" target="_blank" rel="noopener" class="u-hover text-blued">buka pengunduh <span class="go inline-block">→</span></a></p>
+      </div>
+    </article>
+
+    <!-- FN-04 Vestia Zeta AI -->
+    <article class="proj grid md:grid-cols-12 gap-8 md:gap-12 items-center">
+      <div class="md:col-span-7 md:order-2 relative">
+        <figure class="overflow-hidden border-2 border-ink bg-paper">
+          <div class="art aspect-[4/3] flex items-center justify-center">
+            <svg viewBox="0 0 400 300" class="w-full h-full" role="img" aria-label="Vestia Zeta AI — chatbot percakapan">
+              <rect width="400" height="300" fill="#F7F2E8"/>
+              <g stroke="rgba(25,23,20,.07)"><path d="M0 60h400M0 120h400M0 180h400M0 240h400"/><path d="M100 0v300M200 0v300M300 0v300"/></g>
+              <text x="24" y="34" font-family="JetBrains Mono" font-size="11" letter-spacing="2" fill="#5C5547">VESTIA ZETA AI — COMPANION CHATBOT</text>
+              <circle cx="358" cy="30" r="5" fill="#2A4BEA"/>
+              <text x="332" y="34" font-family="JetBrains Mono" font-size="9" fill="#2A4BEA">AKTIF</text>
+              <rect x="24" y="64" width="240" height="44" rx="6" fill="#EFE7D6"/>
+              <text x="38" y="83" font-family="JetBrains Mono" font-size="12" fill="#191714">Halo, sedang sibuk apa hari ini?</text>
+              <text x="38" y="99" font-family="JetBrains Mono" font-size="10" fill="#5C5547">09:14 · Anda</text>
+              <rect x="136" y="124" width="240" height="60" rx="6" fill="#2A4BEA"/>
+              <text x="150" y="143" font-family="JetBrains Mono" font-size="12" fill="#F7F2E8">Sedang merencanakan hari —</text>
+              <text x="150" y="159" font-family="JetBrains Mono" font-size="12" fill="#F7F2E8">ceritakan dong, aku mendengarkan ✦</text>
+              <text x="150" y="175" font-family="JetBrains Mono" font-size="10" fill="#F7F2E8" fill-opacity=".7">09:14 · Zeta</text>
+              <rect x="24" y="200" width="200" height="30" rx="6" fill="#EFE7D6"/>
+              <text x="38" y="220" font-family="JetBrains Mono" font-size="12" fill="#191714">Oke, mau cerita sedikit…</text>
+              <text x="24" y="272" font-family="Caveat" font-size="18" fill="#E2542C">selalu siap merespons — 24/7</text>
+            </svg>
+          </div>
+        </figure>
+        <p class="absolute -top-6 -left-2 sm:-left-6 bg-orange text-paper font-mono text-xs px-4 py-2 rotate-[-4deg] shadow-[3px_3px_0_#191714]">FN-04</p>
+      </div>
+      <div class="md:col-span-5 md:order-1">
+        <p class="font-mono text-[11px] tracking-[.25em] text-soft uppercase mb-3">2026 · aplikasi web · ai chatbot</p>
+        <h3 class="ptitle font-display font-light text-4xl sm:text-5xl leading-none">Vestia Zeta AI</h3>
+        <!-- Penyempurnaan deskripsi Vestia Zeta AI -->
+        <p class="mt-5 text-[15px] leading-[1.8] text-ink/75">
+          Chatbot AI interaktif yang dirancang sebagai teman berdiskusi. Ditenagai oleh Large Language Model (LLM) yang disesuaikan agar memberikan respons hangat, cepat, kontekstual, dan selalu siap sedia kapan saja.
+        </p>
+        <ul class="mt-5 flex flex-wrap gap-2 text-xs font-mono text-soft">
+          <li class="border border-ink/25 px-2.5 py-1">Artificial Intelligence</li>
+          <li class="border border-ink/25 px-2.5 py-1">LLM Fine-tuning</li>
+          <li class="border border-ink/25 px-2.5 py-1">Conversational UI</li>
+        </ul>
+        <p class="mt-7 text-sm font-mono"><a href="https://vestia-zeta.vercel.app" target="_blank" rel="noopener" class="u-hover text-blued">mulai percakapan <span class="go inline-block">→</span></a></p>
+      </div>
+    </article>
+
+    <p class="mt-16 font-hand text-2xl text-soft text-center rotate-[-1deg]">proyek dan gagasan berikutnya sedang dipersiapkan.</p>
+  </div>
+</section>
+
+<!-- ============ 04 WRITING (TULISAN & ESSAY) ============ -->
+<section id="writing" class="px-5 sm:px-8 py-28 md:py-40 bg-paper2/50" aria-label="Tulisan">
+  <div class="max-w-6xl mx-auto">
+    <div class="relative">
+      <span class="absolute -top-20 -right-4 font-display font-light text-[clamp(6rem,18vw,15rem)] leading-none text-blue/10 select-none" aria-hidden="true">04</span>
+      <div class="flex flex-wrap items-baseline justify-between gap-4 mb-6 relative">
+        <h2 class="font-mono text-xs tracking-[.3em] uppercase text-soft">04 — Publikasi &amp; Tulisan</h2>
+        <p class="text-sm text-soft italic font-display">Catatan pemikiran dan dokumentasi pembacaan</p>
+      </div>
+    </div>
+
+    <!-- Perbaikan sinopsis artikel agar lebih akademis dan memikat -->
+    <ol class="mt-10">
+      <li class="wrow border-t border-ink/15">
+        <a href="#contact" class="group grid md:grid-cols-12 gap-3 md:gap-6 items-baseline py-7 md:py-9">
+          <span class="wnum md:col-span-1 font-mono text-sm text-soft">26.06.26</span>
+          <span class="md:col-span-7">
+            <span class="wtitle block font-display font-light text-xl sm:text-3xl leading-tight">Julaybib dan Gen Z: Ketika Penampilan Menentukan Harga Diri</span>
+            <span class="mt-2 block text-sm text-soft leading-relaxed">Refleksi kritis yang mengaitkan keteladanan sahabat Nabi, Julaybib, dengan fenomena sosial modern seperti standar kecantikan digital, isu krisis percaya diri, dan pencarian validasi publik pada Gen Z.</span>
+          </span>
+          <span class="md:col-span-4 md:text-right flex md:justify-end flex-wrap gap-2 text-[11px] font-mono uppercase tracking-wider text-soft">
+            <span class="border border-ink/20 px-2 py-0.5">19 menit</span>
+            <span class="border border-ink/20 px-2 py-0.5">#sosio-kultural</span>
+            <span class="border border-ink/20 px-2 py-0.5">#psikologi</span>
+            <span class="warr text-blue">→</span>
+          </span>
+        </a>
+      </li>
+      <li class="wrow border-t border-ink/15">
+        <a href="#contact" class="group grid md:grid-cols-12 gap-3 md:gap-6 items-baseline py-7 md:py-9">
+          <span class="wnum md:col-span-1 font-mono text-sm text-soft">24.06.26</span>
+          <span class="md:col-span-7">
+            <span class="wtitle block font-display font-light text-xl sm:text-3xl leading-tight">Bahaya Merokok dan Ancaman Senyap "Third-hand Smoke"</span>
+            <span class="mt-2 block text-sm text-soft leading-relaxed">Ulasan komprehensif mengenai bahaya rokok bagi perokok aktif maupun pasif, dampak residu racun *third-hand smoke* bagi lingkungan, serta tinjauan dari perspektif fatwa hukum Islam.</span>
+          </span>
+          <span class="md:col-span-4 md:text-right flex md:justify-end flex-wrap gap-2 text-[11px] font-mono uppercase tracking-wider text-soft">
+            <span class="border border-ink/20 px-2 py-0.5">8 menit</span>
+            <span class="border border-ink/20 px-2 py-0.5">#kesehatan</span>
+            <span class="border border-ink/20 px-2 py-0.5">#fiqh</span>
+            <span class="warr text-blue">→</span>
+          </span>
+        </a>
+      </li>
+      <li class="wrow border-t border-b-4 border-ink">
+        <a href="#contact" class="group grid md:grid-cols-12 gap-3 md:gap-6 items-baseline py-7 md:py-9">
+          <span class="wnum md:col-span-1 font-mono text-sm text-soft">28.06.26</span>
+          <span class="md:col-span-7">
+            <span class="wtitle block font-display font-light text-xl sm:text-3xl leading-tight">Apakah "Man Flu" Benar-Benar Ada? Analisis Jurnal Kyle Sue</span>
+            <span class="mt-2 block text-sm text-soft leading-relaxed">Menelaah bukti ilmiah di balik fenomena *man flu* berdasarkan tinjauan literatur Dr. Kyle Sue yang dipublikasikan dalam British Medical Journal (BMJ).</span>
+          </span>
+          <span class="md:col-span-4 md:text-right flex md:justify-end flex-wrap gap-2 text-[11px] font-mono uppercase tracking-wider text-soft">
+            <span class="border border-ink/20 px-2 py-0.5">7 menit</span>
+            <span class="border border-ink/20 px-2 py-0.5">#sains</span>
+            <span class="border border-ink/20 px-2 py-0.5">#medis</span>
+            <span class="warr text-blue">→</span>
+          </span>
+        </a>
+      </li>
+    </ol>
+
+    <!-- Kutipan refleksi tulisan disempurnakan -->
+    <blockquote class="reveal mt-14 border-l-2 border-blue pl-6 max-w-2xl">
+      <p class="font-display font-light text-xl sm:text-2xl leading-relaxed">
+        "Tulisan di situs ini merupakan cara saya mengabadikan gagasan agar tidak hilang dimakan waktu. Bukan gagasan yang dogmatis, melainkan rekam jejak dari hal-hal yang memicu daya pikir saya."
+      </p>
+      <footer class="mt-3 font-mono text-xs text-soft">— pengantar tulisan</footer>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ============ 05 NOW (AKTIVITAS SEKARANG) ============ -->
+<section id="now" class="px-5 sm:px-8 py-28 md:py-40" aria-label="Sekarang">
+  <div class="max-w-6xl mx-auto">
+    <div class="relative">
+      <span class="absolute -top-20 -right-4 font-display font-light text-[clamp(6rem,18vw,15rem)] leading-none text-blue/10 select-none" aria-hidden="true">05</span>
+      <div class="flex flex-wrap items-baseline justify-between gap-4 mb-14 relative">
+        <h2 class="font-mono text-xs tracking-[.3em] uppercase text-soft">05 — Fokus Saat Ini</h2>
+        <span class="font-hand text-2xl text-orange -rotate-2">laporan berkala</span>
+      </div>
+    </div>
+
+    <!-- Perbaikan tata bahasa pada kartu status -->
+    <div class="grid md:grid-cols-4 gap-px bg-ink/10 border border-ink/10">
+      <div class="bg-paper p-8 reveal">
+        <p class="font-mono text-[11px] text-blued mb-5">STATUS-01</p>
+        <h3 class="font-mono text-xs uppercase tracking-[.25em] text-soft mb-5">Eksplorasi</h3>
+        <p class="font-display text-xl leading-snug">Menjelajahi gagasan baru dan sudut teknologi yang belum sempat dipelajari.</p>
+      </div>
+      <div class="bg-paper p-8 reveal" style="--d:100ms">
+        <p class="font-mono text-[11px] text-blued mb-5">STATUS-02</p>
+        <h3 class="font-mono text-xs uppercase tracking-[.25em] text-soft mb-5">Pengembangan</h3>
+        <p class="font-display text-xl leading-snug">Membangun perangkat lunak yang bermanfaat — tools, bot, dan proyek eksperimental.</p>
+      </div>
+      <div class="bg-paper p-8 reveal" style="--d:200ms">
+        <p class="font-mono text-[11px] text-blued mb-5">STATUS-03</p>
+        <h3 class="font-mono text-xs uppercase tracking-[.25em] text-soft mb-5">Pembelajaran</h3>
+        <p class="font-display text-xl leading-snug">Memperdalam pemahaman seputar perkakas AI, arsitektur LLM, dan literatur lintas disiplin.</p>
+      </div>
+      <div class="bg-paper p-8 reveal" style="--d:300ms">
+        <p class="font-mono text-[11px] text-orange mb-5">STATUS-04</p>
+        <h3 class="font-mono text-xs uppercase tracking-[.25em] text-soft mb-5">Arah Keingintahuan</h3>
+        <p class="font-display text-xl leading-snug">Mengikuti rasa penasaran dan membiarkannya membuka peluang karya baru.</p>
+      </div>
+    </div>
+
+    <div class="mt-12 grid md:grid-cols-12 gap-8 items-start">
+      <div class="md:col-span-7 reveal">
+        <h3 class="font-mono text-xs uppercase tracking-[.25em] text-soft mb-5">Catatan acak dari proses pengembangan</h3>
+        <p class="font-display font-light text-[clamp(1.5rem,3.2vw,2.6rem)] leading-[1.15]">
+          "Sebagian proyek telah tertata rapi.
+          <em class="italic text-blue">Sebagian lainnya dalam proses refaktorisasi.</em>
+          Beberapa di antaranya lahir berkat satu pertanyaan sederhana yang jawabannya ternyata memikat."
+        </p>
+      </div>
+      <div class="md:col-span-4 md:col-start-9 reveal" style="--d:150ms">
+        <h3 class="font-mono text-xs uppercase tracking-[.25em] text-soft mb-5">Pelajaran dari Setiap Rilis Proyek</h3>
+        <ul class="text-sm text-ink/80 space-y-3 font-mono">
+          <li class="flex gap-3"><span class="text-blue">✳</span> Buat cadangan (*backup*) sebelum refaktorisasi—pelajaran berharga dari pengalaman nyata</li>
+          <li class="flex gap-3"><span class="text-blue">✳</span> Sistem *logging* yang akurat jauh lebih bisa diandalkan daripada sekadar asumsi</li>
+          <li class="flex gap-3"><span class="text-blue">✳</span> Menentukan penamaan produk atau bot adalah kombinasi antara fungsionalitas dan seni</li>
+        </ul>
+        <p class="mt-6 font-hand text-2xl text-soft rotate-[-2deg]">terus belajar, terus membangun.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 CONTACT (KONTAK & PENUTUP) ============ -->
+<section id="contact" class="px-5 sm:px-8 py-32 md:py-48 relative overflow-hidden bg-tint/60" aria-label="Penutup">
+  <div class="dots absolute inset-0 opacity-70" aria-hidden="true"></div>
+  <div class="max-w-6xl mx-auto text-center relative">
+    <h2 class="font-display font-light leading-[1.02] tracking-tight text-[clamp(2rem,5.8vw,4.8rem)]">
+      Mari wujudkan sesuatu yang
+      <br><em class="italic text-blue">menarik bersama.</em>
+    </h2>
+
+    <!-- Kalimat penutup diperjelas agar lebih bernilai ajakan/interaktif -->
+    <p class="mt-8 text-soft text-sm sm:text-base max-w-md mx-auto">
+      Situs ini adalah dokumentasi ringkas dari proyek, bacaan, dan ide yang saya kembangkan. Silakan ditelusuri—jika ada hal yang menarik perhatian Anda, mari berdiskusi lebih lanjut.
+    </p>
+
+    <p class="mt-6 font-mono text-xs text-soft">sampai bertemu di diskusi selanjutnya →</p>
+
+    <div class="mt-12 flex flex-wrap justify-center gap-4 text-sm font-mono">
+      <a href="mailto:hello@example.com" class="bg-ink text-paper px-6 py-3 hover:bg-blue transition-colors duration-300">email</a>
+      <a href="https://github.com/zanixongroup" target="_blank" rel="noopener" class="border-2 border-ink px-6 py-3 hover:bg-ink hover:text-paper transition-colors duration-300">github ↗</a>
+      <a href="https://instagram.com" target="_blank" rel="noopener" class="border-2 border-ink px-6 py-3 hover:bg-ink hover:text-paper transition-colors duration-300">instagram ↗</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="border-t-4 border-ink px-5 sm:px-8 py-12">
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+    <p class="font-display text-xl">F<span class="text-blue italic">·</span>AM</p>
+    <!-- Penyempurnaan footer text -->
+    <p class="text-xs text-soft max-w-md leading-relaxed font-mono">
+      Dirancang menggunakan tipografi Fraunces, Space Grotesk, dan JetBrains Mono. Dibangun murni menggunakan HTML, Tailwind CSS, serta semangat belajar di malam hari.
+    </p>
+    <p class="mt-3 inline-block rotate-[-1deg] border border-blue/30 bg-tint/60 text-blue font-mono text-[10px] uppercase tracking-[.2em] px-2.5 py-1">frontend AI generated ✳</p>
+    <div class="flex items-center gap-6 text-xs text-soft font-mono">
+      <a href="#top" class="u-hover">kembali ke atas ↑</a>
+      <span>© <span class="js-year">2026</span> Fatahillah Al Makarim</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Skrip Interaktivitas Utama -->
+<script>
+(function(){
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) document.body.classList.add('no-anim');
+
+  // Pembaruan tahun otomatis pada footer
+  document.querySelectorAll('.js-year').forEach(el => el.textContent = new Date().getFullYear());
+
+  // Animasi garis hero
+  const hero = document.querySelector('h1');
+  if (hero) {
+    hero.querySelectorAll('.line-mask').forEach((m, i) => {
+      setTimeout(() => m.classList.add('in'), 150 + i * 130);
+    });
+  }
+
+  // Intersect Observer untuk efek Scroll Reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Pengendali Menu Overlay Modal Navigasi
+  const toggle = document.getElementById('menu-toggle');
+  const overlay = document.getElementById('menu-overlay');
+  const headerEl = document.querySelector('header');
+  const mainEl = document.querySelector('main');
+  const pageFooter = document.querySelector('footer.border-t-4');
+  const labelEl = toggle && toggle.querySelector('.menu-label');
+  if (toggle && overlay) {
+    const openMenu = () => {
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+      overlay.removeAttribute('inert');
+      headerEl.classList.add('menu-open');
+      if (mainEl) mainEl.setAttribute('inert', '');
+      if (pageFooter) pageFooter.setAttribute('inert', '');
+      document.body.classList.add('overflow-hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+      if (labelEl) labelEl.textContent = 'Tutup';
+    };
+    const closeMenu = () => {
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+      overlay.setAttribute('inert', '');
+      headerEl.classList.remove('menu-open');
+      if (mainEl) mainEl.removeAttribute('inert');
+      if (pageFooter) pageFooter.removeAttribute('inert');
+      document.body.classList.remove('overflow-hidden');
+      toggle.setAttribute('aria-expanded', 'false');
+      if (labelEl) labelEl.textContent = 'Menu';
+    };
+    toggle.addEventListener('click', () => overlay.classList.contains('open') ? closeMenu() : openMenu());
+    overlay.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeMenu(); });
+  }
+
+  // Navigasi Spy - Penanda tautan menu aktif berdasarkan posisi scroll
+  const mLinks = document.querySelectorAll('.mlink');
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        mLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  ['notes', 'writing', 'now', 'contact'].forEach(id => { const s = document.getElementById(id); if (s) spy.observe(s); });
+
+  // Jam real-time zona waktu Jakarta
+  const jkt = document.getElementById('jkt');
+  if (jkt) {
+    const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Jakarta', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+    const tick = () => { jkt.textContent = 'JKT ' + fmt.format(new Date()); };
+    tick(); setInterval(tick, 1000);
+  }
+
+  // Efek paralaks / mouse drift halus pada perangkat kursor
+  if (!reduceMotion && window.matchMedia('(pointer: fine)').matches) {
+    const driftEls = document.querySelectorAll('[data-drift]');
+    if (driftEls.length) {
+      let raf = null;
+      window.addEventListener('mousemove', (ev) => {
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          const cx = (ev.clientX / window.innerWidth - 0.5) * 2;
+          const cy = (ev.clientY / window.innerHeight - 0.5) * 2;
+          driftEls.forEach(t => {
+            const d = parseFloat(t.getAttribute('data-drift') || 14);
+            t.style.translate = (cx * d) + 'px ' + (cy * d) + 'px';
+          });
+          raf = null;
+        });
+      });
+    }
+  }
+})();
+</script>
+</body>
+</html>

@@ -3,6 +3,5 @@ export const cache = {
   docs: [],
   projects: [],
   socials: [],
-  navigation: [],
   config: {}
 };

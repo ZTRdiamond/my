@@ -1,20 +1,46 @@
 [
   {
-    "id": "amira-chatbot",
-    "title": "Amira Chatbot",
-    "description": "A lightweight and advanced whatsapp bot automation for downloading video, image or audio from social media.",
-    "image": "https://files.catbox.moe/ic236l.webp",
-    "tags": ["Node.js", "Baileys", "Bot", "WhatsApp", "Automation"],
+    "id": "wavydl",
+    "title": "WavyDL",
+    "meta": "2026 · aplikasi web · downloader",
+    "description": "Layanan pengunduh media yang mampu mendeteksi jenis tautan secara otomatis. Mendukung Instagram, TikTok, Facebook, Spotify, Reddit, dan platform lainnya. Sistem akan memilih format video, foto, atau audio yang tepat secara presisi, menyusun album carousel, serta mengekstrak audio tanpa kompresi ulang.",
+    "image": "/images/wavydl_banner.webp",
+    "tags": ["Node.js", "API Integration", "12+ Platform"],
     "featured": true,
-    "href": "https://amira.us.kg"
+    "href": "https://wavydl.vercel.app",
+    "linkText": "buka aplikasi"
   },
   {
-    "id": "chocomilk-api",
-    "title": "Chocomilk API",
-    "description": "A high performance and fast API for everyone, free to use.",
-    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80",
-    "tags": ["Hono", "API", "Self-Hosting"],
+    "id": "amira-bot-base",
+    "title": "Amira Bot Base",
+    "meta": "open source · fondasi bot whatsapp",
+    "description": "Kerangka dasar (starter kit) bot WhatsApp yang dirancang untuk mempermudah alur kerja pengembang. Memiliki struktur kode yang bersih, rapi, dan modular, lengkap dengan sistem penanganan perintah (command handler), penanganan peristiwa (event handler), serta sistem plugin. Dikembangkan di bawah ZanixonGroup.",
+    "image": "/images/amirabb_banner.webp",
+    "tags": ["Node.js", "Baileys", "Open Source"],
     "featured": true,
-    "href": "https://chocomilk.amira.us.kg"
+    "href": "https://github.com/zanixongroup/amira-bot-base",
+    "linkText": "lihat repositori"
+  },
+  {
+    "id": "mirasvara",
+    "title": "Mirasvara",
+    "meta": "2026 · aplikasi web · musik",
+    "description": "Layanan pengunduh trek Spotify ke format MP3 secara praktis. Cukup tempelkan tautan lagu untuk mendapatkan berkas audio berkualitas tinggi (128/320kbps) yang telah dilengkapi metadata lengkap seperti nama musisi, judul, dan sampul album. Dilengkapi pula dengan dokumentasi API untuk pengembang.",
+    "image": "/images/mirasvara_banner.webp",
+    "tags": ["Spotify API", "MP3 Audio Processing", "API Docs"],
+    "featured": true,
+    "href": "https://mirasvara.vercel.app",
+    "linkText": "buka pengunduh"
+  },
+  {
+    "id": "vestia-zeta-ai",
+    "title": "Vestia Zeta AI",
+    "meta": "2026 · aplikasi web · ai chatbot",
+    "description": "Chatbot AI interaktif yang dirancang sebagai teman berdiskusi. Ditenagai oleh Large Language Model (LLM) yang disesuaikan agar memberikan respons hangat, cepat, kontekstual, dan selalu siap sedia kapan saja.",
+    "image": "/images/vestiazeta_banner.webp",
+    "tags": ["Artificial Intelligence", "LLM Fine-tuning", "Conversational UI"],
+    "featured": true,
+    "href": "https://vestia-zeta.vercel.app",
+    "linkText": "mulai percakapan"
   }
 ]

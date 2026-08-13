@@ -39,15 +39,13 @@ export async function initializeApplicationData() {
     // ==========================================
     // 1. Load config JSON secara PARALEL (Bersamaan)
     // ==========================================
-    const [config, navigation, socials, projects] = await Promise.all([
+    const [config, socials, projects] = await Promise.all([
       readJsonFile(path.join(dataDir, 'config.json')),
-      readJsonFile(path.join(dataDir, 'navigation.json')),
       readJsonFile(path.join(dataDir, 'socials.json')),
       readJsonFile(path.join(dataDir, 'projects.json')),
     ]);
 
     cache.config = config || {};
-    cache.navigation = navigation || [];
     cache.socials = socials || [];
     cache.projects = projects || [];
 

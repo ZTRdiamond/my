@@ -36,6 +36,7 @@ export const renderDocDetail = (req, res, next) => {
       description: document.description,
       canonical: `/docs/${slug}`
     }),
-    doc: document
+    doc: document,
+    docs: cache.docs
   });
 };

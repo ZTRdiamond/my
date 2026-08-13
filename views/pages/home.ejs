@@ -1,179 +1,313 @@
-<div class="space-y-28 md:space-y-36">
+<!-- ============ HERO SECTION ============ -->
+<section class="relative min-h-screen flex flex-col justify-center px-5 sm:px-8 pt-24 pb-14" aria-label="Pembuka">
+  <div class="max-w-6xl mx-auto w-full">
 
-  <!-- Hero Section -->
-  <section class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-    <!-- Left Column: Premium Typography & Hierarchy -->
-    <div class="lg:col-span-7 space-y-8 text-left">
-      <div class="space-y-4">
-        <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-[11px] font-bold tracking-widest uppercase bg-sky-50 dark:bg-sky-950/40 text-sky-600 dark:text-sky-400 border border-sky-100/80 dark:border-sky-900/40 shadow-sm">
-          <span class="relative flex h-2 w-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-sky-500"></span>
-          </span>
-          Hobbyist Programmer
-        </span>
+    <p class="reveal font-mono text-xs sm:text-sm text-soft">
+      <span class="text-blue">indeks</span> — situs pribadi <%= config.fullName %> — pengembang &amp; penggiat teknologi
+    </p>
 
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.1]">
-          Creating an <br class="hidden sm:inline" />
-          <span class="bg-gradient-to-r from-sky-500 via-sky-400 to-indigo-500 bg-clip-text text-transparent">
-            interesting project
-          </span>
-        </h1>
-      </div>
+    <h1 class="font-display font-light leading-[.96] tracking-tight text-[clamp(2.7rem,9.5vw,8.5rem)] mt-6">
+      <span class="line-mask"><span class="line-inner">Code, curiosity,</span></span>
+      <span class="line-mask"><span class="line-inner">and the things</span></span>
+      <span class="line-mask"><span class="line-inner"><em class="italic font-normal text-blue">in between.</em></span></span>
+    </h1>
 
-      <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed font-light max-w-2xl">
-        <%= config.bio %>
+    <div class="relative mt-14 max-w-2xl">
+      <div class="dots absolute -inset-8 -z-10 hidden md:block" data-drift="-10"></div>
+      <p class="text-[15px] sm:text-base leading-[1.85] text-ink/80">
+        Saya merancang kode, mengeksplorasi batas teknologi, dan mendokumentasikan proses belajar tersebut secara berkala. Berawal dari rasa penasaran untuk memahami bagaimana sesuatu bekerja, saya mencoba menuangkannya menjadi karya yang fungsional dan berdampak.
       </p>
+    </div>
 
-      <!-- Sleek, Sharp Interactive Action Buttons -->
-      <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-4">
-        <a href="/blog" class="group inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-slate-900 hover:bg-sky-500 dark:bg-white dark:hover:bg-sky-500 text-white dark:text-slate-950 dark:hover:text-white rounded-xl font-semibold text-sm transition-all duration-300 shadow-lg shadow-slate-900/10 dark:shadow-none hover:-translate-y-0.5">
-          <span>Read Publications</span>
-          <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i>
-        </a>
-        <a href="#projects" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 bg-white/50 dark:bg-slate-900/50 hover:bg-slate-50 dark:hover:bg-slate-900 text-slate-700 dark:text-slate-300 rounded-xl font-semibold text-sm transition-all duration-300">
-          <span>View Projects</span>
-        </a>
+    <div class="mt-14 grid sm:grid-cols-2 md:grid-cols-4 border-t-2 border-ink">
+      <div class="py-5 pr-6 border-b sm:border-b-0 sm:border-r border-ink/15">
+        <p class="font-mono text-[11px] uppercase tracking-[.25em] text-soft mb-1.5">Saat Ini</p>
+        <p class="text-sm">Fokus membaca, membangun proyek, dan merangkum catatannya.</p>
+      </div>
+      <div class="py-5 pr-6 border-b sm:border-b-0 sm:border-r border-ink/15">
+        <p class="font-mono text-[11px] uppercase tracking-[.25em] text-soft mb-1.5">Lokasi</p>
+        <p class="text-sm">Jakarta, Indonesia — GMT+7</p>
+      </div>
+      <div class="py-5 pr-6 border-b sm:border-b-0 sm:border-r border-ink/15">
+        <p class="font-mono text-[11px] uppercase tracking-[.25em] text-soft mb-1.5">Bahasa</p>
+        <p class="text-sm">Indonesia (Fasih) · Jawa (Menengah) · Inggris (B1)</p>
+      </div>
+      <div class="py-5">
+        <p class="font-mono text-[11px] uppercase tracking-[.25em] text-soft mb-1.5">Status</p>
+        <p class="text-sm"><span class="inline-block w-2 h-2 rounded-full bg-blue mr-2"></span>Terbuka untuk kolaborasi &amp; eksperimen baru</p>
       </div>
     </div>
 
-    <!-- Right Avatar Space with Custom Floating Border Geometry -->
-    <div class="lg:col-span-5 flex justify-center lg:justify-end">
-      <div class="relative w-full max-w-[280px] sm:max-w-[320px] aspect-square group">
-        <!-- Accent Outer Glow (Tegas & Elegan) -->
-        <div class="absolute inset-0 bg-gradient-to-tr from-sky-500 to-indigo-500 rounded-2xl opacity-10 blur-xl group-hover:opacity-20 transition-all duration-500"></div>
-        
-        <!-- Double Ring Border Wrapper -->
-        <div class="absolute inset-0 p-1 bg-gradient-to-tr from-slate-200 to-slate-100 dark:from-slate-800 dark:to-slate-900 rounded-2xl shadow-sm transition-transform duration-500 group-hover:scale-[1.01]">
-          <div class="relative w-full h-full rounded-[14px] overflow-hidden bg-slate-100 dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/50">
-            <img src="<%= config.avatar %>" alt="<%= config.fullName %>" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" loading="lazy">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <p class="mt-16 font-mono text-[11px] sm:text-xs tracking-[.25em] uppercase text-soft flex items-center gap-3">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" class="float-y" data-drift="8">
+        <path d="M8 1v12M3 8l5 5 5-5" stroke="currentColor" stroke-width="1.2"/>
+      </svg>
+      gulir ke bawah untuk mengeksplorasi
+    </p>
+  </div>
+</section>
 
-  <!-- About Section (Optimized Asymmetric Grid) -->
-  <section class="space-y-10">
-    <div class="flex items-center gap-3">
-      <div class="h-px w-8 bg-sky-500"></div>
-      <div class="space-y-1">
-        <h2 class="text-xs uppercase font-extrabold tracking-widest text-sky-500 dark:text-sky-400">Overview</h2>
-        <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Operational DNA</h3>
+<!-- ============ 01 BUILD (APA YANG SAYA BANGUN) ============ -->
+<section id="build" class="px-5 sm:px-8 py-28 md:py-40 bg-tint/50" aria-label="I build things">
+  <div class="max-w-6xl mx-auto">
+    <div class="relative">
+      <span class="absolute -top-20 -right-4 font-display font-light text-[clamp(6rem,18vw,15rem)] leading-none text-blue/10 select-none" aria-hidden="true">01</span>
+      <div class="flex items-baseline justify-between mb-14 relative">
+        <h2 class="font-mono text-xs tracking-[.3em] uppercase text-soft">01 — Eksplorasi &amp; Karya</h2>
+        <span class="font-hand text-2xl text-orange rotate-2">fokus pengembangan</span>
       </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-      <!-- Main Profile Box (Span 7) -->
-      <div class="lg:col-span-7 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900/60 p-8 space-y-6 flex flex-col justify-between backdrop-blur-sm shadow-sm">
-        <div class="space-y-4">
-          <div class="flex items-center gap-3 text-slate-800 dark:text-slate-200">
-            <span class="p-2 rounded-lg bg-sky-50 dark:bg-sky-950/50 text-sky-500">
-              <i data-lucide="user" class="w-5 h-5"></i>
-            </span>
-            <h4 class="font-bold text-lg">Who Am I</h4>
-          </div>
-          <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed font-light">
-            I am a construction worker and a developer, I enjoy learning new things and diving deep into technical subjects like software development and automated systems.
-          </p>
-        </div>
-        
-        <div class="pt-6 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-4">
-          <div>
-            <p class="text-[10px] uppercase tracking-wider font-extrabold text-slate-400 dark:text-slate-500">Current Occupation</p>
-            <p class="text-sm font-semibold text-slate-800 dark:text-slate-200 mt-1"><%= config.occupation %></p>
-          </div>
-          <span class="p-2 rounded-lg bg-slate-50 dark:bg-slate-800 text-slate-400 dark:text-slate-500">
-            <i data-lucide="briefcase" class="w-5 h-5"></i>
-          </span>
-        </div>
+    <blockquote class="reveal font-display font-light text-[clamp(1.8rem,4.6vw,3.9rem)] leading-[1.1] max-w-4xl">
+      «"<em class="italic text-blue">Bagaimana kalau...</em>"
+      <span class="text-ink/70">lalu</span>
+      "<em class="italic text-blue">Ayo buat!</em>"
+      <span class="text-ink/70">— Cara saya mengawali hampir setiap proyek.</span>»
+    </blockquote>
+
+    <div class="mt-16 grid md:grid-cols-12 gap-10">
+      <div class="md:col-span-5">
+        <p class="reveal text-[15px] leading-[1.85] text-ink/80">
+          Saya tidak membatasi diri pada satu domain spesifik. Hal yang paling menarik bagi saya berada di titik temu antar-teknologi—ruang di mana ide abstrak dapat diwujudkan menjadi solusi yang konkret.
+        </p>
+        <p class="reveal mt-6 text-[15px] leading-[1.85] text-ink/80" style="--d:120ms">
+          Terkadang hasilnya berupa aplikasi praktis yang langsung bernilai pakai, terkadang sekadar proyek eksperimental.
+          <span class="text-blued italic">Bagi saya, keduanya merupakan proses belajar yang berharga.</span>
+        </p>
+        <p class="mt-8 font-hand text-3xl text-orange -rotate-2 inline-block">kebiasaan bereksperimen yang terus dirawat.</p>
       </div>
 
-      <!-- Grid Column for Tags & Specific Lists (Span 5) -->
-      <div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6">
-        <!-- Hobbies Card -->
-        <div class="rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900/60 p-6 space-y-4 backdrop-blur-sm shadow-sm hover:border-slate-300 dark:hover:border-slate-700/80 transition-all">
-          <div class="flex items-center gap-2.5 text-slate-800 dark:text-slate-200">
-            <span class="p-1.5 rounded-md bg-sky-50 dark:bg-sky-950/50 text-sky-500">
-              <i data-lucide="heart" class="w-4 h-4"></i>
-            </span>
-            <h4 class="font-bold text-sm">Hobbies & Pursuits</h4>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1.5 bg-slate-50 dark:bg-slate-800/60 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
-              <span class="w-1 h-1 rounded-full bg-sky-500"></span>Programming
-            </span>
-            <span class="px-3 py-1.5 bg-slate-50 dark:bg-slate-800/60 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
-              <span class="w-1 h-1 rounded-full bg-sky-500"></span>Web Scraping
-            </span>
-            <span class="px-3 py-1.5 bg-slate-50 dark:bg-slate-800/60 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
-              <span class="w-1 h-1 rounded-full bg-sky-500"></span>Reading Books
-            </span>
-          </div>
-        </div>
-
-        <!-- Technical Interests Card -->
-        <div class="rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900/60 p-6 space-y-4 backdrop-blur-sm shadow-sm hover:border-slate-300 dark:hover:border-slate-700/80 transition-all">
-          <div class="flex items-center gap-2.5 text-slate-800 dark:text-slate-200">
-            <span class="p-1.5 rounded-md bg-sky-50 dark:bg-sky-950/50 text-sky-500">
-              <i data-lucide="cpu" class="w-4 h-4"></i>
-            </span>
-            <h4 class="font-bold text-sm">Areas of Interest</h4>
-          </div>
-          <div class="flex flex-wrap gap-1.5">
-            <% ['Open Source', 'Backend Dev', 'Automation', 'Science', 'Physics', 'Psychology'].forEach(interest => { %>
-              <span class="px-2.5 py-1 bg-sky-500/5 hover:bg-sky-500/10 border border-sky-500/10 rounded-md text-[11px] font-medium text-sky-600 dark:text-sky-400 transition-colors">
-                <%= interest %>
-              </span>
-            <% }) %>
-          </div>
-        </div>
+      <div class="md:col-span-6 md:col-start-7">
+        <ul class="border-t-4 border-ink">
+          <li class="reveal flex items-baseline gap-4 py-3 border-b border-ink/15 text-[15px]"><span class="font-mono text-xs text-blue w-6">01</span>Artificial Intelligence &amp; LLMs</li>
+          <li class="reveal flex items-baseline gap-4 py-3 border-b border-ink/15 text-[15px]" style="--d:50ms"><span class="font-mono text-xs text-blue w-6">02</span>Pengembangan Aplikasi Web</li>
+          <li class="reveal flex items-baseline gap-4 py-3 border-b border-ink/15 text-[15px]" style="--d:100ms"><span class="font-mono text-xs text-blue w-6">03</span>APIs &amp; Developer Tools</li>
+          <li class="reveal flex items-baseline gap-4 py-3 border-b border-ink/15 text-[15px]" style="--d:150ms"><span class="font-mono text-xs text-blue w-6">04</span>Sistem Otomatisasi (Automation)</li>
+          <li class="reveal flex items-baseline gap-4 py-3 border-b border-ink/15 text-[15px]" style="--d:200ms"><span class="font-mono text-xs text-blue w-6">05</span>Bot &amp; Integrasi Platform</li>
+          <li class="reveal flex items-baseline gap-4 py-3 border-b border-ink/15 text-[15px]" style="--d:250ms"><span class="font-mono text-xs text-blue w-6">06</span>Pengolahan Data &amp; Web Scraping</li>
+          <li class="reveal flex items-baseline gap-4 py-3 border-b border-ink/15 text-[15px]" style="--d:300ms"><span class="font-mono text-xs text-blue w-6">07</span>Proyek Open Source</li>
+          <li class="reveal flex items-baseline gap-4 py-3 border-b border-ink/15 text-[15px]" style="--d:350ms"><span class="font-mono text-xs text-blue w-6">08</span>Infrastruktur Internet</li>
+          <li class="reveal flex items-baseline gap-4 py-3 border-b border-ink/15 text-[15px]" style="--d:400ms"><span class="font-mono text-xs text-blue w-6">09</span>Perangkat Lunak Eksperimental</li>
+          <li class="reveal flex items-baseline gap-4 py-3 text-[15px]" style="--d:450ms"><span class="font-mono text-xs text-orange w-6">10</span>Ruang interdisipliner tempat <em class="italic text-blued">teknologi saling bertaut</em></li>
+        </ul>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Project Implementations -->
-  <section id="projects" class="space-y-10 scroll-mt-24">
-    <div class="flex items-center gap-3">
-      <div class="h-px w-8 bg-sky-500"></div>
-      <div class="space-y-1">
-        <h2 class="text-xs uppercase font-extrabold tracking-widest text-sky-500 dark:text-sky-400">Portfolio</h2>
-        <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Featured Projects</h3>
+<!-- ============ 02 WAY (PRINSIP & CARA BERPIKIR) ============ -->
+<section id="way" class="px-5 sm:px-8 py-28 md:py-40" aria-label="The way I work">
+  <div class="max-w-6xl mx-auto">
+    <div class="relative">
+      <span class="absolute -top-20 -right-4 font-display font-light text-[clamp(6rem,18vw,15rem)] leading-none text-blue/10 select-none" aria-hidden="true">02</span>
+      <div class="flex items-baseline justify-between mb-14 relative">
+        <h2 class="font-mono text-xs tracking-[.3em] uppercase text-soft">02 — Pendekatan Kerja</h2>
+        <span class="font-hand text-2xl text-orange -rotate-3">prinsip &amp; pola pikir</span>
       </div>
     </div>
 
-    <!-- Wrapper modern dengan border tipis dan penataan grid yang bersih -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <% projects.forEach(project => { %>
-        <div class="transition-all duration-300 hover:-translate-y-1">
-          <%- include('../partials/project-card', { project }) %>
+    <ol>
+      <li class="reveal grid md:grid-cols-12 gap-4 md:gap-8 items-baseline py-8 md:py-10 border-t-4 border-ink">
+        <span class="md:col-span-2 font-display italic text-4xl md:text-5xl text-blue">01</span>
+        <div class="md:col-span-6">
+          <h3 class="font-display font-light text-3xl md:text-4xl leading-tight">Memahami Sistem Secara Mendalam</h3>
+          <p class="mt-3 text-[15px] leading-[1.8] text-ink/75">Saya tidak berhenti saat kode sekadar berfungsi (<em>it works</em>). Terdapat tiga hal yang selalu saya evaluasi: Mengapa sistem ini berhasil bekerja? Bagaimana cara mengoptimalkannya? Dan bagaimana perilakunya saat menghadapi kekeliruan?</p>
         </div>
-      <% }) %>
-    </div>
-  </section>
+        <p class="md:col-span-3 md:col-start-10 font-hand text-2xl text-soft rotate-2">pemahaman menyeluruh</p>
+      </li>
+      <li class="reveal grid md:grid-cols-12 gap-4 md:gap-8 items-baseline py-8 md:py-10 border-t border-ink/15" style="--d:100ms">
+        <span class="md:col-span-2 font-display italic text-4xl md:text-5xl text-blue">02</span>
+        <div class="md:col-span-6">
+          <h3 class="font-display font-light text-3xl md:text-4xl leading-tight">Keingintahuan Sebagai Penggerak Utama</h3>
+          <p class="mt-3 text-[15px] leading-[1.8] text-ink/75">Rasa penasaran acap kali membawa saya mengeksplorasi aspek di luar batas masalah utama. Banyak ide bernilai justru lahir dari temuan yang tidak diduga sebelumnya.</p>
+        </div>
+        <p class="md:col-span-3 md:col-start-10 font-hand text-2xl text-soft -rotate-2">eksplorasi tanpa batas</p>
+      </li>
+      <li class="reveal grid md:grid-cols-12 gap-4 md:gap-8 items-baseline py-8 md:py-10 border-t border-b-4 border-ink" style="--d:200ms">
+        <span class="md:col-span-2 font-display italic text-4xl md:text-5xl text-blue">03</span>
+        <div class="md:col-span-6">
+          <h3 class="font-display font-light text-3xl md:text-4xl leading-tight">Eksperimentasi yang Terarah</h3>
+          <p class="mt-3 text-[15px] leading-[1.8] text-ink/75">Uji coba secara langsung sering kali memberikan wawasan berharga. Saya merancang sesuatu yang menarik, lalu membiarkan temuan dari proyek tersebut menentukan langkah iterasi selanjutnya.</p>
+        </div>
+        <p class="md:col-span-3 md:col-start-10 font-hand text-2xl text-soft rotate-1">iterasi &amp; evaluasi</p>
+      </li>
+    </ol>
 
-  <!-- Latest Blog Posts Preview -->
-  <section class="space-y-10">
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-slate-200/60 dark:border-slate-800/60 pb-5">
-      <div class="flex items-center gap-3">
-        <div class="h-px w-8 bg-sky-500"></div>
-        <div class="space-y-1">
-          <h2 class="text-xs uppercase font-extrabold tracking-widest text-sky-500 dark:text-sky-400">Writings</h2>
-          <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Recent Publications</h3>
-        </div>
-      </div>
-      <a href="/blog" class="group inline-flex items-center gap-1 text-sm font-bold text-sky-500 hover:text-sky-600 transition-colors">
-        <span>All Publications</span>
-        <i data-lucide="arrow-right" class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"></i>
-      </a>
+    <div class="mt-20">
+      <p class="reveal font-mono text-[11px] uppercase tracking-[.3em] text-soft mb-6">Di Luar Kode — Bidang Minat &amp; Perspektif</p>
+      <ol class="border-t-4 border-ink">
+        <li class="reveal grid grid-cols-12 gap-3 md:gap-6 items-baseline py-6 border-b border-ink/15 group">
+          <span class="col-span-3 md:col-span-2 font-mono text-xs text-blue">INT-01</span>
+          <span class="col-span-9 md:col-span-4 font-display text-2xl md:text-3xl leading-tight transition-colors duration-300 group-hover:text-blue">Teknologi</span>
+          <span class="col-span-12 md:col-span-6 text-sm text-ink/70 leading-relaxed">Membangun, mengeksplorasi, dan memahami arsitektur digital secara mendasar.</span>
+        </li>
+        <li class="reveal grid grid-cols-12 gap-3 md:gap-6 items-baseline py-6 border-b border-ink/15 group" style="--d:60ms">
+          <span class="col-span-3 md:col-span-2 font-mono text-xs text-blue">INT-02</span>
+          <span class="col-span-9 md:col-span-4 font-display text-2xl md:text-3xl leading-tight italic transition-colors duration-300 group-hover:text-blue">Sains</span>
+          <span class="col-span-12 md:col-span-6 text-sm text-ink/70 leading-relaxed">Pertanyaan yang lahir saat mengamati fenomena alamiah secara lebih seksama.</span>
+        </li>
+        <li class="reveal grid grid-cols-12 gap-3 md:gap-6 items-baseline py-6 border-b border-ink/15 group" style="--d:120ms">
+          <span class="col-span-3 md:col-span-2 font-mono text-xs text-blue">INT-03</span>
+          <span class="col-span-9 md:col-span-4 font-display text-2xl md:text-3xl leading-tight transition-colors duration-300 group-hover:text-blue">Filsafat</span>
+          <span class="col-span-12 md:col-span-6 text-sm text-ink/70 leading-relaxed">Menghubungkan berbagai gagasan dan sudut pandang pemikiran yang berbeda.</span>
+        </li>
+        <li class="reveal grid grid-cols-12 gap-3 md:gap-6 items-baseline py-6 border-b border-ink/15 group" style="--d:180ms">
+          <span class="col-span-3 md:col-span-2 font-mono text-xs text-orange">INT-04</span>
+          <span class="col-span-9 md:col-span-4 font-display text-2xl md:text-3xl leading-tight transition-colors duration-300 group-hover:text-orange">Budaya Digital</span>
+          <span class="col-span-12 md:col-span-6 text-sm text-ink/70 leading-relaxed">Dinamika internet, fenomena meme, dan pola komunikasi masyarakat modern.</span>
+        </li>
+        <li class="reveal grid grid-cols-12 gap-3 md:gap-6 items-baseline py-6 border-b border-ink/15 group" style="--d:240ms">
+          <span class="col-span-3 md:col-span-2 font-mono text-xs text-blue">INT-05</span>
+          <span class="col-span-9 md:col-span-4 font-display text-2xl md:text-3xl leading-tight transition-colors duration-300 group-hover:text-blue">Literasi</span>
+          <span class="col-span-12 md:col-span-6 text-sm text-ink/70 leading-relaxed">Membaca buku, publikasi, dan esai. Fokus utama berada pada kedalaman substansi bacaan.</span>
+        </li>
+      </ol>
+      <p class="mt-6 font-hand text-2xl text-soft -rotate-1">rasa ingin tahu yang melampaui baris kode.</p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <% posts.forEach(post => { %>
-        <div class="transition-all duration-300 hover:-translate-y-1">
-          <%- include('../partials/post-card', { post }) %>
-        </div>
-      <% }) %>
+    <div class="mt-20">
+      <p class="reveal font-mono text-[11px] uppercase tracking-[.3em] text-soft mb-5">Kegiatan Waktu Luang</p>
+      <p class="reveal font-display text-2xl md:text-3xl leading-snug">
+        Membaca · Eksplorasi Hal Baru · Menonton · Diskusi · Programming
+      </p>
+      <p class="mt-3 font-hand text-2xl text-soft rotate-1">tidak semua hal harus berorientasi pada hasil akhir.</p>
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- ============ MARQUEE BANNER ============ -->
+<div class="bg-blue text-paper overflow-hidden py-3" aria-hidden="true">
+  <div class="marquee-track font-mono text-sm tracking-[.3em] uppercase">
+    <span class="flex items-center gap-10 pr-10">code ✦ curiosity ✦ what if ✦ let's build it ✦ exploring ✦ learning ✦ building ✦</span>
+    <span class="flex items-center gap-10 pr-10">code ✦ curiosity ✦ what if ✦ let's build it ✦ exploring ✦ learning ✦ building ✦</span>
+  </div>
 </div>
+
+<!-- ============ 03 FIELD NOTES (PORTOFOLIO PROYEK) ============ -->
+<section id="notes" class="px-5 sm:px-8 py-28 md:py-40" aria-label="Field notes">
+  <div class="max-w-6xl mx-auto">
+    <div class="relative">
+      <span class="absolute -top-20 -right-4 font-display font-light text-[clamp(6rem,18vw,15rem)] leading-none text-blue/10 select-none" aria-hidden="true">03</span>
+      <div class="flex flex-wrap items-baseline justify-between gap-4 mb-16 relative">
+        <h2 class="font-mono text-xs tracking-[.3em] uppercase text-soft">03 — Catatan Proyek</h2>
+        <p class="text-sm text-soft italic font-display">Empat proyek aktif yang terus dikembangkan secara bertahap</p>
+      </div>
+    </div>
+
+    <% projects.forEach((project, index) => { %>
+      <%- include('../partials/project-feature', { project, index }) %>
+    <% }) %>
+
+    <p class="mt-16 font-hand text-2xl text-soft text-center rotate-[-1deg]">proyek dan gagasan berikutnya sedang dipersiapkan.</p>
+  </div>
+</section>
+
+<!-- ============ 04 WRITING (TULISAN & ESSAY) ============ -->
+<section id="writing" class="px-5 sm:px-8 py-28 md:py-40 bg-paper2/50" aria-label="Tulisan">
+  <div class="max-w-6xl mx-auto">
+    <div class="relative">
+      <span class="absolute -top-20 -right-4 font-display font-light text-[clamp(6rem,18vw,15rem)] leading-none text-blue/10 select-none" aria-hidden="true">04</span>
+      <div class="flex flex-wrap items-baseline justify-between gap-4 mb-6 relative">
+        <h2 class="font-mono text-xs tracking-[.3em] uppercase text-soft">04 — Publikasi &amp; Tulisan</h2>
+        <p class="text-sm text-soft italic font-display">Catatan pemikiran dan dokumentasi pembacaan</p>
+      </div>
+    </div>
+
+    <ol class="mt-10">
+      <% posts.slice(0, 3).forEach(post => { %>
+        <%- include('../partials/writing-row', { post }) %>
+      <% }) %>
+      <li class="border-b-4 border-ink"></li>
+    </ol>
+
+    <div class="mt-10 text-center">
+      <a href="/blog" class="inline-block font-mono text-sm u-hover text-blued">lihat semua tulisan →</a>
+    </div>
+
+    <blockquote class="reveal mt-14 border-l-2 border-blue pl-6 max-w-2xl">
+      <p class="font-display font-light text-xl sm:text-2xl leading-relaxed">
+        "Tulisan di situs ini merupakan cara saya mengabadikan gagasan agar tidak hilang dimakan waktu. Bukan gagasan yang dogmatis, melainkan rekam jejak dari hal-hal yang memicu daya pikir saya."
+      </p>
+      <footer class="mt-3 font-mono text-xs text-soft">— pengantar tulisan</footer>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ============ 05 NOW (AKTIVITAS SEKARANG) ============ -->
+<section id="now" class="px-5 sm:px-8 py-28 md:py-40" aria-label="Sekarang">
+  <div class="max-w-6xl mx-auto">
+    <div class="relative">
+      <span class="absolute -top-20 -right-4 font-display font-light text-[clamp(6rem,18vw,15rem)] leading-none text-blue/10 select-none" aria-hidden="true">05</span>
+      <div class="flex flex-wrap items-baseline justify-between gap-4 mb-14 relative">
+        <h2 class="font-mono text-xs tracking-[.3em] uppercase text-soft">05 — Fokus Saat Ini</h2>
+        <span class="font-hand text-2xl text-orange -rotate-2">laporan berkala</span>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-4 gap-px bg-ink/10 border border-ink/10">
+      <div class="bg-paper p-8 reveal">
+        <p class="font-mono text-[11px] text-blued mb-5">STATUS-01</p>
+        <h3 class="font-mono text-xs uppercase tracking-[.25em] text-soft mb-5">Eksplorasi</h3>
+        <p class="font-display text-xl leading-snug">Menjelajahi gagasan baru dan sudut teknologi yang belum sempat dipelajari.</p>
+      </div>
+      <div class="bg-paper p-8 reveal" style="--d:100ms">
+        <p class="font-mono text-[11px] text-blued mb-5">STATUS-02</p>
+        <h3 class="font-mono text-xs uppercase tracking-[.25em] text-soft mb-5">Pengembangan</h3>
+        <p class="font-display text-xl leading-snug">Membangun perangkat lunak yang bermanfaat — tools, bot, dan proyek eksperimental.</p>
+      </div>
+      <div class="bg-paper p-8 reveal" style="--d:200ms">
+        <p class="font-mono text-[11px] text-blued mb-5">STATUS-03</p>
+        <h3 class="font-mono text-xs uppercase tracking-[.25em] text-soft mb-5">Pembelajaran</h3>
+        <p class="font-display text-xl leading-snug">Memperdalam pemahaman seputar perkakas AI, arsitektur LLM, dan literatur lintas disiplin.</p>
+      </div>
+      <div class="bg-paper p-8 reveal" style="--d:300ms">
+        <p class="font-mono text-[11px] text-orange mb-5">STATUS-04</p>
+        <h3 class="font-mono text-xs uppercase tracking-[.25em] text-soft mb-5">Arah Keingintahuan</h3>
+        <p class="font-display text-xl leading-snug">Mengikuti rasa penasaran dan membiarkannya membuka peluang karya baru.</p>
+      </div>
+    </div>
+
+    <div class="mt-12 grid md:grid-cols-12 gap-8 items-start">
+      <div class="md:col-span-7 reveal">
+        <h3 class="font-mono text-xs uppercase tracking-[.25em] text-soft mb-5">Catatan acak dari proses pengembangan</h3>
+        <p class="font-display font-light text-[clamp(1.5rem,3.2vw,2.6rem)] leading-[1.15]">
+          "Sebagian proyek telah tertata rapi.
+          <em class="italic text-blue">Sebagian lainnya dalam proses refaktorisasi.</em>
+          Beberapa di antaranya lahir berkat satu pertanyaan sederhana yang jawabannya ternyata memikat."
+        </p>
+      </div>
+      <div class="md:col-span-4 md:col-start-9 reveal" style="--d:150ms">
+        <h3 class="font-mono text-xs uppercase tracking-[.25em] text-soft mb-5">Pelajaran dari Setiap Rilis Proyek</h3>
+        <ul class="text-sm text-ink/80 space-y-3 font-mono">
+          <li class="flex gap-3"><span class="text-blue">✳</span> Buat cadangan (<em>backup</em>) sebelum refaktorisasi—pelajaran berharga dari pengalaman nyata</li>
+          <li class="flex gap-3"><span class="text-blue">✳</span> Sistem <em>logging</em> yang akurat jauh lebih bisa diandalkan daripada sekadar asumsi</li>
+          <li class="flex gap-3"><span class="text-blue">✳</span> Menentukan penamaan produk atau bot adalah kombinasi antara fungsionalitas dan seni</li>
+        </ul>
+        <p class="mt-6 font-hand text-2xl text-soft rotate-[-2deg]">terus belajar, terus membangun.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 CONTACT (KONTAK & PENUTUP) ============ -->
+<section id="contact" class="px-5 sm:px-8 py-32 md:py-48 relative overflow-hidden bg-tint/60" aria-label="Penutup">
+  <div class="dots absolute inset-0 opacity-70" aria-hidden="true"></div>
+  <div class="max-w-6xl mx-auto text-center relative">
+    <h2 class="font-display font-light leading-[1.02] tracking-tight text-[clamp(2rem,5.8vw,4.8rem)]">
+      Mari wujudkan sesuatu yang
+      <br><em class="italic text-blue">menarik bersama.</em>
+    </h2>
+
+    <p class="mt-8 text-soft text-sm sm:text-base max-w-md mx-auto">
+      Situs ini adalah dokumentasi ringkas dari proyek, bacaan, dan ide yang saya kembangkan. Silakan ditelusuri—jika ada hal yang menarik perhatian Anda, mari berdiskusi lebih lanjut.
+    </p>
+
+    <p class="mt-6 font-mono text-xs text-soft">sampai bertemu di diskusi selanjutnya →</p>
+
+    <div class="mt-12 flex flex-wrap justify-center gap-4 text-sm font-mono">
+      <% socials.forEach(social => { %>
+        <a href="<%= social.url %>" target="_blank" rel="noopener" class="border-2 border-ink px-6 py-3 hover:bg-ink hover:text-paper transition-colors duration-300"><%= social.name.toLowerCase() %> ↗</a>
+      <% }) %>
+    </div>
+  </div>
+</section>

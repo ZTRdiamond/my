@@ -33,7 +33,7 @@ my/
 │   │   ├── parser.js               # parseMarkdown() & reading time
 │   │   └── seo.js                  # Builder SEO meta tag
 │   ├── middlewares/
-│   │   ├── locals.js               # Inject navigation, socials, config, currentPath
+│   │   ├── locals.js               # Inject socials, config, currentPath
 │   │   └── errorHandler.js         # 404 & 500 handlers
 │   └── libs/markdown/              # Custom markdown-it plugins
 │       ├── AdmonitionContainer.js  # ::: note/info/tip/warning/caution/danger
@@ -43,8 +43,7 @@ my/
 │       ├── MultiMediaPlayer.js     # Video/audio HTML5 media
 │       ├── Tabs.js                 # Tab group markdown
 │       ├── HighlightBacktick.js    # Inline code styling
-│       ├── Dokapi.js               # Dokapi custom plugin
-│       └── css/dokapi.css          # Stylesheet untuk Dokapi
+│       └── Dokapi.js               # Dokapi custom plugin (kelas Tailwind paper, tanpa css terpisah)
 ├── views/                          # Template EJS
 │   ├── layouts/base.ejs            # Layout utama
 │   ├── pages/                      # Konten halaman dinamis
@@ -53,16 +52,15 @@ my/
 │   │   ├── post.ejs
 │   │   ├── docs.ejs
 │   │   ├── doc.ejs
-│   │   ├── 404.ejs                 # (KOSONG — perlu diisi)
-│   │   └── 500.ejs                 # (KOSONG — perlu diisi)
+│   │   ├── 404.ejs
+│   │   └── 500.ejs
 │   └── partials/                   # Komponen reusable
 │       ├── seo.ejs
-│       ├── navbar.ejs
+│       ├── navbar.ejs              # Header fixed + menu overlay fullscreen
 │       ├── footer.ejs
-│       ├── post-card.ejs
-│       └── project-card.ejs
+│       ├── writing-row.ejs         # Baris tulisan (dipakai home & blog)
+│       └── project-feature.ejs     # Feature proyek zigzag (dipakai home)
 ├── public/                         # Static assets
-│   ├── css/styles.css
 │   ├── favicon.ico
 │   └── images/
 ├── content/                          # Konten Markdown
@@ -70,7 +68,6 @@ my/
 │   └── docs/                         # Dokumentasi
 ├── data/                             # Data konfigurasi JSON
 │   ├── config.json
-│   ├── navigation.json
 │   ├── projects.json
 │   └── socials.json
 ├── package.json
@@ -83,7 +80,7 @@ my/
 
 Saat aplikasi start (lokal) atau cold start (Vercel), `initializeApplicationData()` di `src/services/contentLoader.js` melakukan:
 
-1. Load 4 file JSON di `data/` secara paralel.
+1. Load 3 file JSON di `data/` secara paralel.
 2. Cari semua file `.md` di `content/blog/` dan `content/docs/`.
 3. Parse masing-masing dengan `gray-matter` + `markdown-it`.
 4. Simpan hasil ke `cache` object in-memory.
@@ -91,7 +88,7 @@ Saat aplikasi start (lokal) atau cold start (Vercel), `initializeApplicationData
 ### Request Lifecycle
 
 1. `compression()`
-2. `injectLocals` → inject `navigation`, `socials`, `config`, `currentPath`
+2. `injectLocals` → inject `socials`, `config`, `currentPath`
 3. `ensureDataInitialized` → guard cold-start Vercel
 4. Router → controller → `res.render('layouts/base', { page, ... })`
 5. Layout memuat partials dan `views/pages/<page>.ejs`
@@ -106,7 +103,6 @@ app.use("/static", express.static(path.resolve('public')));
 ```
 
 Artinya:
-- `public/css/styles.css` → diakses via `/static/css/styles.css`
 - `public/favicon.ico` → diakses via `/static/favicon.ico`
 - `public/images/...` → diakses via `/static/images/...`
 
@@ -163,8 +159,16 @@ Plugin custom yang tersedia:
 - Semua halaman render ke `layouts/base` dengan properti `page`.
 - Layout akan melakukan `<%- include('../pages/' + page) %>`.
 - Partials di-include dari `views/partials/`.
-- Gunakan `currentPath` untuk styling navigasi aktif.
 - Gunakan Tailwind CSS classes. Dark mode pakai class `.dark` di `<html>`.
+
+### Tema UI (Paper — sejak redesign 2026-08-12)
+
+- Tema baru: kertas krem (`paper`/`ink`/`blue`/`orange`) — Tailwind CDN, font Fraunces/Space Grotesk/JetBrains Mono/Caveat. Tanpa dark mode.
+- Semua CSS desain + interaktivitas (menu overlay, reveal, marquee, clock JKT, mouse drift) ada di `views/layouts/base.ejs` (`<style>` + `<script>`).
+- `views/partials/navbar.ejs` berisi header fixed + menu overlay fullscreen (4 item: Work/Writing/Now/Contact → anchor `/#notes` dst).
+- Plugin markdown lama tetap render dengan warna sky/slate — di-override via blok `OVERRIDE MARKDOWN PLUGIN` di `<style>` base.ejs.
+- `navigation.json` sudah dihapus (tidak dipakai); menu overlay & link header (blog/docs) hardcode di partial.
+- Proyek di landing dirender dari `data/projects.json` (field: `meta`, `image`, `linkText`) lewat `project-feature.ejs`; tulisan dari `cache.blogs` lewat `writing-row.ejs`.
 
 ## 5. Environment & Scripts
 
@@ -226,7 +230,6 @@ Untuk halaman blog detail, tipe `ogType: 'article'` akan mengeluarkan meta tag:
   docs: [],
   projects: [],
   socials: [],
-  navigation: [],
   config: {}
 }
 ```
