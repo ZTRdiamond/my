@@ -1,0 +1,210 @@
+{
+  "profile": {
+    "name": "Fatahillah Al Makarim",
+    "title": "Construction Worker, Backend Developer & Automation Developer",
+    "location": "Indonesia",
+    "email": "fatahillahalmakarim@gmail.com",
+    "website": "https://ztrdiamond.is-a.dev",
+    "github": "https://github.com/ztrdiamond",
+    "avatar": "/images/profile/ztrdiamond.webp",
+    "summary": "Profesional dengan kompetensi ganda di bidang konstruksi dan rekayasa perangkat lunak. Berpengalaman mengerjakan berbagai pekerjaan konstruksi bangunan sekaligus mengembangkan perangkat lunak secara mandiri. Di bidang software development, fokus utama berada pada backend development, API, automation, integrasi database, dan pengembangan aplikasi berbasis Node.js. Terbiasa membangun project dari tahap perancangan hingga deployment menggunakan berbagai tools dan teknologi modern.",
+    "tagline": "Code it, automate it.",
+    "joined": "2022",
+    "status": "available"
+  },
+
+  "experience": [
+    {
+      "id": "exp-01",
+      "role": "Construction Worker",
+      "company": "Freelance / Informal Work",
+      "location": "Indonesia",
+      "type": "freelance",
+      "start": "2024",
+      "end": "Sekarang",
+      "current": true,
+      "highlights": [
+        "Mengerjakan berbagai pekerjaan konstruksi bangunan dan pekerjaan lapangan.",
+        "Berpengalaman dalam pekerjaan struktural dan finishing sesuai kebutuhan proyek.",
+        "Mengerjakan pekerjaan dengan memperhatikan ketelitian, kualitas hasil, keselamatan kerja, dan target penyelesaian.",
+        "Terbiasa bekerja dalam kondisi lapangan yang membutuhkan ketahanan fisik, disiplin, dan kemampuan beradaptasi.",
+        "Mengembangkan kemampuan teknis secara mandiri di luar jam kerja, termasuk programming dan teknologi."
+      ]
+    },
+
+    {
+      "id": "exp-02",
+      "role": "Backend Developer & Automation Developer",
+      "company": "Personal Projects / Open Source",
+      "location": "Remote",
+      "type": "personal",
+      "start": "2022",
+      "end": "Sekarang",
+      "current": true,
+      "highlights": [
+        "Mengembangkan berbagai aplikasi dan layanan backend menggunakan JavaScript dan Node.js.",
+        "Membangun REST API dengan sistem routing, middleware, validasi, dan pengelolaan request/response.",
+        "Mengembangkan sistem automation untuk mengurangi pekerjaan repetitif dan meningkatkan efisiensi workflow.",
+        "Mengimplementasikan integrasi database, storage, authentication, caching, dan berbagai layanan eksternal.",
+        "Merancang aplikasi dengan pendekatan modular agar fitur dan komponen dapat dikembangkan secara terpisah.",
+        "Melakukan deployment dan maintenance aplikasi pada VPS menggunakan Docker dan Docker Compose.",
+        "Mengembangkan dan memelihara berbagai personal project serta project yang bersifat open source."
+      ]
+    }
+  ],
+
+  "education": [
+    {
+      "id": "edu-01",
+      "degree": "Sekolah Dasar",
+      "school": "SD Negeri Peusar 2",
+      "location": "Peusar, Kecamatan Panongan, Indonesia",
+      "start": 2012,
+      "end": 2018,
+      "note": "Pendidikan formal terakhir yang berhasil diselesaikan.",
+      "activities": []
+    }
+  ],
+
+  "skills": [
+    {
+      "category": "Programming Languages",
+      "items": [
+        {
+          "name": "JavaScript",
+          "level": 89,
+          "note": "Bahasa utama untuk backend development, automation, scripting, dan personal projects."
+        },
+        {
+          "name": "TypeScript",
+          "level": 48,
+          "note": "Memahami konsep dasar TypeScript dan pernah menggunakannya dalam pengembangan project."
+        },
+        {
+          "name": "Python",
+          "level": 9,
+          "note": "Beginner; masih dalam tahap pengenalan dan pembelajaran dasar."
+        },
+        {
+          "name": "Bash / Shell",
+          "level": 5,
+          "note": "Dasar command"
+        }
+      ]
+    },
+
+    {
+      "category": "Backend Development",
+      "items": [
+        {
+          "name": "Node.js",
+          "level": 90,
+          "note": "Pengembangan backend service, API, automation, scripting, dan aplikasi berbasis JavaScript."
+        },
+        {
+          "name": "Express.js",
+          "level": 86,
+          "note": "Routing, middleware, REST API, backend service, dan web application."
+        },
+        {
+          "name": "Hono",
+          "level": 52,
+          "note": "Memahami dasar penggunaan framework lightweight untuk pengembangan API."
+        },
+        {
+          "name": "REST API",
+          "level": 82,
+          "note": "Memahami endpoint design, routing, request/response, middleware, integrasi layanan, dan error handling."
+        }
+      ]
+    },
+
+    {
+      "category": "DevOps & Infrastructure",
+      "items": [
+        {
+          "name": "Linux",
+          "level": 30,
+          "note": "Memahami beberapa command dan kebutuhan dasar server, tetapi belum mendalami administrasi Linux."
+        },
+        {
+          "name": "Termux",
+          "level": 45,
+          "note": "Pernah digunakan sebagai environment development untuk menjalankan Node.js, Git, dan berbagai tools."
+        },
+        {
+          "name": "Docker",
+          "level": 65,
+          "note": "Memahami Dockerfile, containerization, Docker Compose, volume, networking dasar, dan deployment."
+        },
+        {
+          "name": "Nginx",
+          "level": 20,
+          "note": "Masih dalam tahap pembelajaran dan belum terlalu memahami konfigurasi serta troubleshooting secara mendalam."
+        },
+        {
+          "name": "Git / GitHub",
+          "level": 80,
+          "note": "Version control, repository management, branching, commit, pull, push, dan workflow development."
+        },
+        {
+          "name": "VPS Deployment",
+          "level": 75,
+          "note": "Cukup memahami deployment dan maintenance aplikasi pada VPS, terutama menggunakan Docker dan Docker Compose."
+        }
+      ]
+    },
+
+    {
+      "category": "Database & Storage",
+      "items": [
+        {
+          "name": "PostgreSQL",
+          "level": 43,
+          "note": "Memahami dasar penggunaan dan implementasi PostgreSQL, tetapi belum menguasai seluruh syntax query dan database management secara mendalam."
+        },
+        {
+          "name": "Knex.js",
+          "level": 60,
+          "note": "Memahami penggunaan query builder, schema, dan migration untuk aplikasi Node.js."
+        },
+        {
+          "name": "JSON Storage",
+          "level": 80,
+          "note": "Memahami struktur JSON dan pernah membangun sistem penyimpanan serta persistence berbasis JSON secara mandiri."
+        },
+        {
+          "name": "S3-compatible Storage",
+          "level": 65,
+          "note": "Memahami implementasi object storage untuk penyimpanan dan pengelolaan file atau media."
+        }
+      ]
+    }
+  ],
+
+  "languages": [
+    {
+      "name": "Bahasa Indonesia",
+      "native": true,
+      "flag": "ID",
+      "level": 100,
+      "label": "Native / Fasih"
+    },
+    {
+      "name": "Bahasa Jawa",
+      "native": false,
+      "flag": "ID",
+      "level": 72,
+      "label": "Cukup baik — dapat digunakan untuk percakapan sehari-hari, namun masih sering bercampur dengan Bahasa Indonesia"
+    },
+    {
+      "name": "English",
+      "native": false,
+      "flag": "EN",
+      "level": 50,
+      "label": "Cukup untuk membaca dan memahami kalimat serta dokumentasi, tetapi masih kurang lancar dalam menyusun kalimat dan berbicara"
+    }
+  ],
+
+  "certifications": []
+}

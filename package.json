@@ -41,8 +41,8 @@
     "markdown-it-html5-media": "^0.7.1",
     "markdown-it-multimd-table": "^4.2.3",
     "markdown-it-toc-done-right": "^4.2.0",
+    "pdfkit": "^0.20.2",
     "prismjs": "^1.30.0",
     "serve-favicon": "^2.5.0"
-  },
-  "devDependencies": {}
+  }
 }
